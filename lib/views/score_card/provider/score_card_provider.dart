@@ -19,16 +19,16 @@ class ScoreCardProvider extends ChangeNotifier {
 
   int totalScore = 0;
 
-  int rower = 0;
-  int benchHops = 0;
-  int kneeTuckPushUps = 0;
-  int lateralHops = 0;
-  int boxJumpBurpee = 0;
-  int chinUps = 0;
-  int squatPress = 0;
-  int russianTwist = 0;
-  int deadBallOverTheShoulder = 0;
-  int shuttleSprintLateralHop = 0;
+  int rower = -1;
+  int benchHops = -1;
+  int kneeTuckPushUps = -1;
+  int lateralHops = -1;
+  int boxJumpBurpee = -1;
+  int chinUps = -1;
+  int squatPress = -1;
+  int russianTwist = -1;
+  int deadBallOverTheShoulder = -1;
+  int shuttleSprintLateralHop = -1;
 
   int rowerScore = 0;
   int benchHopsScore = 0;
