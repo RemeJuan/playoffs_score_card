@@ -15,12 +15,6 @@ class ScoreTable extends StatelessWidget {
     final provider = context.watch<ScoreCardProvider>();
 
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black,
-          width: 1,
-        ),
-      ),
       margin: const EdgeInsets.all(AppTheme.paddingDefault),
       padding: const EdgeInsets.all(AppTheme.paddingDefault),
       child: Column(
