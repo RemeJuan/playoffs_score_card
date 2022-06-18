@@ -1,0 +1,15 @@
+# EXAMPLE USAGE
+# Refer for explanation to following link:
+# https://github.com/Arkweid/lefthook/blob/master/docs/full_guide.md
+#
+pre-push:
+  commands:
+    test:
+      tags: unit testing
+      run: flutter test test
+post-receive:
+  commands:
+    flutter:
+      run: flutter pub get
+    lefthook:
+      run: lefthook install
