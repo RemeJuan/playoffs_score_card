@@ -29,21 +29,19 @@ class ScoreRow extends StatelessWidget {
           return Row(
             children: [
               SizedBox(
-                width: width * 0.3,
+                width: width * 0.4,
                 child: Text(event),
               ),
               SizedBox(
-                width: width * 0.4,
+                width: width * 0.3,
                 child: TextFormField(
-                  initialValue: reps.toString(),
+                  initialValue: reps == -1 ? "" : "$reps",
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
-                    labelText: "Reps",
                     isDense: true,
                     contentPadding: EdgeInsets.only(
                       bottom: AppTheme.paddingDefault * 0.5,
                     ),
-                    icon: Icon(Icons.numbers),
                   ),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -61,7 +59,7 @@ class ScoreRow extends StatelessWidget {
               Container(
                 width: width * 0.3,
                 alignment: Alignment.centerRight,
-                child: Text(score.toString()),
+                child: Text("$score / 100"),
               ),
             ],
           );
