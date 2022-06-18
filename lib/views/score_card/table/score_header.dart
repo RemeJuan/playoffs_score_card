@@ -6,8 +6,8 @@ class ScoreHeader extends StatelessWidget {
   @override
   Widget build(context) {
     return Container(
-      padding: const EdgeInsets.only(
-        bottom: AppTheme.paddingDefault,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppTheme.paddingDefault,
       ),
       decoration: const BoxDecoration(
         border: Border(
@@ -15,21 +15,39 @@ class ScoreHeader extends StatelessWidget {
             color: Colors.black,
             width: 1,
           ),
+          top: BorderSide(
+            color: Colors.black,
+            width: 1,
+          ),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text("Event", style: _style),
-          Text("Reps", style: _style),
-          Text("Score (Max 100)", style: _style),
-        ],
-      ),
+      child: LayoutBuilder(builder: (context, constraints) {
+        final width = constraints.maxWidth;
+
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: width * 0.4,
+              child: Text("Event", style: _style),
+            ),
+            SizedBox(
+              width: width * 0.3,
+              child: Text("Reps", style: _style),
+            ),
+            Container(
+              width: width * 0.3,
+              alignment: Alignment.centerRight,
+              child: Text("Score", style: _style),
+            ),
+          ],
+        );
+      }),
     );
   }
 
   final TextStyle _style = const TextStyle(
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: FontWeight.bold,
   );
 }
