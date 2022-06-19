@@ -40,6 +40,9 @@ dependencies:
   realm: ^0.3.1+beta
   flutter_hooks: ^0.18.5
   uuid: ^3.0.6
+  line_chart: ^1.1.11
+  intl: ^0.17.0
+  visibility_detector: ^0.3.3
 
 dev_dependencies:
   flutter_test:
