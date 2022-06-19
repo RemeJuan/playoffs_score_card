@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -11,11 +12,16 @@ final sl = GetIt.instance;
 
 void initService() {
   sl.registerSingletonAsync<Isar>(() async {
-    final dir = await getApplicationSupportDirectory();
-    return await Isar.open(
-      schemas: [ScoreCardSchema],
-      directory: dir.path,
-    );
+    if (kIsWeb) {
+      return await Isar.open(
+        schemas: [ScoreCardSchema],
+      );
+    } else {
+      return await Isar.open(
+        schemas: [ScoreCardSchema],
+        directory: (await getApplicationSupportDirectory()).path,
+      );
+    }
   });
   sl.registerLazySingleton<RouterProvider>(() => RouterProvider());
   sl.registerLazySingleton<HistoryProvider>(
