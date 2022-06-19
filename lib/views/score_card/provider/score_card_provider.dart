@@ -208,7 +208,10 @@ class ScoreCardProvider extends ChangeNotifier {
     });
 
     status = ScoreCardStatus.saved;
-    _init();
     notifyListeners();
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    _init();
   }
 }
