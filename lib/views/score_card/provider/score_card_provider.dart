@@ -209,14 +209,13 @@ class ScoreCardProvider extends ChangeNotifier {
           russianTwist,
           deadBallOverTheShoulder,
           shuttleSprintLateralHop,
+          totalScore: totalScore,
         ),
       ),
     );
 
     status = ScoreCardStatus.saved;
-    print("saved: $id");
     _init();
-    print("re-init: $id");
     notifyListeners();
   }
 }
