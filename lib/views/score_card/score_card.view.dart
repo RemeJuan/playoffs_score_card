@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playoffs_score_tracker/locator.dart';
+import 'package:playoffs_score_tracker/router/router_provider.dart';
 import 'package:playoffs_score_tracker/theme.dart';
 import 'package:playoffs_score_tracker/themes/default.template.dart';
 import 'package:playoffs_score_tracker/views/score_card/provider/score_card_provider.dart';
@@ -13,9 +14,15 @@ class ScoreCardView extends StatelessWidget {
   Widget build(context) {
     return ChangeNotifierProvider<ScoreCardProvider>.value(
       value: sl<ScoreCardProvider>(),
-      child: Builder(
-        builder: (context) {
-          final provider = context.watch<ScoreCardProvider>();
+      child: Consumer<ScoreCardProvider>(
+        builder: (context, provider, _) {
+          final status = provider.status;
+          final canSave = status == ScoreCardStatus.complete;
+
+          if (status == ScoreCardStatus.saved) {
+            _navigate();
+          }
+
           return DefaultTemplate(
             title: "Score Card",
             child: Column(
@@ -35,7 +42,7 @@ class ScoreCardView extends StatelessWidget {
                 const Expanded(child: ScoreTable()),
                 const SizedBox(height: AppTheme.paddingDefault),
                 ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: canSave ? provider.save : null,
                   child: const Text("Save"),
                 ),
                 const SizedBox(height: AppTheme.paddingDefault),
@@ -45,5 +52,10 @@ class ScoreCardView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void _navigate() async {
+    await Future.delayed(const Duration(milliseconds: 10));
+    sl<RouterProvider>().setCurrentIndex(1);
   }
 }
