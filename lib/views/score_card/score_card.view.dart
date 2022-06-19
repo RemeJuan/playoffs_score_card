@@ -11,8 +11,8 @@ class ScoreCardView extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return ChangeNotifierProvider<ScoreCardProvider>(
-      create: (_) => sl<ScoreCardProvider>(),
+    return ChangeNotifierProvider<ScoreCardProvider>.value(
+      value: sl<ScoreCardProvider>(),
       child: Builder(
         builder: (context) {
           final provider = context.watch<ScoreCardProvider>();
