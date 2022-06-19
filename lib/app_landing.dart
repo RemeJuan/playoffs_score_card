@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:playoffs_score_tracker/router/app_router.dart';
 import 'package:playoffs_score_tracker/router/router_provider.dart';
+import 'package:playoffs_score_tracker/theme.dart';
 import 'package:provider/provider.dart';
 
 import 'locator.dart';
@@ -36,15 +36,16 @@ class AppLanding extends HookWidget {
               title: Text(
                 AppRouter.routes[page].title,
                 style: TextStyle(
-                  color: HexColor("#fb053e"),
+                  color: AppTheme.red,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              backgroundColor: HexColor("0c0033"),
+              backgroundColor: AppTheme.blue,
             ),
             resizeToAvoidBottomInset: true,
             body: PageView(
               controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
               children: AppRouter.routes.map((route) {
                 return route.page;
               }).toList(),
