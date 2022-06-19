@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:playoffs_score_tracker/views/history/history.view.dart';
-import 'package:playoffs_score_tracker/views/profile/profile.view.dart';
-import 'package:playoffs_score_tracker/views/score_card/score_card.view.dart';
+import 'package:playoffs_score_card/views/history/history.view.dart';
+import 'package:playoffs_score_card/views/profile/profile.view.dart';
+import 'package:playoffs_score_card/views/score_card/score_card.view.dart';
 
 class AppRoute {
   final Widget page;

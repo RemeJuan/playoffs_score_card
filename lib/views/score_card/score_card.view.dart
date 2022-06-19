@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:playoffs_score_tracker/locator.dart';
-import 'package:playoffs_score_tracker/router/router_provider.dart';
-import 'package:playoffs_score_tracker/theme.dart';
-import 'package:playoffs_score_tracker/themes/default.template.dart';
-import 'package:playoffs_score_tracker/views/score_card/provider/score_card_provider.dart';
-import 'package:playoffs_score_tracker/views/score_card/table/score_table.dart';
+import 'package:playoffs_score_card/locator.dart';
+import 'package:playoffs_score_card/router/router_provider.dart';
+import 'package:playoffs_score_card/theme.dart';
+import 'package:playoffs_score_card/themes/default.template.dart';
+import 'package:playoffs_score_card/views/score_card/provider/score_card_provider.dart';
+import 'package:playoffs_score_card/views/score_card/table/score_table.dart';
 import 'package:provider/provider.dart';
 
 class ScoreCardView extends StatelessWidget {

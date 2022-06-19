@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:playoffs_score_tracker/collections/score_card.collection.dart';
-import 'package:playoffs_score_tracker/theme.dart';
+import 'package:playoffs_score_card/collections/score_card.collection.dart';
+import 'package:playoffs_score_card/theme.dart';
 
 class HistoryEntry extends StatelessWidget {
   final ScoreCard score;

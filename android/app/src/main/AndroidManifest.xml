@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.playoffs_score_tracker">
+    package="com.playoffs_score_card">
    <application
-        android:label="playoffs_score_tracker"
+        android:label="playoffs_score_card"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

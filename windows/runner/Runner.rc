@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "playoffs_score_tracker" "\0"
+            VALUE "FileDescription", "playoffs_score_card" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "playoffs_score_tracker" "\0"
+            VALUE "InternalName", "playoffs_score_card" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "playoffs_score_tracker.exe" "\0"
-            VALUE "ProductName", "playoffs_score_tracker" "\0"
+            VALUE "OriginalFilename", "playoffs_score_card.exe" "\0"
+            VALUE "ProductName", "playoffs_score_card" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

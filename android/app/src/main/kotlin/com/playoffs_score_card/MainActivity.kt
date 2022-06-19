@@ -1,4 +1,4 @@
-package com.example.playoffs_score_tracker
+package com.playoffs_score_card
 
 import io.flutter.embedding.android.FlutterActivity
 

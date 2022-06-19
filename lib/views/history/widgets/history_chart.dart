@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:line_chart/charts/line-chart.widget.dart';
 import 'package:line_chart/model/line-chart.model.dart';
-import 'package:playoffs_score_tracker/theme.dart';
-import 'package:playoffs_score_tracker/views/history/provider/history.provider.dart';
+import 'package:playoffs_score_card/theme.dart';
+import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
 import 'package:provider/provider.dart';
 
 class HistoryChart extends StatelessWidget {

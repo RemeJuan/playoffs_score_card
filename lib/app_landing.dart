@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:playoffs_score_tracker/router/app_router.dart';
-import 'package:playoffs_score_tracker/router/router_provider.dart';
-import 'package:playoffs_score_tracker/theme.dart';
+import 'package:playoffs_score_card/router/app_router.dart';
+import 'package:playoffs_score_card/router/router_provider.dart';
+import 'package:playoffs_score_card/theme.dart';
 import 'package:provider/provider.dart';
 
 import 'locator.dart';

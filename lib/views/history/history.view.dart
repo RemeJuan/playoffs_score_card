@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:playoffs_score_tracker/locator.dart';
-import 'package:playoffs_score_tracker/views/history/provider/history.provider.dart';
-import 'package:playoffs_score_tracker/views/history/widgets/history_chart.dart';
-import 'package:playoffs_score_tracker/views/history/widgets/history_entry.dart';
+import 'package:playoffs_score_card/locator.dart';
+import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
+import 'package:playoffs_score_card/views/history/widgets/history_chart.dart';
+import 'package:playoffs_score_card/views/history/widgets/history_entry.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 

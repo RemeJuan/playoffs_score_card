@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
-import 'package:playoffs_score_tracker/collections/score_card.collection.dart';
+import 'package:playoffs_score_card/collections/score_card.collection.dart';
 
 class HistoryProvider extends ChangeNotifier {
   final Isar _isar;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:playoffs_score_tracker/theme.dart';
-import 'package:playoffs_score_tracker/views/score_card/provider/score_card_provider.dart';
+import 'package:playoffs_score_card/theme.dart';
+import 'package:playoffs_score_card/views/score_card/provider/score_card_provider.dart';
 import 'package:provider/provider.dart';
 
 part "score_header.dart";

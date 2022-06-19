@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:playoffs_score_tracker/app_landing.dart';
-import 'package:playoffs_score_tracker/theme.dart';
+import 'package:playoffs_score_card/app_landing.dart';
+import 'package:playoffs_score_card/theme.dart';
 
 import 'bootstrap.dart';
 
