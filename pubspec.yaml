@@ -44,6 +44,9 @@ dependencies:
   isar: ^2.5.0
   isar_flutter_libs: ^2.5.0
   path_provider: ^2.0.11
+  firebase_core: ^1.18.0
+  firebase_app_check: ^0.0.6+14
+  firebase_database: ^9.0.16
 
 dev_dependencies:
   flutter_test:

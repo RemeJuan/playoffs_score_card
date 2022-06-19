@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "347106065165",
+    "firebase_url": "https://playoffs-score-card-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "playoffs-score-card",
+    "storage_bucket": "playoffs-score-card.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347106065165:android:28e48e88c1b2ff81710e44",
+        "android_client_info": {
+          "package_name": "com.example.playoffs_score_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347106065165-lmqjjn35qptv8rqkh9t5qfg63faijfp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc4m-nPgzGF4fLZf8DKfa8JUlaXL4F0-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347106065165-lmqjjn35qptv8rqkh9t5qfg63faijfp0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "347106065165-h2kdd2thncpau7h6p1g9lv8eo1fddait.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.playoffsScoreTracker"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347106065165:android:b0b5510335ce1a61710e44",
+        "android_client_info": {
+          "package_name": "com.playoffs_score_card"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347106065165-lmqjjn35qptv8rqkh9t5qfg63faijfp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc4m-nPgzGF4fLZf8DKfa8JUlaXL4F0-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347106065165-lmqjjn35qptv8rqkh9t5qfg63faijfp0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "347106065165-h2kdd2thncpau7h6p1g9lv8eo1fddait.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.playoffsScoreTracker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,7 +8,7 @@
 PRODUCT_NAME = playoffs_score_card
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.playoffsScoreTracker
+PRODUCT_BUNDLE_IDENTIFIER = com.playoffsScoreCard
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
