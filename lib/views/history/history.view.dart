@@ -4,7 +4,9 @@ class HistoryView extends StatelessWidget {
   const HistoryView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  Widget build( context) {
+    return const Center(
+      child: Text('History'),
+    );
   }
 }
