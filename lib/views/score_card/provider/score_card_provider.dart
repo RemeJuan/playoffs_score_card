@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
+import 'package:playoffs_score_tracker/schemas/score_card.schema.dart';
+import 'package:realm/realm.dart';
+import 'package:uuid/uuid.dart' as u;
+
+enum ScoreCardStatus {
+  incomplete,
+  complete,
+  saved,
+}
 
 class ScoreCardProvider extends ChangeNotifier {
-  final Uuid uuid;
+  final u.Uuid uuid;
+  final Realm db;
 
   late String id;
 
@@ -19,16 +28,17 @@ class ScoreCardProvider extends ChangeNotifier {
 
   int totalScore = 0;
 
-  int rower = -1;
-  int benchHops = -1;
-  int kneeTuckPushUps = -1;
-  int lateralHops = -1;
-  int boxJumpBurpee = -1;
-  int chinUps = -1;
-  int squatPress = -1;
-  int russianTwist = -1;
-  int deadBallOverTheShoulder = -1;
-  int shuttleSprintLateralHop = -1;
+  late DateTime date;
+  late int rower;
+  late int benchHops;
+  late int kneeTuckPushUps;
+  late int lateralHops;
+  late int boxJumpBurpee;
+  late int chinUps;
+  late int squatPress;
+  late int russianTwist;
+  late int deadBallOverTheShoulder;
+  late int shuttleSprintLateralHop;
 
   int rowerScore = 0;
   int benchHopsScore = 0;
@@ -41,12 +51,26 @@ class ScoreCardProvider extends ChangeNotifier {
   int deadBallOverTheShoulderScore = 0;
   int shuttleSprintLateralHopScore = 0;
 
-  ScoreCardProvider(this.uuid) {
+  ScoreCardStatus status = ScoreCardStatus.incomplete;
+
+  ScoreCardProvider(this.uuid, this.db) {
     _init();
   }
 
   void _init() {
     id = uuid.v4();
+    print("re-init: $id");
+    date = DateTime.now();
+    rower = -1;
+    benchHops = -1;
+    kneeTuckPushUps = -1;
+    lateralHops = -1;
+    boxJumpBurpee = -1;
+    chinUps = -1;
+    squatPress = -1;
+    russianTwist = -1;
+    deadBallOverTheShoulder = -1;
+    shuttleSprintLateralHop = -1;
   }
 
   void setRower(int value) {
@@ -147,6 +171,52 @@ class ScoreCardProvider extends ChangeNotifier {
         deadBallOverTheShoulderScore +
         shuttleSprintLateralHop;
 
+    canSave();
+    notifyListeners();
+  }
+
+  void canSave() {
+    if (rower != -1 &&
+        benchHops != -1 &&
+        kneeTuckPushUps != -1 &&
+        lateralHops != -1 &&
+        boxJumpBurpee != -1 &&
+        chinUps != -1 &&
+        squatPress != -1 &&
+        russianTwist != -1 &&
+        deadBallOverTheShoulder != -1 &&
+        shuttleSprintLateralHop != -1) {
+      status = ScoreCardStatus.complete;
+    } else {
+      status = ScoreCardStatus.incomplete;
+    }
+    notifyListeners();
+  }
+
+  void save() {
+    db.write(
+      () => db.add(
+        ScoreCard(
+          id,
+          date,
+          rower,
+          benchHops,
+          kneeTuckPushUps,
+          lateralHops,
+          boxJumpBurpee,
+          chinUps,
+          squatPress,
+          russianTwist,
+          deadBallOverTheShoulder,
+          shuttleSprintLateralHop,
+        ),
+      ),
+    );
+
+    status = ScoreCardStatus.saved;
+    print("saved: $id");
+    _init();
+    print("re-init: $id");
     notifyListeners();
   }
 }
