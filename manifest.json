@@ -1,6 +1,6 @@
 {
-    "name": "playoffs_score_tracker",
-    "short_name": "playoffs_score_tracker",
+    "name": "playoffs_score_card",
+    "short_name": "playoffs_score_card",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
