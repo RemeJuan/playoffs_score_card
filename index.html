@@ -34,12 +34,15 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = '1733277387';
+    var serviceWorkerVersion = '2257078759';
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
 <body>
+<div class="loading">
+  <div class="loader"></div>
+</div>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
@@ -55,4 +58,50 @@
     });
   </script>
 </body>
+<style>
+    html, body {
+        background: #2b2d5b;
+    }
+
+    .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .loader {
+        border-radius: 50%;
+        border: 16px solid #fb053e;
+        border-right-color: transparent;
+        border-left-color: transparent;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
 </html>
