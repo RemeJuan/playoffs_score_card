@@ -1,0 +1,29 @@
+name: Build App
+permissions: write-all
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.0.3'
+        cache: true
+        cache-key: flutter # optional, change this to force refresh cache
+        cache-path: ${{ runner.tool_cache }}/flutter # optional, change this to specify the cache path
+        architecture: x64 # optional, x64 or arm64
+        
+    - run: flutter pub get
+    - run: flutter test
+    - run: flutter build web
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@v4.3.3
+      with:
+        branch: gh-pages # The branch the action should deploy to.
+        folder: build/web # The folder the action should deploy.
