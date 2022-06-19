@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playoffs_score_tracker/views/history/history.view.dart';
+import 'package:playoffs_score_tracker/views/profile/profile.view.dart';
 import 'package:playoffs_score_tracker/views/score_card/score_card.view.dart';
 
 class AppRoute {
@@ -31,7 +32,7 @@ class AppRouter {
       icon: Icons.history,
     ),
     AppRoute(
-      page: const SizedBox.shrink(),
+      page: const ProfileView(),
       title: "Profile",
       label: "Profile",
       icon: Icons.person_outline,
