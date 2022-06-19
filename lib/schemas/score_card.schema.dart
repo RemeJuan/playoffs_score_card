@@ -18,4 +18,5 @@ class _ScoreCard {
   late int russianTwist;
   late int deadBallOverTheShoulder;
   late int shuttleSprintLateralHop;
+  late int totalScore = 0;
 }

@@ -7,6 +7,8 @@ part of 'score_card.schema.dart';
 // **************************************************************************
 
 class ScoreCard extends _ScoreCard with RealmEntity, RealmObject {
+  static var _defaultsSet = false;
+
   ScoreCard(
     String id,
     DateTime date,
@@ -19,8 +21,14 @@ class ScoreCard extends _ScoreCard with RealmEntity, RealmObject {
     int squatPress,
     int russianTwist,
     int deadBallOverTheShoulder,
-    int shuttleSprintLateralHop,
-  ) {
+    int shuttleSprintLateralHop, {
+    int totalScore = 0,
+  }) {
+    if (!_defaultsSet) {
+      _defaultsSet = RealmObject.setDefaults<ScoreCard>({
+        'totalScore': 0,
+      });
+    }
     RealmObject.set(this, '_id', id);
     RealmObject.set(this, 'date', date);
     RealmObject.set(this, 'rower', rower);
@@ -33,6 +41,7 @@ class ScoreCard extends _ScoreCard with RealmEntity, RealmObject {
     RealmObject.set(this, 'russianTwist', russianTwist);
     RealmObject.set(this, 'deadBallOverTheShoulder', deadBallOverTheShoulder);
     RealmObject.set(this, 'shuttleSprintLateralHop', shuttleSprintLateralHop);
+    RealmObject.set(this, 'totalScore', totalScore);
   }
 
   ScoreCard._();
@@ -104,6 +113,11 @@ class ScoreCard extends _ScoreCard with RealmEntity, RealmObject {
       RealmObject.set(this, 'shuttleSprintLateralHop', value);
 
   @override
+  int get totalScore => RealmObject.get<int>(this, 'totalScore') as int;
+  @override
+  set totalScore(int value) => RealmObject.set(this, 'totalScore', value);
+
+  @override
   Stream<RealmObjectChanges<ScoreCard>> get changes =>
       RealmObject.getChanges<ScoreCard>(this);
 
@@ -125,6 +139,7 @@ class ScoreCard extends _ScoreCard with RealmEntity, RealmObject {
       SchemaProperty('russianTwist', RealmPropertyType.int),
       SchemaProperty('deadBallOverTheShoulder', RealmPropertyType.int),
       SchemaProperty('shuttleSprintLateralHop', RealmPropertyType.int),
+      SchemaProperty('totalScore', RealmPropertyType.int),
     ]);
   }
 }
