@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:playoffs_score_tracker/schemas/score_card.schema.dart';
-import 'package:realm/realm.dart';
+import 'package:isar/isar.dart';
+import 'package:playoffs_score_tracker/collections/score_card.collection.dart';
 
 class HistoryProvider extends ChangeNotifier {
-  final Realm _realm;
+  final Isar _isar;
+  List<ScoreCard> scores = [];
 
-  late List<ScoreCard> scores;
+  HistoryProvider(this._isar);
 
-  HistoryProvider(this._realm);
-
-  void init() {
-    scores = _realm.all<ScoreCard>().toList()
-      ..sort((a, b) => b.date.compareTo(a.date));
+  void init() async {
+    scores = await _isar.scoreCards.where().findAll();
+    notifyListeners();
   }
 }

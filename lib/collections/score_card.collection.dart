@@ -1,12 +1,11 @@
-import 'package:realm/realm.dart';
+import 'package:isar/isar.dart';
 
-part "score_card.schema.g.dart";
+part 'score_card.collection.g.dart';
 
-@RealmModel()
-class _ScoreCard {
-  @PrimaryKey()
-  @MapTo("_id")
-  late String id;
+@Collection()
+class ScoreCard {
+  @Id()
+  int? id;
   late DateTime date;
   late int rower;
   late int benchHops;

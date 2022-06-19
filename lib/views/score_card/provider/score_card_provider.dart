@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:playoffs_score_tracker/schemas/score_card.schema.dart';
-import 'package:realm/realm.dart';
-import 'package:uuid/uuid.dart' as u;
+import 'package:isar/isar.dart';
+import 'package:playoffs_score_tracker/collections/score_card.collection.dart';
 
 enum ScoreCardStatus {
   incomplete,
@@ -10,10 +9,7 @@ enum ScoreCardStatus {
 }
 
 class ScoreCardProvider extends ChangeNotifier {
-  final u.Uuid uuid;
-  final Realm db;
-
-  late String id;
+  final Isar db;
 
   final int maxRower = 290;
   final int maxBenchHops = 95;
@@ -53,13 +49,11 @@ class ScoreCardProvider extends ChangeNotifier {
 
   ScoreCardStatus status = ScoreCardStatus.incomplete;
 
-  ScoreCardProvider(this.uuid, this.db) {
+  ScoreCardProvider(this.db) {
     _init();
   }
 
   void _init() {
-    id = uuid.v4();
-    print("re-init: $id");
     date = DateTime.now();
     rower = -1;
     benchHops = -1;
@@ -71,6 +65,7 @@ class ScoreCardProvider extends ChangeNotifier {
     russianTwist = -1;
     deadBallOverTheShoulder = -1;
     shuttleSprintLateralHop = -1;
+    status = ScoreCardStatus.incomplete;
   }
 
   void setRower(int value) {
@@ -193,26 +188,24 @@ class ScoreCardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void save() {
-    db.write(
-      () => db.add(
-        ScoreCard(
-          id,
-          date,
-          rower,
-          benchHops,
-          kneeTuckPushUps,
-          lateralHops,
-          boxJumpBurpee,
-          chinUps,
-          squatPress,
-          russianTwist,
-          deadBallOverTheShoulder,
-          shuttleSprintLateralHop,
-          totalScore: totalScore,
-        ),
-      ),
-    );
+  void save() async {
+    final card = ScoreCard()
+      ..date = date
+      ..rower = rower
+      ..benchHops = benchHops
+      ..kneeTuckPushUps = kneeTuckPushUps
+      ..lateralHops = lateralHops
+      ..boxJumpBurpee = boxJumpBurpee
+      ..chinUps = chinUps
+      ..squatPress = squatPress
+      ..russianTwist = russianTwist
+      ..deadBallOverTheShoulder = deadBallOverTheShoulder
+      ..shuttleSprintLateralHop = shuttleSprintLateralHop
+      ..totalScore = totalScore;
+
+    await db.writeTxn((isar) async {
+      isar.scoreCards.put(card);
+    });
 
     status = ScoreCardStatus.saved;
     _init();
