@@ -17,7 +17,7 @@ jobs:
         cache: true
         
     - run: flutter pub get
-    - run: flutter test
+#     - run: flutter test
     - run: flutter build web
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4.3.3
