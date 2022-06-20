@@ -38,7 +38,6 @@ dependencies:
   hexcolor: ^2.0.7
   get_it: ^7.2.0
   flutter_hooks: ^0.18.5
-  line_chart: ^1.1.11
   intl: ^0.17.0
   visibility_detector: ^0.3.3
   isar: ^2.5.0
@@ -47,6 +46,7 @@ dependencies:
   firebase_core: ^1.18.0
   firebase_database: ^9.0.16
   firebase_app_check: ^0.0.6+14
+  chart_sparkline: ^1.0.11
 
 dev_dependencies:
   flutter_test:

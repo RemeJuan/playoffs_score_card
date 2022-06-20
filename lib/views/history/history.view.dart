@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playoffs_score_card/locator.dart';
 import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
+import 'package:playoffs_score_card/views/history/widgets/chart_switcher.dart';
 import 'package:playoffs_score_card/views/history/widgets/history_chart.dart';
 import 'package:playoffs_score_card/views/history/widgets/history_entry.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class HistoryView extends StatelessWidget {
           builder: (context, provider, _) {
             return Column(
               children: [
+                const HistoryChartSwitcher(),
                 const HistoryChart(),
                 Expanded(
                   child: ListView.builder(
