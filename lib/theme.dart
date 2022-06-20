@@ -22,5 +22,9 @@ class AppTheme {
         onPrimary: Colors.white,
       ),
     ),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: red,
+      selectionHandleColor: red,
+    ),
   );
 }
