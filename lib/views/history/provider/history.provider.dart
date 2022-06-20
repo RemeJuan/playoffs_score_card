@@ -46,7 +46,7 @@ class HistoryProvider extends ChangeNotifier {
   late int maxShuttleSprintLateralHop;
 
   void getData() async {
-    scores = await _isar.scoreCards.where().findAll();
+    scores = await _isar.scoreCards.where().sortByDateDesc().findAll();
 
     chartData = scores.reversed.map((e) {
       return e.totalScore.toDouble();
