@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
 import 'package:playoffs_score_card/theme.dart';
+import 'package:playoffs_score_card/views/history/history_details.view.dart';
+import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
+import 'package:provider/provider.dart';
 
 class HistoryEntry extends StatelessWidget {
   final ScoreCard score;
@@ -13,9 +16,7 @@ class HistoryEntry extends StatelessWidget {
     final date = DateFormat("d MMMM yyyy").format(score.date);
 
     return InkWell(
-      onTap: () {
-        print("Tapped on ${score.id}");
-      },
+      onTap: () => _showMaterialDialog(context),
       child: Container(
         padding: const EdgeInsets.all(AppTheme.paddingDefault),
         child: Row(
@@ -42,6 +43,28 @@ class HistoryEntry extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showMaterialDialog(BuildContext context) {
+    final date = DateFormat("d MMMM yyyy").format(score.date);
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.8),
+      builder: (_) {
+        return ChangeNotifierProvider<HistoryProvider>.value(
+          value: context.read<HistoryProvider>(),
+          child: AlertDialog(
+            insetPadding: EdgeInsets.zero,
+            scrollable: true,
+            title: Text("Score Details: $date"),
+            content: SizedBox(
+              child: HistoryDetailsView(score: score),
+            ),
+          ),
+        );
+      },
     );
   }
 }

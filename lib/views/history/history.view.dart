@@ -11,13 +11,13 @@ class HistoryView extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final provider = sl<HistoryProvider>()..init();
+    final provider = sl<HistoryProvider>()..getData();
 
     return VisibilityDetector(
       key: UniqueKey(),
       onVisibilityChanged: (visibility) {
         if (visibility.visibleFraction == 1.0) {
-          provider.init();
+          provider.getData();
         }
       },
       child: ChangeNotifierProvider<HistoryProvider>.value(

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:playoffs_score_card/core/models/max_scores.model.dart';
 import 'package:playoffs_score_card/router/router_provider.dart';
 import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
 import 'package:playoffs_score_card/views/score_card/provider/score_card_provider.dart';
@@ -25,9 +26,10 @@ void initService() {
   });
   sl.registerLazySingleton<RouterProvider>(() => RouterProvider());
   sl.registerLazySingleton<HistoryProvider>(
-    () => HistoryProvider(sl()),
+    () => HistoryProvider(sl(), sl()),
   );
+  sl.registerLazySingleton<MaxScoresModel>(() => MaxScoresModel());
   sl.registerLazySingleton<ScoreCardProvider>(
-    () => ScoreCardProvider(sl()),
+    () => ScoreCardProvider(sl(), sl()),
   );
 }

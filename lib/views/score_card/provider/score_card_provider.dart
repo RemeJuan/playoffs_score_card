@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
+import 'package:playoffs_score_card/core/models/max_scores.model.dart';
 
 enum ScoreCardStatus {
   incomplete,
@@ -9,18 +10,19 @@ enum ScoreCardStatus {
 }
 
 class ScoreCardProvider extends ChangeNotifier {
+  final MaxScoresModel maxScores;
   final Isar db;
 
-  final int maxRower = 290;
-  final int maxBenchHops = 95;
-  final int maxKneeTuckPushUps = 57;
-  final int maxLateralHops = 130;
-  final int maxBoxJumpBurpee = 20;
-  final int maxChinUps = 25;
-  final int maxSquatPress = 36;
-  final int maxRussianTwist = 87;
-  final int maxDeadBallOverTheShoulder = 27;
-  final int maxShuttleSprintLateralHop = 15;
+  late int maxRower;
+  late int maxBenchHops;
+  late int maxKneeTuckPushUps;
+  late int maxLateralHops;
+  late int maxBoxJumpBurpee;
+  late int maxChinUps;
+  late int maxSquatPress;
+  late int maxRussianTwist;
+  late int maxDeadBallOverTheShoulder;
+  late int maxShuttleSprintLateralHop;
 
   int totalScore = 0;
 
@@ -49,7 +51,7 @@ class ScoreCardProvider extends ChangeNotifier {
 
   ScoreCardStatus status = ScoreCardStatus.incomplete;
 
-  ScoreCardProvider(this.db) {
+  ScoreCardProvider(this.db, this.maxScores) {
     _init();
   }
 
@@ -66,6 +68,18 @@ class ScoreCardProvider extends ChangeNotifier {
     deadBallOverTheShoulder = -1;
     shuttleSprintLateralHop = -1;
     status = ScoreCardStatus.incomplete;
+
+    // Max Scores
+    maxRower = maxScores.maxRower;
+    maxBenchHops = maxScores.maxBenchHops;
+    maxKneeTuckPushUps = maxScores.maxKneeTuckPushUps;
+    maxLateralHops = maxScores.maxLateralHops;
+    maxBoxJumpBurpee = maxScores.maxBoxJumpBurpee;
+    maxChinUps = maxScores.maxChinUps;
+    maxSquatPress = maxScores.maxSquatPress;
+    maxRussianTwist = maxScores.maxRussianTwist;
+    maxDeadBallOverTheShoulder = maxScores.maxDeadBallOverTheShoulder;
+    maxShuttleSprintLateralHop = maxScores.maxShuttleSprintLateralHop;
   }
 
   void setRower(int value) {
@@ -155,7 +169,7 @@ class ScoreCardProvider extends ChangeNotifier {
   }
 
   void totalScoreCalculator() {
-    totalScore = rowerScore +
+    final ts = rowerScore +
         benchHopsScore +
         kneeTuckPushUpsScore +
         lateralHopsScore +
@@ -165,6 +179,12 @@ class ScoreCardProvider extends ChangeNotifier {
         russianTwistScore +
         deadBallOverTheShoulderScore +
         shuttleSprintLateralHop;
+
+    if (ts < 0) {
+      totalScore = 0;
+    } else {
+      totalScore = ts;
+    }
 
     canSave();
     notifyListeners();
