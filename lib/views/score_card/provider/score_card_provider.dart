@@ -169,22 +169,24 @@ class ScoreCardProvider extends ChangeNotifier {
   }
 
   void totalScoreCalculator() {
-    final ts = rowerScore +
-        benchHopsScore +
-        kneeTuckPushUpsScore +
-        lateralHopsScore +
-        boxJumpBurpeeScore +
-        chinUpsScore +
-        squatPressScore +
-        russianTwistScore +
-        deadBallOverTheShoulderScore +
-        shuttleSprintLateralHop;
+    final scores = [
+      rowerScore,
+      benchHopsScore,
+      kneeTuckPushUpsScore,
+      lateralHopsScore,
+      boxJumpBurpeeScore,
+      chinUpsScore,
+      squatPressScore,
+      russianTwistScore,
+      deadBallOverTheShoulderScore,
+      shuttleSprintLateralHopScore,
+    ];
 
-    if (ts < 0) {
-      totalScore = 0;
-    } else {
-      totalScore = ts;
-    }
+    // Remove all dummy (-1) scores from the lest and then add the remainder
+    // together to get the total score
+    final ts = scores.where((s) => s != -1).reduce((a, b) => a + b);
+
+    totalScore = ts;
 
     canSave();
     notifyListeners();
