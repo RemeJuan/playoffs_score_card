@@ -29,7 +29,9 @@ void initService() {
   sl.registerLazySingleton<FlutterFileSaver>(() => FlutterFileSaver());
 
   sl.registerLazySingleton<RouterProvider>(() => RouterProvider());
-  sl.registerLazySingleton<ProfileProvider>(() => ProfileProvider(sl(), sl()));
+  sl.registerLazySingleton<ProfileProvider>(
+    () => ProfileProvider(sl(), sl()),
+  );
   sl.registerLazySingleton<HistoryProvider>(
     () => HistoryProvider(sl(), sl()),
   );

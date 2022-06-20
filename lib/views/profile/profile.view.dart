@@ -88,7 +88,9 @@ class ProfileView extends StatelessWidget {
                       ),
                       const SizedBox(height: AppTheme.paddingDefault),
                       ElevatedButton(
-                        onPressed: () => provider.exportData(),
+                        onPressed: provider.hasRecords
+                            ? () => provider.exportData()
+                            : null,
                         child: const Text('Backup Data'),
                       ),
                       const SizedBox(height: AppTheme.paddingDefault * 2),
