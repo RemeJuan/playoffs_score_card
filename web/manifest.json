@@ -1,11 +1,11 @@
 {
-    "name": "playoffs_score_card",
-    "short_name": "playoffs_score_card",
+    "name": "Playoffs Score Card",
+    "short_name": "Playoffs Score Card",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A simple web app for users to track their progress across the F45 Playoffs.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
