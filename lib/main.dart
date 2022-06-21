@@ -20,6 +20,7 @@ class PlayoffsTrackerApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Playoffs Score Tracker",
       theme: AppTheme.primary,
       home: AppLanding(),
