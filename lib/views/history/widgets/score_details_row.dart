@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class ScoreDetailsRow extends StatelessWidget {
   final String name;
-  final int score;
+  final int reps;
   final int maxScore;
 
   const ScoreDetailsRow({
     required this.name,
-    required this.score,
+    required this.reps,
     required this.maxScore,
     Key? key,
   }) : super(key: key);
@@ -31,7 +31,7 @@ class ScoreDetailsRow extends StatelessWidget {
         SizedBox(
           width: width * 0.2,
           child: Text(
-            "${_calculateReps()}",
+            "$reps",
             style: const TextStyle(
               fontSize: 16,
             ),
@@ -40,7 +40,7 @@ class ScoreDetailsRow extends StatelessWidget {
         SizedBox(
           width: width * 0.2,
           child: Text(
-            "$score / 100",
+            "${_calcScore(reps, maxScore)} / 100",
             style: const TextStyle(
               fontSize: 16,
             ),
@@ -50,7 +50,8 @@ class ScoreDetailsRow extends StatelessWidget {
     );
   }
 
-  int _calculateReps() {
-    return ((score / 100) * maxScore).round();
+  int _calcScore(int value, int max) {
+    if (value > max) return 100;
+    return (value / max * 100).round();
   }
 }
