@@ -17,5 +17,5 @@ class ScoreCard {
   late int russianTwist;
   late int deadBallOverTheShoulder;
   late int shuttleSprintLateralHop;
-  late int totalScore = 0;
+  late num totalScore = 0.0;
 }

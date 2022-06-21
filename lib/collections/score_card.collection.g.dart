@@ -15,7 +15,7 @@ extension GetScoreCardCollection on Isar {
 const ScoreCardSchema = CollectionSchema(
   name: 'ScoreCard',
   schema:
-      '{"name":"ScoreCard","idName":"id","properties":[{"name":"benchHops","type":"Long"},{"name":"boxJumpBurpee","type":"Long"},{"name":"chinUps","type":"Long"},{"name":"date","type":"Long"},{"name":"deadBallOverTheShoulder","type":"Long"},{"name":"kneeTuckPushUps","type":"Long"},{"name":"lateralHops","type":"Long"},{"name":"rower","type":"Long"},{"name":"russianTwist","type":"Long"},{"name":"shuttleSprintLateralHop","type":"Long"},{"name":"squatPress","type":"Long"},{"name":"totalScore","type":"Long"}],"indexes":[],"links":[]}',
+      '{"name":"ScoreCard","idName":"id","properties":[{"name":"benchHops","type":"Long"},{"name":"boxJumpBurpee","type":"Long"},{"name":"chinUps","type":"Long"},{"name":"date","type":"Long"},{"name":"deadBallOverTheShoulder","type":"Long"},{"name":"kneeTuckPushUps","type":"Long"},{"name":"lateralHops","type":"Long"},{"name":"rower","type":"Long"},{"name":"russianTwist","type":"Long"},{"name":"shuttleSprintLateralHop","type":"Long"},{"name":"squatPress","type":"Long"}],"indexes":[],"links":[]}',
   idName: 'id',
   propertyIds: {
     'benchHops': 0,
@@ -28,8 +28,7 @@ const ScoreCardSchema = CollectionSchema(
     'rower': 7,
     'russianTwist': 8,
     'shuttleSprintLateralHop': 9,
-    'squatPress': 10,
-    'totalScore': 11
+    'squatPress': 10
   },
   listProperties: {},
   indexIds: {},
@@ -95,8 +94,6 @@ void _scoreCardSerializeNative(
   final _shuttleSprintLateralHop = value9;
   final value10 = object.squatPress;
   final _squatPress = value10;
-  final value11 = object.totalScore;
-  final _totalScore = value11;
   final size = staticSize + dynamicSize;
 
   rawObj.buffer = alloc(size);
@@ -114,7 +111,6 @@ void _scoreCardSerializeNative(
   writer.writeLong(offsets[8], _russianTwist);
   writer.writeLong(offsets[9], _shuttleSprintLateralHop);
   writer.writeLong(offsets[10], _squatPress);
-  writer.writeLong(offsets[11], _totalScore);
 }
 
 ScoreCard _scoreCardDeserializeNative(IsarCollection<ScoreCard> collection,
@@ -132,7 +128,6 @@ ScoreCard _scoreCardDeserializeNative(IsarCollection<ScoreCard> collection,
   object.russianTwist = reader.readLong(offsets[8]);
   object.shuttleSprintLateralHop = reader.readLong(offsets[9]);
   object.squatPress = reader.readLong(offsets[10]);
-  object.totalScore = reader.readLong(offsets[11]);
   return object;
 }
 
@@ -163,8 +158,6 @@ P _scoreCardDeserializePropNative<P>(
       return (reader.readLong(offset)) as P;
     case 10:
       return (reader.readLong(offset)) as P;
-    case 11:
-      return (reader.readLong(offset)) as P;
     default:
       throw 'Illegal propertyIndex';
   }
@@ -188,7 +181,6 @@ dynamic _scoreCardSerializeWeb(
   IsarNative.jsObjectSet(
       jsObj, 'shuttleSprintLateralHop', object.shuttleSprintLateralHop);
   IsarNative.jsObjectSet(jsObj, 'squatPress', object.squatPress);
-  IsarNative.jsObjectSet(jsObj, 'totalScore', object.totalScore);
   return jsObj;
 }
 
@@ -224,8 +216,6 @@ ScoreCard _scoreCardDeserializeWeb(
           double.negativeInfinity;
   object.squatPress =
       IsarNative.jsObjectGet(jsObj, 'squatPress') ?? double.negativeInfinity;
-  object.totalScore =
-      IsarNative.jsObjectGet(jsObj, 'totalScore') ?? double.negativeInfinity;
   return object;
 }
 
@@ -269,9 +259,6 @@ P _scoreCardDeserializePropWeb<P>(Object jsObj, String propertyName) {
           double.negativeInfinity) as P;
     case 'squatPress':
       return (IsarNative.jsObjectGet(jsObj, 'squatPress') ??
-          double.negativeInfinity) as P;
-    case 'totalScore':
-      return (IsarNative.jsObjectGet(jsObj, 'totalScore') ??
           double.negativeInfinity) as P;
     default:
       throw 'Illegal propertyName';
@@ -945,55 +932,6 @@ extension ScoreCardQueryFilter
       includeUpper: includeUpper,
     ));
   }
-
-  QueryBuilder<ScoreCard, ScoreCard, QAfterFilterCondition> totalScoreEqualTo(
-      int value) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.eq,
-      property: 'totalScore',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<ScoreCard, ScoreCard, QAfterFilterCondition>
-      totalScoreGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.gt,
-      include: include,
-      property: 'totalScore',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<ScoreCard, ScoreCard, QAfterFilterCondition> totalScoreLessThan(
-    int value, {
-    bool include = false,
-  }) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.lt,
-      include: include,
-      property: 'totalScore',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<ScoreCard, ScoreCard, QAfterFilterCondition> totalScoreBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return addFilterConditionInternal(FilterCondition.between(
-      property: 'totalScore',
-      lower: lower,
-      includeLower: includeLower,
-      upper: upper,
-      includeUpper: includeUpper,
-    ));
-  }
 }
 
 extension ScoreCardQueryLinks
@@ -1100,14 +1038,6 @@ extension ScoreCardQueryWhereSortBy
   QueryBuilder<ScoreCard, ScoreCard, QAfterSortBy> sortBySquatPressDesc() {
     return addSortByInternal('squatPress', Sort.desc);
   }
-
-  QueryBuilder<ScoreCard, ScoreCard, QAfterSortBy> sortByTotalScore() {
-    return addSortByInternal('totalScore', Sort.asc);
-  }
-
-  QueryBuilder<ScoreCard, ScoreCard, QAfterSortBy> sortByTotalScoreDesc() {
-    return addSortByInternal('totalScore', Sort.desc);
-  }
 }
 
 extension ScoreCardQueryWhereSortThenBy
@@ -1211,14 +1141,6 @@ extension ScoreCardQueryWhereSortThenBy
   QueryBuilder<ScoreCard, ScoreCard, QAfterSortBy> thenBySquatPressDesc() {
     return addSortByInternal('squatPress', Sort.desc);
   }
-
-  QueryBuilder<ScoreCard, ScoreCard, QAfterSortBy> thenByTotalScore() {
-    return addSortByInternal('totalScore', Sort.asc);
-  }
-
-  QueryBuilder<ScoreCard, ScoreCard, QAfterSortBy> thenByTotalScoreDesc() {
-    return addSortByInternal('totalScore', Sort.desc);
-  }
 }
 
 extension ScoreCardQueryWhereDistinct
@@ -1272,10 +1194,6 @@ extension ScoreCardQueryWhereDistinct
   QueryBuilder<ScoreCard, ScoreCard, QDistinct> distinctBySquatPress() {
     return addDistinctByInternal('squatPress');
   }
-
-  QueryBuilder<ScoreCard, ScoreCard, QDistinct> distinctByTotalScore() {
-    return addDistinctByInternal('totalScore');
-  }
 }
 
 extension ScoreCardQueryProperty
@@ -1328,9 +1246,5 @@ extension ScoreCardQueryProperty
 
   QueryBuilder<ScoreCard, int, QQueryOperations> squatPressProperty() {
     return addPropertyNameInternal('squatPress');
-  }
-
-  QueryBuilder<ScoreCard, int, QQueryOperations> totalScoreProperty() {
-    return addPropertyNameInternal('totalScore');
   }
 }

@@ -4,7 +4,7 @@ class ScoreRow extends StatelessWidget {
   final String event;
   final int reps;
   final int maxReps;
-  final int score;
+  final double score;
   final Function(String) onChanged;
 
   const ScoreRow({

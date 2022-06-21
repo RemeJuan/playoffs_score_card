@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
 import 'package:playoffs_score_card/core/models/max_scores.model.dart';
+import 'package:playoffs_score_card/core/utils/utils.dart';
 
 enum ChartDataSource {
   total("Total"),
@@ -46,18 +47,46 @@ class HistoryProvider extends ChangeNotifier {
   late int maxShuttleSprintLateralHop;
 
   void getData() async {
-    scores = await _isar.scoreCards.where().sortByDateDesc().findAll();
+    final scoreCards =
+        await _isar.scoreCards.where().sortByDateDesc().findAll();
+    final cards = <ScoreCard>[];
 
-    chartData = scores.reversed.map((e) {
-      return e.totalScore.toDouble();
-    }).toList();
+    for (final card in scoreCards) {
+      if (card.totalScore == 0.0) {
+        final scores = [
+          CoreUtils.calcScore(card.rower, maxRower),
+          CoreUtils.calcScore(card.benchHops, maxBenchHops),
+          CoreUtils.calcScore(card.kneeTuckPushUps, maxKneeTuckPushUps),
+          CoreUtils.calcScore(card.lateralHops, maxLateralHops),
+          CoreUtils.calcScore(card.boxJumpBurpee, maxBoxJumpBurpee),
+          CoreUtils.calcScore(card.chinUps, maxChinUps),
+          CoreUtils.calcScore(card.squatPress, maxSquatPress),
+          CoreUtils.calcScore(card.russianTwist, maxRussianTwist),
+          CoreUtils.calcScore(
+            card.deadBallOverTheShoulder,
+            maxDeadBallOverTheShoulder,
+          ),
+          CoreUtils.calcScore(
+            card.shuttleSprintLateralHop,
+            maxShuttleSprintLateralHop,
+          ),
+        ];
+        card.totalScore = double.parse(
+          scores.reduce((a, b) => a + b).toStringAsFixed(1),
+        );
+      }
+      cards.add(card);
+    }
+
+    scores = cards;
+    chartData = scores.reversed.map((e) => e.totalScore.toDouble()).toList();
 
     notifyListeners();
   }
 
   void updateChartData(ChartDataSource source) {
     activeChartDataSource = source;
-    int amount;
+    num amount;
 
     chartData = scores.reversed.map((e) {
       switch (source) {

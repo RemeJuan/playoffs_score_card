@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
 import 'package:playoffs_score_card/core/models/max_scores.model.dart';
+import 'package:playoffs_score_card/core/utils/utils.dart';
 
 enum ScoreCardStatus {
   incomplete,
@@ -24,7 +25,7 @@ class ScoreCardProvider extends ChangeNotifier {
   late int maxDeadBallOverTheShoulder;
   late int maxShuttleSprintLateralHop;
 
-  late int totalScore;
+  late double totalScore;
 
   late DateTime date;
   late int rower;
@@ -38,16 +39,16 @@ class ScoreCardProvider extends ChangeNotifier {
   late int deadBallOverTheShoulder;
   late int shuttleSprintLateralHop;
 
-  int rowerScore = 0;
-  int benchHopsScore = 0;
-  int kneeTuckPushUpsScore = 0;
-  int lateralHopsScore = 0;
-  int boxJumpBurpeeScore = 0;
-  int chinUpsScore = 0;
-  int squatPressScore = 0;
-  int russianTwistScore = 0;
-  int deadBallOverTheShoulderScore = 0;
-  int shuttleSprintLateralHopScore = 0;
+  double rowerScore = 0;
+  double benchHopsScore = 0;
+  double kneeTuckPushUpsScore = 0;
+  double lateralHopsScore = 0;
+  double boxJumpBurpeeScore = 0;
+  double chinUpsScore = 0;
+  double squatPressScore = 0;
+  double russianTwistScore = 0;
+  double deadBallOverTheShoulderScore = 0;
+  double shuttleSprintLateralHopScore = 0;
 
   ScoreCardStatus status = ScoreCardStatus.incomplete;
 
@@ -85,7 +86,7 @@ class ScoreCardProvider extends ChangeNotifier {
 
   void setRower(int value) {
     rower = value;
-    rowerScore = _calcScore(value, maxRower);
+    rowerScore = CoreUtils.calcScore(value, maxRower);
 
     totalScoreCalculator();
     notifyListeners();
@@ -93,7 +94,7 @@ class ScoreCardProvider extends ChangeNotifier {
 
   void setBenchHops(int value) {
     benchHops = value;
-    benchHopsScore = _calcScore(value, maxBenchHops);
+    benchHopsScore = CoreUtils.calcScore(value, maxBenchHops);
 
     totalScoreCalculator();
     notifyListeners();
@@ -101,7 +102,7 @@ class ScoreCardProvider extends ChangeNotifier {
 
   void setKneeTuckPushUps(int value) {
     kneeTuckPushUps = value;
-    kneeTuckPushUpsScore = _calcScore(value, maxKneeTuckPushUps);
+    kneeTuckPushUpsScore = CoreUtils.calcScore(value, maxKneeTuckPushUps);
 
     totalScoreCalculator();
     notifyListeners();
@@ -109,7 +110,7 @@ class ScoreCardProvider extends ChangeNotifier {
 
   void setLateralHops(int value) {
     lateralHops = value;
-    lateralHopsScore = _calcScore(value, maxLateralHops);
+    lateralHopsScore = CoreUtils.calcScore(value, maxLateralHops);
 
     totalScoreCalculator();
     notifyListeners();
@@ -117,7 +118,7 @@ class ScoreCardProvider extends ChangeNotifier {
 
   void setBoxJumpBurpee(int value) {
     boxJumpBurpee = value;
-    boxJumpBurpeeScore = _calcScore(value, maxBoxJumpBurpee);
+    boxJumpBurpeeScore = CoreUtils.calcScore(value, maxBoxJumpBurpee);
 
     totalScoreCalculator();
     notifyListeners();
@@ -125,7 +126,7 @@ class ScoreCardProvider extends ChangeNotifier {
 
   void setChinUps(int value) {
     chinUps = value;
-    chinUpsScore = _calcScore(value, maxChinUps);
+    chinUpsScore = CoreUtils.calcScore(value, maxChinUps);
 
     totalScoreCalculator();
     notifyListeners();
@@ -133,7 +134,7 @@ class ScoreCardProvider extends ChangeNotifier {
 
   void setSquatPress(int value) {
     squatPress = value;
-    squatPressScore = _calcScore(value, maxSquatPress);
+    squatPressScore = CoreUtils.calcScore(value, maxSquatPress);
 
     totalScoreCalculator();
     notifyListeners();
@@ -141,7 +142,7 @@ class ScoreCardProvider extends ChangeNotifier {
 
   void setRussianTwist(int value) {
     russianTwist = value;
-    russianTwistScore = _calcScore(value, maxRussianTwist);
+    russianTwistScore = CoreUtils.calcScore(value, maxRussianTwist);
 
     totalScoreCalculator();
     notifyListeners();
@@ -150,7 +151,7 @@ class ScoreCardProvider extends ChangeNotifier {
   void setDeadBallOverTheShoulder(int value) {
     deadBallOverTheShoulder = value;
     deadBallOverTheShoulderScore =
-        _calcScore(value, maxDeadBallOverTheShoulder);
+        CoreUtils.calcScore(value, maxDeadBallOverTheShoulder);
 
     totalScoreCalculator();
     notifyListeners();
@@ -159,7 +160,7 @@ class ScoreCardProvider extends ChangeNotifier {
   void setShuttleSprintLateralHop(int value) {
     shuttleSprintLateralHop = value;
     shuttleSprintLateralHopScore =
-        _calcScore(value, maxShuttleSprintLateralHop);
+        CoreUtils.calcScore(value, maxShuttleSprintLateralHop);
 
     totalScoreCalculator();
     notifyListeners();
@@ -169,11 +170,6 @@ class ScoreCardProvider extends ChangeNotifier {
     _init();
     date = d;
     notifyListeners();
-  }
-
-  int _calcScore(int value, int max) {
-    if (value > max) return 100;
-    return (value / max * 100).round();
   }
 
   void totalScoreCalculator() {

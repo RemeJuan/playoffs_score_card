@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playoffs_score_card/core/utils/utils.dart';
 
 class ScoreDetailsRow extends StatelessWidget {
   final String name;
@@ -40,7 +41,7 @@ class ScoreDetailsRow extends StatelessWidget {
         SizedBox(
           width: width * 0.2,
           child: Text(
-            "${_calcScore(reps, maxScore)} / 100",
+            "${CoreUtils.calcScore(reps, maxScore)} / 100",
             style: const TextStyle(
               fontSize: 16,
             ),
@@ -48,10 +49,5 @@ class ScoreDetailsRow extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  int _calcScore(int value, int max) {
-    if (value > max) return 100;
-    return (value / max * 100).round();
   }
 }
