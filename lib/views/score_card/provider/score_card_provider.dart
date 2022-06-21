@@ -24,7 +24,7 @@ class ScoreCardProvider extends ChangeNotifier {
   late int maxDeadBallOverTheShoulder;
   late int maxShuttleSprintLateralHop;
 
-  int totalScore = 0;
+  late int totalScore;
 
   late DateTime date;
   late int rower;
@@ -67,6 +67,7 @@ class ScoreCardProvider extends ChangeNotifier {
     russianTwist = -1;
     deadBallOverTheShoulder = -1;
     shuttleSprintLateralHop = -1;
+    totalScore = 0;
     status = ScoreCardStatus.incomplete;
 
     // Max Scores
@@ -85,6 +86,7 @@ class ScoreCardProvider extends ChangeNotifier {
   void setRower(int value) {
     rower = value;
     rowerScore = _calcScore(value, maxRower);
+
     totalScoreCalculator();
     notifyListeners();
   }
@@ -160,6 +162,12 @@ class ScoreCardProvider extends ChangeNotifier {
         _calcScore(value, maxShuttleSprintLateralHop);
 
     totalScoreCalculator();
+    notifyListeners();
+  }
+
+  void addPreviousScore(DateTime d) async {
+    _init();
+    date = d;
     notifyListeners();
   }
 

@@ -35,7 +35,8 @@ class ScoreRow extends StatelessWidget {
               SizedBox(
                 width: width * 0.3,
                 child: TextFormField(
-                  initialValue: reps == -1 ? "" : "$reps",
+                  key: Key("${key}_input"),
+                  initialValue: reps == -1 ? "" : reps.toString(),
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     isDense: true,

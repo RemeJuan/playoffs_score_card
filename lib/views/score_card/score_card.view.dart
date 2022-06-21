@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:playoffs_score_card/locator.dart';
 import 'package:playoffs_score_card/router/router_provider.dart';
 import 'package:playoffs_score_card/theme.dart';
@@ -23,20 +24,35 @@ class ScoreCardView extends StatelessWidget {
             _navigate();
           }
 
+          final date = DateFormat("d MMM yyyy").format(provider.date);
+
           return DefaultTemplate(
             title: "Score Card",
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  margin: const EdgeInsets.all(AppTheme.paddingDefault * 2),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Total Score: ${provider.totalScore}",
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  padding: const EdgeInsets.all(
+                    AppTheme.paddingDefault * 2,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Score: ${provider.totalScore}",
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        date,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const Expanded(child: ScoreTable()),

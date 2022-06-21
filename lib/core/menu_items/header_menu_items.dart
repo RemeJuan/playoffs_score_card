@@ -20,6 +20,26 @@ PopupMenuItem _about() {
   );
 }
 
+PopupMenuItem _historyEntry() {
+  return PopupMenuItem(
+    value: "history",
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        Icon(
+          Icons.scoreboard_outlined,
+          size: 14.0,
+        ),
+        SizedBox(width: AppTheme.paddingDefault * 0.5),
+        Text(
+          "Add previous scores",
+          style: TextStyle(fontSize: 14.0),
+        ),
+      ],
+    ),
+  );
+}
+
 void _showAboutDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -94,4 +114,28 @@ void _showAboutDialog(BuildContext context) {
       );
     },
   );
+}
+
+void _showHistoryDialog(BuildContext context) async {
+  final date = await showDatePicker(
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate: DateTime(2015),
+    lastDate: DateTime(DateTime.now().year + 1),
+    builder: (context, child) {
+      return Theme(
+        data: ThemeData.light().copyWith(
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: AppTheme.materialBlue,
+          ),
+        ),
+        child: child!,
+      );
+    },
+  );
+
+  await Future.delayed(const Duration(milliseconds: 10));
+  sl<ScoreCardProvider>().addPreviousScore(date!);
+  await Future.delayed(const Duration(milliseconds: 10));
+  sl<RouterProvider>().setCurrentIndex(0);
 }
