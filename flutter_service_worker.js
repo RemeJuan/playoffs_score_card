@@ -7,12 +7,12 @@ const RESOURCES = {
 "manifest.json": "59b1d047bcf5564a16d097947ca7ff8f",
 "version.json": "27fdb36bf4d49802c0ca6b50a8a56735",
 "flutter.js": "eb2682e33f25cd8f1fc59011497c35f8",
-"index.html": "1f661e9d5eb4d29c38decf999ff711e4",
-"/": "1f661e9d5eb4d29c38decf999ff711e4",
-"icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
-"icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
-"icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
+"index.html": "1240db58ed4dec3b02110b350228166b",
+"/": "1240db58ed4dec3b02110b350228166b",
+"icons/Icon-512.png": "43f31faaeda7705c3fe10672f38c7a87",
+"icons/Icon-maskable-192.png": "01a4940be6c2f4727b9ac0206bb1193d",
+"icons/Icon-192.png": "01a4940be6c2f4727b9ac0206bb1193d",
+"icons/Icon-maskable-512.png": "e0b24e3919db2e1a48503313e1b7a4ff",
 "canvaskit/canvaskit.js": "c2b4e5f3d7a3d82aed024e7249a78487",
 "canvaskit/profiling/canvaskit.js": "ae2949af4efc61d28a4a80fffa1db900",
 "canvaskit/profiling/canvaskit.wasm": "95e736ab31147d1b2c7b25f11d4c32cd",
@@ -25,7 +25,7 @@ const RESOURCES = {
 "assets/assets/fonts/Trade%2520Gothic%2520LT%2520Light.ttf": "05748951114e8f8876ccfcaca8c8e7f2",
 "assets/NOTICES": "329ae03d3b0699c99e7304fc0e56996b",
 "assets/FontManifest.json": "cad296026acd3f44d6bd3bc031eecd66",
-"favicon.png": "5dcef449791fa27946b3d35ad8803796"
+"favicon.png": "088fcd9c7ffc4bd23bf6493e917a2826"
 };
 
 // The application shell files that are downloaded before a service worker can
