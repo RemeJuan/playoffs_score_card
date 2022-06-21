@@ -45,11 +45,15 @@ class ScoreCardView extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
-                        date,
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: () => _showDatePicker(context),
+                        child: Text(
+                          date,
+                          style: const TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ],
@@ -73,5 +77,27 @@ class ScoreCardView extends StatelessWidget {
   void _navigate() async {
     await Future.delayed(const Duration(milliseconds: 10));
     sl<RouterProvider>().setCurrentIndex(1);
+  }
+
+  void _showDatePicker(BuildContext context) async {
+    final date = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015),
+      lastDate: DateTime(DateTime.now().day),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: AppTheme.materialBlue,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    await Future.delayed(const Duration(milliseconds: 10));
+    sl<ScoreCardProvider>().addPreviousScore(date!);
   }
 }

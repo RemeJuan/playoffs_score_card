@@ -1,45 +1,5 @@
 part of "package:playoffs_score_card/app_landing.dart";
 
-PopupMenuItem _about() {
-  return PopupMenuItem(
-    value: "about",
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
-        Icon(
-          Icons.info_outline,
-          size: 14.0,
-        ),
-        SizedBox(width: AppTheme.paddingDefault * 0.5),
-        Text(
-          "About",
-          style: TextStyle(fontSize: 14.0),
-        ),
-      ],
-    ),
-  );
-}
-
-PopupMenuItem _historyEntry() {
-  return PopupMenuItem(
-    value: "history",
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
-        Icon(
-          Icons.scoreboard_outlined,
-          size: 14.0,
-        ),
-        SizedBox(width: AppTheme.paddingDefault * 0.5),
-        Text(
-          "Add previous scores",
-          style: TextStyle(fontSize: 14.0),
-        ),
-      ],
-    ),
-  );
-}
-
 void _showAboutDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -71,6 +31,16 @@ void _showAboutDialog(BuildContext context) {
                 style: TextStyle(
                   color: AppTheme.blue,
                   decoration: TextDecoration.underline,
+                ),
+              ),
+              const TextSpan(
+                text: "\n\n",
+              ),
+              const TextSpan(
+                text:
+                    "You can tap on the date to change it and add your past entries in to get more details on the history view.",
+                style: TextStyle(
+                  color: Colors.black,
                 ),
               ),
               const TextSpan(
@@ -114,28 +84,4 @@ void _showAboutDialog(BuildContext context) {
       );
     },
   );
-}
-
-void _showHistoryDialog(BuildContext context) async {
-  final date = await showDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(2015),
-    lastDate: DateTime(DateTime.now().year + 1),
-    builder: (context, child) {
-      return Theme(
-        data: ThemeData.light().copyWith(
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: AppTheme.materialBlue,
-          ),
-        ),
-        child: child!,
-      );
-    },
-  );
-
-  await Future.delayed(const Duration(milliseconds: 10));
-  sl<ScoreCardProvider>().addPreviousScore(date!);
-  await Future.delayed(const Duration(milliseconds: 10));
-  sl<RouterProvider>().setCurrentIndex(0);
 }

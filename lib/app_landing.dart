@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:playoffs_score_card/router/app_router.dart';
 import 'package:playoffs_score_card/router/router_provider.dart';
 import 'package:playoffs_score_card/theme.dart';
-import 'package:playoffs_score_card/views/score_card/provider/score_card_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -47,29 +46,10 @@ class AppLanding extends HookWidget {
               ),
               backgroundColor: AppTheme.blue,
               actions: [
-                PopupMenuButton(
-                  onSelected: (value) {
-                    if (value == 'about') {
-                      _showAboutDialog(context);
-                    }
-
-                    if (value == "history") {
-                      _showHistoryDialog(context);
-                    }
-                  },
-                  offset: const Offset(0, 50),
-                  icon: const Icon(
-                    Icons.more_vert,
-                    color: Colors.white,
-                    size: 24.0,
-                  ),
-                  iconSize: 65.0,
-                  itemBuilder: (context) {
-                    return [
-                      _historyEntry(),
-                      _about(),
-                    ];
-                  },
+                IconButton(
+                  onPressed: () => _showAboutDialog(context),
+                  icon: const Icon(Icons.info_outline),
+                  color: Colors.white,
                 )
               ],
             ),
