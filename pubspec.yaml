@@ -3,7 +3,7 @@ repository: https://github.com/RemeJuan/playoffs_score_card
 homepage: https://playoffsscorecard.app
 description: A simple web app for users to track their progress across the F45 Playoffs.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+1
+version: 1.1.0
 
 environment:
   sdk: ">=2.17.3 <3.0.0"
@@ -70,3 +70,7 @@ flutter:
           weight: 600
         - asset: "assets/fonts/Trade Gothic LT Light.ttf"
           weight: 300
+cider:
+  link_template:
+    tag: https://github.com/RemeJuan/playoffs_score_card/project/releases/tag/%tag% # initial release link template
+    diff: https://github.com/RemeJuan/playoffs_score_card/project/compare/%from%...%to% # subsequent releases link template
