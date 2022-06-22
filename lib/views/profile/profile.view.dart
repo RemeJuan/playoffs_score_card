@@ -94,9 +94,9 @@ class ProfileView extends StatelessWidget {
                         child: const Text('Backup Data'),
                       ),
                       const SizedBox(height: AppTheme.paddingDefault * 2),
-                      const ElevatedButton(
-                        onPressed: null,
-                        child: Text('Restore Data'),
+                      ElevatedButton(
+                        onPressed: () => provider.importData(),
+                        child: const Text('Restore Data'),
                       ),
                     ],
                   ),

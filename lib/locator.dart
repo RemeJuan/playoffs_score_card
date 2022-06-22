@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_file_saver/flutter_file_saver.dart';
 import 'package:get_it/get_it.dart';
@@ -27,10 +28,11 @@ void initService() {
     }
   });
   sl.registerLazySingleton<FlutterFileSaver>(() => FlutterFileSaver());
+  sl.registerLazySingleton<FilePicker>(() => FilePicker.platform);
 
   sl.registerLazySingleton<RouterProvider>(() => RouterProvider());
   sl.registerLazySingleton<ProfileProvider>(
-    () => ProfileProvider(sl(), sl()),
+    () => ProfileProvider(sl(), sl(), sl()),
   );
   sl.registerLazySingleton<HistoryProvider>(
     () => HistoryProvider(sl(), sl()),
