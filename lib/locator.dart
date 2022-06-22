@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_file_saver/flutter_file_saver.dart';
 import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:playoffs_score_card/core/models/max_scores.model.dart';
 import 'package:playoffs_score_card/router/router_provider.dart';
@@ -27,10 +28,14 @@ void initService() {
       );
     }
   });
+  sl.registerLazySingletonAsync<PackageInfo>(
+    () => PackageInfo.fromPlatform(),
+  );
+
   sl.registerLazySingleton<FlutterFileSaver>(() => FlutterFileSaver());
   sl.registerLazySingleton<FilePicker>(() => FilePicker.platform);
 
-  sl.registerLazySingleton<RouterProvider>(() => RouterProvider());
+  sl.registerLazySingleton<RouterProvider>(() => RouterProvider(sl()));
   sl.registerLazySingleton<ProfileProvider>(
     () => ProfileProvider(sl(), sl(), sl()),
   );

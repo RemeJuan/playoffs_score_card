@@ -1,6 +1,7 @@
 part of "package:playoffs_score_card/app_landing.dart";
 
 void _showAboutDialog(BuildContext context) {
+  final provider = context.read<RouterProvider>();
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -76,6 +77,16 @@ void _showAboutDialog(BuildContext context) {
                 style: TextStyle(
                   color: AppTheme.blue,
                   decoration: TextDecoration.underline,
+                ),
+              ),
+              const TextSpan(
+                text: "\n\n",
+              ),
+              TextSpan(
+                text: "App version: ${provider.version}",
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
