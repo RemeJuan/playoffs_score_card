@@ -3,12 +3,12 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "main.dart.js": "fdb4b608467a18cbc611e36beb47d23f",
+  "main.dart.js": "f98a587a9b6c260127972754c5c7e002",
 "manifest.json": "59b1d047bcf5564a16d097947ca7ff8f",
-"version.json": "27fdb36bf4d49802c0ca6b50a8a56735",
+"version.json": "6c775d16cdf738a2d1d960d5c3db712f",
 "flutter.js": "eb2682e33f25cd8f1fc59011497c35f8",
-"index.html": "ed62d165b6bbada24081f0133a524a62",
-"/": "ed62d165b6bbada24081f0133a524a62",
+"index.html": "82439598c2e9499e5aadf9ddf95f2dab",
+"/": "82439598c2e9499e5aadf9ddf95f2dab",
 "icons/Icon-512.png": "43f31faaeda7705c3fe10672f38c7a87",
 "icons/Icon-maskable-192.png": "01a4940be6c2f4727b9ac0206bb1193d",
 "icons/Icon-192.png": "01a4940be6c2f4727b9ac0206bb1193d",
@@ -23,7 +23,7 @@ const RESOURCES = {
 "assets/assets/fonts/Trade%2520Gothic%2520LT%2520Bold.ttf": "cb7d0b0968943ceca839712e38df14c1",
 "assets/assets/fonts/Trade%2520Gothic%2520LT.ttf": "0631e2714248f8295ff4d71b602a486d",
 "assets/assets/fonts/Trade%2520Gothic%2520LT%2520Light.ttf": "05748951114e8f8876ccfcaca8c8e7f2",
-"assets/NOTICES": "329ae03d3b0699c99e7304fc0e56996b",
+"assets/NOTICES": "353a5e39e647e4456e981bd4621f354e",
 "assets/FontManifest.json": "cad296026acd3f44d6bd3bc031eecd66",
 "favicon.png": "088fcd9c7ffc4bd23bf6493e917a2826"
 };
