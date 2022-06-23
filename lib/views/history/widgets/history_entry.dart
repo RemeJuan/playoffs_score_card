@@ -15,32 +15,42 @@ class HistoryEntry extends StatelessWidget {
   Widget build(context) {
     final date = DateFormat("d MMMM yyyy").format(score.date);
 
-    return InkWell(
-      onTap: () => _showMaterialDialog(context),
-      child: Container(
-        padding: const EdgeInsets.all(AppTheme.paddingDefault),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              date,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+    return Dismissible(
+      key: UniqueKey(),
+      background: Container(color: Colors.red),
+      confirmDismiss: (_) => _confirmDelete(context),
+      direction: DismissDirection.endToStart,
+      onDismissed: (direction) {
+        final provider = context.read<HistoryProvider>();
+        provider.removeScore(score);
+      },
+      child: InkWell(
+        onTap: () => _showMaterialDialog(context),
+        child: Container(
+          padding: const EdgeInsets.all(AppTheme.paddingDefault),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                date,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const Expanded(child: SizedBox.shrink()),
-            Text(
-              "${score.totalScore} / 1000",
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+              const Expanded(child: SizedBox.shrink()),
+              Text(
+                "${score.totalScore} / 1000",
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(width: AppTheme.paddingDefault),
-            const Icon(Icons.arrow_forward_ios),
-          ],
+              const SizedBox(width: AppTheme.paddingDefault),
+              const Icon(Icons.arrow_forward_ios),
+            ],
+          ),
         ),
       ),
     );
@@ -66,5 +76,33 @@ class HistoryEntry extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<bool?> _confirmDelete(BuildContext context) async {
+    final res = await showDialog<bool>(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          title: const Text('Please Confirm'),
+          content: const Text('Are you sure to remove the box?'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  // Close the dialog
+                  Navigator.of(context).pop(true);
+                },
+                child: const Text('Yes')),
+            TextButton(
+                onPressed: () {
+                  // Close the dialog
+                  Navigator.of(context).pop(false);
+                },
+                child: const Text('No'))
+          ],
+        );
+      },
+    );
+
+    return res;
   }
 }

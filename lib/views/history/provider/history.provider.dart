@@ -132,6 +132,11 @@ class HistoryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeScore(ScoreCard score) async {
+    await _isar.writeTxn((isar) => isar.scoreCards.delete(score.id!));
+    await Future.delayed(const Duration(milliseconds: 500));
+  }
+
   void _init() async {
     // Max Scores
     maxRower = maxScores.maxRower;
