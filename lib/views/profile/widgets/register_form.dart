@@ -39,23 +39,21 @@ class RegisterForm extends HookWidget {
         const SizedBox(
           height: AppTheme.paddingDefault,
         ),
-        // TextButton(
-        //   onPressed: () {
-        //     //forgot password screen
-        //   },
-        //   child: const Text(
-        //     'Forgot Password',
-        //   ),
-        // ),
+        TextButton(
+          onPressed: _emailController.text.isNotEmpty
+              ? () => _provider.forgotPassword(_emailController.text)
+              : null,
+          child: const Text(
+            'Forgot Password',
+          ),
+        ),
         Container(
           padding: const EdgeInsets.all(AppTheme.paddingDefault),
           child: ElevatedButton(
-            onPressed: _passController.text == _confirmController.text
-                ? () => _provider.createNewUser(
-                      _emailController.text,
-                      _passController.text,
-                    )
-                : null,
+            onPressed: () => _provider.createNewUser(
+              _emailController.text,
+              _passController.text,
+            ),
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppTheme.paddingDefault * 2,

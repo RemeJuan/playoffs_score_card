@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -64,35 +63,47 @@ class ProfileProvider extends ChangeNotifier {
 
   void createNewUser(String email, String password) async {
     try {
-      final credential = await _auth.createUserWithEmailAndPassword(
+      final credentials = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      log(credential.toString());
+      print(credentials);
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthExceptions.WeakPassword.code) {
-        log('The password provided is too weak.');
+        debugPrint('The password provided is too weak.');
       } else if (e.code == AuthExceptions.UserAlreadyExists.code) {
-        log('The account already exists for that email.');
+        debugPrint('The account already exists for that email.');
       }
     } catch (e) {
-      log(e.toString());
+      print(e);
+      debugPrint(e.toString());
     }
   }
 
   void loginUser(String email, String password) async {
     try {
       final credential = await _auth.signInWithEmailAndPassword(
-          email: email,
-          password: password
+        email: email,
+        password: password,
       );
-      log(credential.toString());
+
+      debugPrint(credential.toString());
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthExceptions.UserNotFound.code) {
-        log('No user found for that email.');
+        debugPrint('No user found for that email.');
       } else if (e.code == AuthExceptions.WrongPassword.code) {
-        log('Wrong password provided for that user.');
+        debugPrint('Wrong password provided for that user.');
+      }
+    }
+  }
+
+  void forgotPassword(String email) {
+    try {
+      _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == AuthExceptions.UserNotFound.code) {
+        debugPrint('No user found for that email.');
       }
     }
   }

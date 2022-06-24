@@ -30,14 +30,12 @@ class LoginForm extends HookWidget {
         const SizedBox(
           height: AppTheme.paddingDefault,
         ),
-        // TextButton(
-        //   onPressed: () {
-        //     //forgot password screen
-        //   },
-        //   child: const Text(
-        //     'Forgot Password',
-        //   ),
-        // ),
+        TextButton(
+          onPressed: () => _provider.forgotPassword(_emailController.text),
+          child: const Text(
+            'Forgot Password',
+          ),
+        ),
         Container(
           padding: const EdgeInsets.all(AppTheme.paddingDefault),
           child: ElevatedButton(
