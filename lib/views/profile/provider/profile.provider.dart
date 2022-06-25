@@ -19,20 +19,28 @@ enum AuthExceptions {
   const AuthExceptions(this.code);
 }
 
+enum AuthStatus {
+  None,
+  Registering,
+  LoggingIn,
+  LoggedIn,
+  Success,
+  Error,
+}
+
 class ProfileProvider extends ChangeNotifier {
   final Isar _isar;
   final FlutterFileSaver _fileSaver;
   final FilePicker _filePicker;
   final FirebaseAuth _auth;
 
+  AuthStatus status = AuthStatus.None;
   bool hasRecords = false;
   String errorMessage = "";
 
   String email = "";
   String password = "";
   String confirmPassword = "";
-  bool passwordMatch = false;
-  bool validEmail = false;
 
   ProfileProvider(this._isar, this._fileSaver, this._filePicker, this._auth) {
     _init();
@@ -87,56 +95,84 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // check if passwords match
-  void checkPasswordMatch() async {
-    passwordMatch = password == confirmPassword;
-    notifyListeners();
-  }
-
-  // check if email is valid
-  void checkEmail() async {
-    validEmail = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-    ).hasMatch(email);
-    notifyListeners();
-  }
-
   void createNewUser() async {
-    errorMessage = "";
+    status = AuthStatus.None;
+    notifyListeners();
+
+    if (errorMessage.isNotEmpty) {
+      errorMessage = "";
+      notifyListeners();
+    }
+
+    if (!_checkEmail()) {
+      errorMessage = "Please enter a valid email address";
+      notifyListeners();
+      return;
+    }
+
+    if (!_checkPasswordMatch()) {
+      errorMessage = "Passwords do not match";
+      notifyListeners();
+      return;
+    }
+
     try {
-      final credentials = await _auth.createUserWithEmailAndPassword(
+      status = AuthStatus.Registering;
+      notifyListeners();
+
+      await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      print(credentials);
+      status = AuthStatus.Success;
+      notifyListeners();
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthExceptions.WeakPassword.code) {
         errorMessage = 'The password provided is too weak.';
       } else if (e.code == AuthExceptions.UserAlreadyExists.code) {
         errorMessage = 'The account already exists for that email.';
       }
-    } catch (e) {
-      print(e);
-      debugPrint(e.toString());
+      notifyListeners();
     }
   }
 
   void loginUser() async {
-    errorMessage = "";
+    status = AuthStatus.None;
+    notifyListeners();
+
+    if (errorMessage.isNotEmpty) {
+      errorMessage = "";
+      notifyListeners();
+    }
+
+    if (!_checkEmail()) {
+      errorMessage = "Please enter a valid email address";
+      notifyListeners();
+      return;
+    }
+
     try {
-      final credential = await _auth.signInWithEmailAndPassword(
+      status = AuthStatus.LoggingIn;
+      notifyListeners();
+
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      debugPrint(credential.toString());
+      status = AuthStatus.LoggedIn;
+      // Reset stored details
+      password = "";
+      confirmPassword = "";
+      notifyListeners();
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthExceptions.UserNotFound.code) {
         errorMessage = 'No user found for that email.';
       } else if (e.code == AuthExceptions.WrongPassword.code) {
         errorMessage = 'Wrong password provided for that user.';
       }
+      notifyListeners();
     }
   }
 
@@ -149,5 +185,17 @@ class ProfileProvider extends ChangeNotifier {
         errorMessage = 'No user found for that email.';
       }
     }
+  }
+
+  // check if passwords match
+  bool _checkPasswordMatch() {
+    return password == confirmPassword;
+  }
+
+  // check if email is valid
+  bool _checkEmail() {
+    return RegExp(
+      r"^[a-zA-Z\d.a-zA-Z\d.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    ).hasMatch(email);
   }
 }

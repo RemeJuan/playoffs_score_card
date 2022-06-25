@@ -23,8 +23,7 @@ class LoginForm extends HookWidget {
         Container(
           padding: const EdgeInsets.all(AppTheme.paddingDefault),
           child: ElevatedButton(
-            onPressed:
-                _provider.validEmail ? () => _provider.loginUser() : null,
+            onPressed: _provider.loginUser,
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppTheme.paddingDefault * 2,

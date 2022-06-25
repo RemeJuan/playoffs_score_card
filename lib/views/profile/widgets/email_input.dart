@@ -6,7 +6,7 @@ class EmailInput extends HookWidget {
   @override
   Widget build(context) {
     final _email = context.select<ProfileProvider, String>(
-          (p) => p.email,
+      (p) => p.email,
     );
 
     return TextFormField(
@@ -17,6 +17,16 @@ class EmailInput extends HookWidget {
       ),
       keyboardType: TextInputType.emailAddress,
       onChanged: (value) => context.read<ProfileProvider>().updateEmail(value),
+      validator: (value) {
+        final validEmail = RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+        ).hasMatch(value!);
+        if (!validEmail) {
+          return 'Please enter a valid email address';
+        }
+        return null;
+      },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }
