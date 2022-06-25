@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:playoffs_score_card/locator.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/views/profile/provider/profile.provider.dart';
+import 'package:playoffs_score_card/views/profile/widgets/auth_view.dart';
 import 'package:provider/provider.dart';
-
-part 'widgets/auth_view.dart';
-part 'widgets/login_form.dart';
-part 'widgets/register_form.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -49,7 +45,7 @@ class ProfileView extends StatelessWidget {
                 const SizedBox(height: AppTheme.paddingDefault * 2),
                 ElevatedButton(
                   onPressed: () => _showLogin(context),
-                  child: const Text("Login"),
+                  child: const Text("Signup / Register"),
                 ),
                 const Expanded(child: SizedBox.shrink()),
                 Container(

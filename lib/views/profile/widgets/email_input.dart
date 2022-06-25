@@ -1,0 +1,22 @@
+part of "auth_view.dart";
+
+class EmailInput extends HookWidget {
+  const EmailInput({Key? key}) : super(key: key);
+
+  @override
+  Widget build(context) {
+    final _email = context.select<ProfileProvider, String>(
+          (p) => p.email,
+    );
+
+    return TextFormField(
+      initialValue: _email,
+      decoration: const InputDecoration(
+        border: UnderlineInputBorder(),
+        labelText: 'Email Address',
+      ),
+      keyboardType: TextInputType.emailAddress,
+      onChanged: (value) => context.read<ProfileProvider>().updateEmail(value),
+    );
+  }
+}

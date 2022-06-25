@@ -5,33 +5,17 @@ class LoginForm extends HookWidget {
 
   @override
   Widget build(context) {
-    final _emailController = useTextEditingController();
-    final _passController = useTextEditingController();
     final _provider = sl<ProfileProvider>();
 
     return Column(
       children: [
-        TextField(
-          controller: _emailController,
-          decoration: const InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: 'Email Address',
-          ),
-          keyboardType: TextInputType.emailAddress,
-        ),
-        TextField(
-          controller: _passController,
-          obscureText: true,
-          decoration: const InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: 'Password',
-          ),
-        ),
+        const EmailInput(),
+        const PasswordInput(),
         const SizedBox(
           height: AppTheme.paddingDefault,
         ),
         TextButton(
-          onPressed: () => _provider.forgotPassword(_emailController.text),
+          onPressed: _provider.forgotPassword,
           child: const Text(
             'Forgot Password',
           ),
@@ -39,6 +23,8 @@ class LoginForm extends HookWidget {
         Container(
           padding: const EdgeInsets.all(AppTheme.paddingDefault),
           child: ElevatedButton(
+            onPressed:
+                _provider.validEmail ? () => _provider.loginUser() : null,
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppTheme.paddingDefault * 2,
@@ -53,7 +39,6 @@ class LoginForm extends HookWidget {
                 ),
               ),
             ),
-            onPressed: () => _provider.loginUser(),
           ),
         ),
       ],

@@ -6,6 +6,7 @@ import 'package:playoffs_score_card/views/profile/provider/profile.provider.dart
 import 'package:provider/provider.dart';
 
 part "confirm_input.dart";
+part "email_input.dart";
 part "login_form.dart";
 part "password_input.dart";
 part "register_form.dart";

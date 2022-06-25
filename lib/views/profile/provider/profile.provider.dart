@@ -32,6 +32,7 @@ class ProfileProvider extends ChangeNotifier {
   String password = "";
   String confirmPassword = "";
   bool passwordMatch = false;
+  bool validEmail = false;
 
   ProfileProvider(this._isar, this._fileSaver, this._filePicker, this._auth) {
     _init();
@@ -92,6 +93,14 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // check if email is valid
+  void checkEmail() async {
+    validEmail = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    ).hasMatch(email);
+    notifyListeners();
+  }
+
   void createNewUser() async {
     errorMessage = "";
     try {
@@ -131,7 +140,7 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
-  void forgotPassword(String email) {
+  void forgotPassword() {
     errorMessage = "";
     try {
       _auth.sendPasswordResetEmail(email: email);
