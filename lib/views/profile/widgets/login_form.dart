@@ -1,4 +1,4 @@
-part of "package:playoffs_score_card/views/profile/profile.view.dart";
+part of "auth_view.dart";
 
 class LoginForm extends HookWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -53,10 +53,7 @@ class LoginForm extends HookWidget {
                 ),
               ),
             ),
-            onPressed: () => _provider.loginUser(
-              _emailController.text,
-              _passController.text,
-            ),
+            onPressed: () => _provider.loginUser(),
           ),
         ),
       ],

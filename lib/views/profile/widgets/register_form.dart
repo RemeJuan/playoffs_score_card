@@ -1,4 +1,4 @@
-part of "package:playoffs_score_card/views/profile/profile.view.dart";
+part of "auth_view.dart";
 
 class RegisterForm extends HookWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -8,10 +8,21 @@ class RegisterForm extends HookWidget {
     final _emailController = useTextEditingController();
     final _passController = useTextEditingController();
     final _confirmController = useTextEditingController();
+
+    final _confirmPasswordVisibility = useState(false);
+
+    final _passwordsMatch = useState(false);
     final _provider = sl<ProfileProvider>();
 
     return Column(
       children: [
+        if (_provider.errorMessage.isNotEmpty)
+          Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppTheme.paddingDefault,
+            ),
+            child: Text(_provider.errorMessage),
+          ),
         TextField(
           controller: _emailController,
           decoration: const InputDecoration(
@@ -20,22 +31,8 @@ class RegisterForm extends HookWidget {
           ),
           keyboardType: TextInputType.emailAddress,
         ),
-        TextField(
-          controller: _passController,
-          obscureText: true,
-          decoration: const InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: 'Password',
-          ),
-        ),
-        TextField(
-          controller: _confirmController,
-          obscureText: true,
-          decoration: const InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: 'Confirm Password',
-          ),
-        ),
+        const PasswordInput(),
+        const ConfirmPasswordInput(),
         const SizedBox(
           height: AppTheme.paddingDefault,
         ),
@@ -50,10 +47,8 @@ class RegisterForm extends HookWidget {
         Container(
           padding: const EdgeInsets.all(AppTheme.paddingDefault),
           child: ElevatedButton(
-            onPressed: () => _provider.createNewUser(
-              _emailController.text,
-              _passController.text,
-            ),
+            onPressed:
+                _passwordsMatch.value ? () => _provider.createNewUser() : null,
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppTheme.paddingDefault * 2,

@@ -24,7 +24,14 @@ class ProfileProvider extends ChangeNotifier {
   final FlutterFileSaver _fileSaver;
   final FilePicker _filePicker;
   final FirebaseAuth _auth;
+
   bool hasRecords = false;
+  String errorMessage = "";
+
+  String email = "";
+  String password = "";
+  String confirmPassword = "";
+  bool passwordMatch = false;
 
   ProfileProvider(this._isar, this._fileSaver, this._filePicker, this._auth) {
     _init();
@@ -61,7 +68,32 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
-  void createNewUser(String email, String password) async {
+  // update users email address
+  void updateEmail(String email) async {
+    this.email = email;
+    notifyListeners();
+  }
+
+  // update users password
+  void updatePassword(String password) async {
+    this.password = password;
+    notifyListeners();
+  }
+
+  // update users confirm password
+  void updateConfirmPassword(String confirmPassword) async {
+    this.confirmPassword = confirmPassword;
+    notifyListeners();
+  }
+
+  // check if passwords match
+  void checkPasswordMatch() async {
+    passwordMatch = password == confirmPassword;
+    notifyListeners();
+  }
+
+  void createNewUser() async {
+    errorMessage = "";
     try {
       final credentials = await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -71,9 +103,9 @@ class ProfileProvider extends ChangeNotifier {
       print(credentials);
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthExceptions.WeakPassword.code) {
-        debugPrint('The password provided is too weak.');
+        errorMessage = 'The password provided is too weak.';
       } else if (e.code == AuthExceptions.UserAlreadyExists.code) {
-        debugPrint('The account already exists for that email.');
+        errorMessage = 'The account already exists for that email.';
       }
     } catch (e) {
       print(e);
@@ -81,7 +113,8 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
-  void loginUser(String email, String password) async {
+  void loginUser() async {
+    errorMessage = "";
     try {
       final credential = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -91,19 +124,20 @@ class ProfileProvider extends ChangeNotifier {
       debugPrint(credential.toString());
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthExceptions.UserNotFound.code) {
-        debugPrint('No user found for that email.');
+        errorMessage = 'No user found for that email.';
       } else if (e.code == AuthExceptions.WrongPassword.code) {
-        debugPrint('Wrong password provided for that user.');
+        errorMessage = 'Wrong password provided for that user.';
       }
     }
   }
 
   void forgotPassword(String email) {
+    errorMessage = "";
     try {
       _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthExceptions.UserNotFound.code) {
-        debugPrint('No user found for that email.');
+        errorMessage = 'No user found for that email.';
       }
     }
   }
