@@ -8,9 +8,13 @@ class EmailInput extends HookWidget {
     final _email = context.select<ProfileProvider, String>(
       (p) => p.email,
     );
+    final _status = context.select<ProfileProvider, AuthStatus>(
+      (p) => p.status,
+    );
 
     return TextFormField(
       initialValue: _email,
+      enabled: _status == AuthStatus.None,
       decoration: const InputDecoration(
         border: UnderlineInputBorder(),
         labelText: 'Email Address',

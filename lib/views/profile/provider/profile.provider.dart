@@ -48,6 +48,10 @@ class ProfileProvider extends ChangeNotifier {
 
   void _init() async {
     hasRecords = _isar.scoreCards.where().countSync() > 0;
+    if (_auth.currentUser != null) {
+      status = AuthStatus.LoggedIn;
+      notifyListeners();
+    }
   }
 
   void exportData() async {
@@ -127,6 +131,7 @@ class ProfileProvider extends ChangeNotifier {
 
       status = AuthStatus.Success;
       notifyListeners();
+      loginUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthExceptions.WeakPassword.code) {
         errorMessage = 'The password provided is too weak.';
@@ -138,8 +143,10 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   void loginUser() async {
-    status = AuthStatus.None;
-    notifyListeners();
+    if (status != AuthStatus.Success) {
+      status == AuthStatus.None;
+      notifyListeners();
+    }
 
     if (errorMessage.isNotEmpty) {
       errorMessage = "";
@@ -185,6 +192,12 @@ class ProfileProvider extends ChangeNotifier {
         errorMessage = 'No user found for that email.';
       }
     }
+  }
+
+  void logout() {
+    _auth.signOut();
+    status = AuthStatus.None;
+    notifyListeners();
   }
 
   // check if passwords match

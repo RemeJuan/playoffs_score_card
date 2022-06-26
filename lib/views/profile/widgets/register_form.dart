@@ -1,23 +1,21 @@
 part of "auth_view.dart";
 
-class RegisterForm extends HookWidget {
+class RegisterForm extends StatelessWidget {
   const RegisterForm({Key? key}) : super(key: key);
 
   @override
   Widget build(context) {
     final _provider = context.read<ProfileProvider>();
     final _errorMessage = context.select<ProfileProvider, String>(
-          (p) => p.errorMessage,
+      (p) => p.errorMessage,
     );
     final _status = context.select<ProfileProvider, AuthStatus>(
-          (p) => p.status,
+      (p) => p.status,
     );
 
-    dialog() => _showDialog(context, _status);
-
-    useEffect(() {
-      dialog();
-    }, [_status]);
+    if (_status == AuthStatus.LoggedIn) {
+      Navigator.of(context).pop();
+    }
 
     return Column(
       children: [
@@ -46,44 +44,52 @@ class RegisterForm extends HookWidget {
               ),
             ),
           ),
-        Container(
-          padding: const EdgeInsets.all(AppTheme.paddingDefault),
-          child: ElevatedButton(
-            onPressed: () => _provider.createNewUser(),
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppTheme.paddingDefault * 2,
-                vertical: AppTheme.paddingDefault * 0.5,
-              ),
-              child: const Text(
-                'Register',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+        if (_status == AuthStatus.None)
+          Container(
+            padding: const EdgeInsets.all(AppTheme.paddingDefault),
+            child: ElevatedButton(
+              onPressed: () => _provider.createNewUser(),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppTheme.paddingDefault * 2,
+                  vertical: AppTheme.paddingDefault * 0.5,
+                ),
+                child: const Text(
+                  'Register',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
+        if (_status == AuthStatus.Registering)
+          const Center(
+            child: CircularProgressIndicator(),
+          ),
+        if (_status == AuthStatus.Success)
+          const Center(
+            child: Text(
+              'Registration Successful, you are now being logged in',
+              style: TextStyle(
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        if (_status == AuthStatus.Error)
+          const Center(
+            child: Text(
+              'Registration Failed, please try again',
+              style: TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
       ],
     );
-  }
-
-  void _showDialog(BuildContext context, AuthStatus _status) {
-    if (_status == AuthStatus.Registering) {
-      LoadingDialog.show(context, const CircularProgressIndicator());
-    } else if (_status == AuthStatus.Success) {
-      LoadingDialog.hide(context);
-      LoadingDialog.show(
-        context,
-        const Center(
-          child: Text('Success! You are now being logged in'),
-        ),
-      );
-    } else if (_status == AuthStatus.LoggedIn) {
-      LoadingDialog.hide(context);
-      Navigator.pop(context);
-    }
   }
 }

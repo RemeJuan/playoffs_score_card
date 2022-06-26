@@ -43,10 +43,15 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppTheme.paddingDefault * 2),
-                ElevatedButton(
-                  onPressed: () => _showLogin(context),
-                  child: const Text("Signup / Register"),
-                ),
+                provider.status == AuthStatus.LoggedIn
+                    ? ElevatedButton(
+                        onPressed: () => provider.logout(),
+                        child: const Text("Logout"),
+                      )
+                    : ElevatedButton(
+                        onPressed: () => _showLogin(context),
+                        child: const Text("Signup / Register"),
+                      ),
                 const Expanded(child: SizedBox.shrink()),
                 Container(
                   margin: const EdgeInsets.only(

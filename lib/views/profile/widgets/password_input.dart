@@ -9,9 +9,12 @@ class PasswordInput extends HookWidget {
     final _provider = context.select<ProfileProvider, String>(
       (p) => p.password,
     );
-
+    final _status = context.select<ProfileProvider, AuthStatus>(
+      (p) => p.status,
+    );
     return TextFormField(
       initialValue: _provider,
+      enabled: _status == AuthStatus.None,
       obscureText: !_passwordVisibility.value,
       decoration: InputDecoration(
         border: const UnderlineInputBorder(),
