@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playoffs_score_card/locator.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/views/profile/provider/profile.provider.dart';
+import 'package:playoffs_score_card/views/profile/widgets/auth_view.dart';
 import 'package:provider/provider.dart';
 
 class ProfileView extends StatelessWidget {
@@ -41,6 +42,16 @@ class ProfileView extends StatelessWidget {
                     ],
                   ),
                 ),
+                const SizedBox(height: AppTheme.paddingDefault * 2),
+                provider.status == AuthStatus.LoggedIn
+                    ? ElevatedButton(
+                        onPressed: () => provider.logout(),
+                        child: const Text("Logout"),
+                      )
+                    : ElevatedButton(
+                        onPressed: () => _showLogin(context),
+                        child: const Text("Signup / Register"),
+                      ),
                 const Expanded(child: SizedBox.shrink()),
                 Container(
                   margin: const EdgeInsets.only(
@@ -106,6 +117,17 @@ class ProfileView extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  void _showLogin(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierColor: Colors.black12.withOpacity(0.6),
+      barrierDismissible: false,
+      pageBuilder: (_, __, ___) {
+        return const AuthView();
+      },
     );
   }
 }

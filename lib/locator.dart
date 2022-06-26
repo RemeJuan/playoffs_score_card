@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_file_saver/flutter_file_saver.dart';
 import 'package:get_it/get_it.dart';
@@ -31,13 +32,14 @@ void initService() {
   sl.registerLazySingletonAsync<PackageInfo>(
     () => PackageInfo.fromPlatform(),
   );
+  sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
   sl.registerLazySingleton<FlutterFileSaver>(() => FlutterFileSaver());
   sl.registerLazySingleton<FilePicker>(() => FilePicker.platform);
 
   sl.registerLazySingleton<RouterProvider>(() => RouterProvider(sl()));
   sl.registerLazySingleton<ProfileProvider>(
-    () => ProfileProvider(sl(), sl(), sl()),
+    () => ProfileProvider(sl(), sl(), sl(), sl()),
   );
   sl.registerLazySingleton<HistoryProvider>(
     () => HistoryProvider(sl(), sl()),
