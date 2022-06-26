@@ -79,16 +79,6 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-        if (_status == AuthStatus.Error)
-          const Center(
-            child: Text(
-              'Registration Failed, please try again',
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
       ],
     );
   }

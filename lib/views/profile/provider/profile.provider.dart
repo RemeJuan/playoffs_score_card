@@ -25,7 +25,6 @@ enum AuthStatus {
   LoggingIn,
   LoggedIn,
   Success,
-  Error,
 }
 
 class ProfileProvider extends ChangeNotifier {
@@ -133,6 +132,7 @@ class ProfileProvider extends ChangeNotifier {
       notifyListeners();
       loginUser();
     } on FirebaseAuthException catch (e) {
+      status = AuthStatus.None;
       if (e.code == AuthExceptions.WeakPassword.code) {
         errorMessage = 'The password provided is too weak.';
       } else if (e.code == AuthExceptions.UserAlreadyExists.code) {
@@ -174,6 +174,7 @@ class ProfileProvider extends ChangeNotifier {
       confirmPassword = "";
       notifyListeners();
     } on FirebaseAuthException catch (e) {
+      status = AuthStatus.None;
       if (e.code == AuthExceptions.UserNotFound.code) {
         errorMessage = 'No user found for that email.';
       } else if (e.code == AuthExceptions.WrongPassword.code) {
