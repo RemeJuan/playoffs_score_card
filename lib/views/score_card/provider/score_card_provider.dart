@@ -246,8 +246,11 @@ class ScoreCardProvider extends ChangeNotifier {
     final currentUser = _auth.currentUser?.uid;
     if (currentUser != null) {
       final cards = await db.scoreCards.where().exportJson();
-      await _firebaseFirestore.collection("scores").doc().set({
-        currentUser: cards,
+      await _firebaseFirestore
+          .collection("scores")
+          .doc(_auth.currentUser!.uid)
+          .set({
+        "history": cards,
       });
     }
 
