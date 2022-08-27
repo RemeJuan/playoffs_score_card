@@ -12,19 +12,19 @@ import 'locator.dart';
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // Setup the dependency injection.
   initService();
 
   await sl.isReady<Isar>();
   await sl.isReady<PackageInfo>();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   await FirebaseAppCheck.instance.activate(
     webRecaptchaSiteKey: 'playoffs-score-card-re',
   );
-
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
