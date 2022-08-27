@@ -44,7 +44,7 @@ void initService() {
     () => ProfileProvider(sl(), sl(), sl()),
   );
   sl.registerLazySingleton<HistoryProvider>(
-    () => HistoryProvider(sl(), sl()),
+    () => HistoryProvider(sl(), sl(), sl(), sl()),
   );
   sl.registerLazySingleton<MaxScoresModel>(() => MaxScoresModel());
   sl.registerLazySingleton<ScoreCardProvider>(
