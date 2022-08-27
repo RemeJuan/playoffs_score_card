@@ -5,15 +5,17 @@ class LoginForm extends HookWidget {
 
   @override
   Widget build(context) {
-    final _provider = sl<ProfileProvider>();
-    final _errorMessage = context.select<ProfileProvider, String>(
+    final _profileProvider = context.read<ProfileProvider>();
+    final _coreProvider = context.read<CoreProvider>();
+    final _errorMessage = context.select<CoreProvider, String>(
       (p) => p.errorMessage,
     );
-    final _status = context.select<ProfileProvider, AuthStatus>(
+    final _status = context.select<CoreProvider, AuthStatus>(
       (p) => p.status,
     );
     if (_status == AuthStatus.LoggedIn) {
       Navigator.of(context).pop();
+      _profileProvider.cleanUp();
     }
 
     return Column(
@@ -22,7 +24,7 @@ class LoginForm extends HookWidget {
         const PasswordInput(),
         const SizedBox(height: AppTheme.paddingDefault),
         TextButton(
-          onPressed: _provider.forgotPassword,
+          onPressed: () => _coreProvider.forgotPassword(_profileProvider.email),
           child: const Text(
             'Forgot Password',
           ),
@@ -44,7 +46,10 @@ class LoginForm extends HookWidget {
           Container(
             padding: const EdgeInsets.all(AppTheme.paddingDefault),
             child: ElevatedButton(
-              onPressed: () => _provider.loginUser(),
+              onPressed: () => _coreProvider.loginUser(
+                _profileProvider.email,
+                _profileProvider.password,
+              ),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppTheme.paddingDefault * 2,

@@ -5,11 +5,12 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final _provider = context.read<ProfileProvider>();
-    final _errorMessage = context.select<ProfileProvider, String>(
+    final _profileProvider = context.read<ProfileProvider>();
+    final _coreProvider = context.read<CoreProvider>();
+    final _errorMessage = context.select<CoreProvider, String>(
       (p) => p.errorMessage,
     );
-    final _status = context.select<ProfileProvider, AuthStatus>(
+    final _status = context.select<CoreProvider, AuthStatus>(
       (p) => p.status,
     );
 
@@ -26,7 +27,9 @@ class RegisterForm extends StatelessWidget {
           height: AppTheme.paddingDefault,
         ),
         TextButton(
-          onPressed: () => _provider.forgotPassword(),
+          onPressed: () => _coreProvider.forgotPassword(
+            _profileProvider.email,
+          ),
           child: const Text(
             'Forgot Password',
           ),
@@ -48,7 +51,11 @@ class RegisterForm extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(AppTheme.paddingDefault),
             child: ElevatedButton(
-              onPressed: () => _provider.createNewUser(),
+              onPressed: () => _coreProvider.createNewUser(
+                _profileProvider.email,
+                _profileProvider.password,
+                _profileProvider.confirmPassword,
+              ),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppTheme.paddingDefault * 2,

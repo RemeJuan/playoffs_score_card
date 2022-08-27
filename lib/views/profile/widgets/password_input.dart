@@ -9,7 +9,7 @@ class PasswordInput extends HookWidget {
     final _provider = context.select<ProfileProvider, String>(
       (p) => p.password,
     );
-    final _status = context.select<ProfileProvider, AuthStatus>(
+    final _status = context.select<CoreProvider, AuthStatus>(
       (p) => p.status,
     );
     return TextFormField(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playoffs_score_card/core/providers/core_provider.dart';
 import 'package:playoffs_score_card/locator.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/views/profile/provider/profile.provider.dart';
@@ -15,6 +16,8 @@ class ProfileView extends StatelessWidget {
       child: Center(
         child: Consumer<ProfileProvider>(
           builder: (context, provider, _) {
+            final authProvider = context.watch<CoreProvider>();
+
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -43,9 +46,9 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppTheme.paddingDefault * 2),
-                provider.status == AuthStatus.LoggedIn
+                authProvider.status == AuthStatus.LoggedIn
                     ? ElevatedButton(
-                        onPressed: () => provider.logout(),
+                        onPressed: () => authProvider.logout(),
                         child: const Text("Logout"),
                       )
                     : ElevatedButton(
