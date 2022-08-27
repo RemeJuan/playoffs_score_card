@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
@@ -25,11 +27,13 @@ enum ChartDataSource {
 class HistoryProvider extends ChangeNotifier {
   final Isar _isar;
   final MaxScoresModel maxScores;
+  final FirebaseFirestore _firestore;
+  final FirebaseAuth _auth;
   List<ScoreCard> scores = [];
 
   List<double> chartData = [];
 
-  HistoryProvider(this._isar, this.maxScores) {
+  HistoryProvider(this._isar, this.maxScores, this._auth, this._firestore) {
     _init();
   }
 
@@ -135,6 +139,15 @@ class HistoryProvider extends ChangeNotifier {
   void removeScore(ScoreCard score) async {
     await _isar.writeTxn((isar) => isar.scoreCards.delete(score.id!));
     await Future.delayed(const Duration(milliseconds: 500));
+
+    // Write scores to cloud when there is an active logged in user.
+    final currentUser = _auth.currentUser?.uid;
+    if (currentUser != null) {
+      final cards = await _isar.scoreCards.where().exportJson();
+      await _firestore.collection("scores").doc(_auth.currentUser!.uid).set({
+        "history": cards,
+      });
+    }
   }
 
   void _init() async {

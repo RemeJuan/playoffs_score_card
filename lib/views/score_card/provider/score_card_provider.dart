@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
@@ -13,6 +15,8 @@ enum ScoreCardStatus {
 class ScoreCardProvider extends ChangeNotifier {
   final MaxScoresModel maxScores;
   final Isar db;
+  final FirebaseFirestore _firebaseFirestore;
+  final FirebaseAuth _auth;
 
   late int maxRower;
   late int maxBenchHops;
@@ -52,7 +56,12 @@ class ScoreCardProvider extends ChangeNotifier {
 
   ScoreCardStatus status = ScoreCardStatus.incomplete;
 
-  ScoreCardProvider(this.db, this.maxScores) {
+  ScoreCardProvider(
+    this.db,
+    this.maxScores,
+    this._firebaseFirestore,
+    this._auth,
+  ) {
     _init();
   }
 
@@ -232,6 +241,18 @@ class ScoreCardProvider extends ChangeNotifier {
     await db.writeTxn((isar) async {
       isar.scoreCards.put(card);
     });
+
+    // Write scores to cloud when there is an active logged in user.
+    final currentUser = _auth.currentUser?.uid;
+    if (currentUser != null) {
+      final cards = await db.scoreCards.where().exportJson();
+      await _firebaseFirestore
+          .collection("scores")
+          .doc(_auth.currentUser!.uid)
+          .set({
+        "history": cards,
+      });
+    }
 
     status = ScoreCardStatus.saved;
     notifyListeners();

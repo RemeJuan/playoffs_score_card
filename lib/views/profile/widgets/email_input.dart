@@ -8,7 +8,7 @@ class EmailInput extends HookWidget {
     final _email = context.select<ProfileProvider, String>(
       (p) => p.email,
     );
-    final _status = context.select<ProfileProvider, AuthStatus>(
+    final _status = context.select<CoreProvider, AuthStatus>(
       (p) => p.status,
     );
 
@@ -22,9 +22,7 @@ class EmailInput extends HookWidget {
       keyboardType: TextInputType.emailAddress,
       onChanged: (value) => context.read<ProfileProvider>().updateEmail(value),
       validator: (value) {
-        final validEmail = RegExp(
-          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-        ).hasMatch(value!);
+        final validEmail = context.read<CoreProvider>().checkEmail(value);
         if (!validEmail) {
           return 'Please enter a valid email address';
         }
