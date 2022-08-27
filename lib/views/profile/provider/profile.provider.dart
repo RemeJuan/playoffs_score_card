@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_file_saver/flutter_file_saver.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
+import 'package:playoffs_score_card/collections/user.collection.dart' as ic;
 
 enum AuthExceptions {
   WeakPassword("weak-password"),
@@ -32,6 +34,7 @@ class ProfileProvider extends ChangeNotifier {
   final FlutterFileSaver _fileSaver;
   final FilePicker _filePicker;
   final FirebaseAuth _auth;
+  final FirebaseFirestore _firebaseFirestore;
 
   AuthStatus status = AuthStatus.None;
   bool hasRecords = false;
@@ -41,7 +44,13 @@ class ProfileProvider extends ChangeNotifier {
   String password = "";
   String confirmPassword = "";
 
-  ProfileProvider(this._isar, this._fileSaver, this._filePicker, this._auth) {
+  ProfileProvider(
+    this._isar,
+    this._fileSaver,
+    this._filePicker,
+    this._auth,
+    this._firebaseFirestore,
+  ) {
     _init();
   }
 
@@ -163,10 +172,19 @@ class ProfileProvider extends ChangeNotifier {
       status = AuthStatus.LoggingIn;
       notifyListeners();
 
-      await _auth.signInWithEmailAndPassword(
+      final user = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      await _isar.writeTxn(
+        (isar) => isar.users.put(ic.User()..userId = user.user!.uid),
+      );
+
+      // await _firebaseFirestore
+      //     .collection("scores")
+      //     .doc(user.user!.uid)
+      //     .get();
 
       status = AuthStatus.LoggedIn;
       // Reset stored details

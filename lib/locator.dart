@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -29,6 +30,7 @@ void initService() {
       );
     }
   });
+  sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
   sl.registerLazySingletonAsync<PackageInfo>(
     () => PackageInfo.fromPlatform(),
   );
@@ -39,13 +41,13 @@ void initService() {
 
   sl.registerLazySingleton<RouterProvider>(() => RouterProvider(sl()));
   sl.registerLazySingleton<ProfileProvider>(
-    () => ProfileProvider(sl(), sl(), sl(), sl()),
+    () => ProfileProvider(sl(), sl(), sl(), sl(), sl()),
   );
   sl.registerLazySingleton<HistoryProvider>(
     () => HistoryProvider(sl(), sl()),
   );
   sl.registerLazySingleton<MaxScoresModel>(() => MaxScoresModel());
   sl.registerLazySingleton<ScoreCardProvider>(
-    () => ScoreCardProvider(sl(), sl()),
+    () => ScoreCardProvider(sl(), sl(), sl()),
   );
 }
