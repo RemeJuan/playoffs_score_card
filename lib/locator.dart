@@ -30,10 +30,10 @@ void initService() {
       );
     }
   });
-  sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
   sl.registerLazySingletonAsync<PackageInfo>(
     () => PackageInfo.fromPlatform(),
   );
+  sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
   sl.registerLazySingleton<FlutterFileSaver>(() => FlutterFileSaver());
@@ -41,13 +41,13 @@ void initService() {
 
   sl.registerLazySingleton<RouterProvider>(() => RouterProvider(sl()));
   sl.registerLazySingleton<ProfileProvider>(
-    () => ProfileProvider(sl(), sl(), sl(), sl(), sl()),
+    () => ProfileProvider(sl(), sl(), sl()),
   );
   sl.registerLazySingleton<HistoryProvider>(
     () => HistoryProvider(sl(), sl()),
   );
   sl.registerLazySingleton<MaxScoresModel>(() => MaxScoresModel());
   sl.registerLazySingleton<ScoreCardProvider>(
-    () => ScoreCardProvider(sl(), sl(), sl()),
+    () => ScoreCardProvider(sl(), sl(), sl(), sl()),
   );
 }
