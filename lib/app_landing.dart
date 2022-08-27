@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:playoffs_score_card/core/providers/core_provider.dart';
 import 'package:playoffs_score_card/router/app_router.dart';
 import 'package:playoffs_score_card/router/router_provider.dart';
 import 'package:playoffs_score_card/theme.dart';
@@ -21,11 +22,20 @@ class AppLanding extends HookWidget {
 
   @override
   Widget build(context) {
-    return ChangeNotifierProvider<RouterProvider>.value(
-      value: sl<RouterProvider>(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<RouterProvider>.value(
+          value: sl<RouterProvider>(),
+        ),
+        ChangeNotifierProvider<CoreProvider>(
+          create: (_) => CoreProvider(sl(), sl(), sl()),
+        ),
+      ],
       child: Consumer<RouterProvider>(
         builder: (context, provider, _) {
           final page = provider.currentIndex;
+          final _coreProvider = context.read<CoreProvider>();
+          final _isLoggedIn = _coreProvider.status == AuthStatus.LoggedIn;
 
           if (pageController.hasClients && pageController.page != page) {
             pageController.animateToPage(
@@ -37,6 +47,10 @@ class AppLanding extends HookWidget {
 
           return Scaffold(
             appBar: AppBar(
+              leading: Icon(
+                Icons.online_prediction,
+                color: _isLoggedIn ? Colors.green : Colors.red,
+              ),
               title: Text(
                 AppRouter.routes[page].title,
                 style: TextStyle(
