@@ -1,15 +1,15 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
-import 'package:provider/provider.dart';
 
-class HistoryChart extends StatelessWidget {
+class HistoryChart extends ConsumerWidget {
   const HistoryChart({Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
-    final provider = context.watch<HistoryProvider>();
+  Widget build(context, ref) {
+    final provider = ref.watch(historyProvider);
 
     return Container(
       padding: const EdgeInsets.only(left: AppTheme.paddingDefault * 1.5),

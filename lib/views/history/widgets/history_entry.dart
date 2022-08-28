@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/views/history/history_details.view.dart';
 import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
-import 'package:provider/provider.dart';
 
-class HistoryEntry extends StatelessWidget {
+class HistoryEntry extends ConsumerWidget {
   final ScoreCard score;
 
   const HistoryEntry({required this.score, Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
+  Widget build(context, ref) {
     final date = DateFormat("d MMMM yyyy").format(score.date);
 
     return Dismissible(
@@ -21,8 +21,7 @@ class HistoryEntry extends StatelessWidget {
       confirmDismiss: (_) => _confirmDelete(context),
       direction: DismissDirection.endToStart,
       onDismissed: (direction) {
-        final provider = context.read<HistoryProvider>();
-        provider.removeScore(score);
+        ref.read(historyProvider).removeScore(score);
       },
       child: InkWell(
         onTap: () => _showMaterialDialog(context),
@@ -63,15 +62,12 @@ class HistoryEntry extends StatelessWidget {
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.8),
       builder: (_) {
-        return ChangeNotifierProvider<HistoryProvider>.value(
-          value: context.read<HistoryProvider>(),
-          child: AlertDialog(
-            insetPadding: EdgeInsets.zero,
-            scrollable: true,
-            title: Text("Score Details: $date"),
-            content: SizedBox(
-              child: HistoryDetailsView(score: score),
-            ),
+        return AlertDialog(
+          insetPadding: EdgeInsets.zero,
+          scrollable: true,
+          title: Text("Score Details: $date"),
+          content: SizedBox(
+            child: HistoryDetailsView(score: score),
           ),
         );
       },

@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
-import 'package:playoffs_score_card/core/models/max_scores.model.dart';
+import 'package:playoffs_score_card/core/providers/general_providers.dart';
 import 'package:playoffs_score_card/core/utils/utils.dart';
 
 enum ChartDataSource {
@@ -24,20 +24,29 @@ enum ChartDataSource {
   const ChartDataSource(this.name);
 }
 
-class HistoryProvider extends ChangeNotifier {
-  final Isar _isar;
-  final MaxScoresModel maxScores;
-  final FirebaseFirestore _firestore;
-  final FirebaseAuth _auth;
-  List<ScoreCard> scores = [];
+enum HistoryStatus {
+  loading,
+  loaded,
+}
 
+final historyProvider = Provider(HistoryProvider.new);
+
+class HistoryProvider {
+  final Ref ref;
+
+  late Isar _db;
+  late FirebaseFirestore _firestore;
+  late FirebaseAuth _auth;
+
+  List<ScoreCard> scores = [];
   List<double> chartData = [];
 
-  HistoryProvider(this._isar, this.maxScores, this._auth, this._firestore) {
+  ChartDataSource activeChartDataSource = ChartDataSource.total;
+  HistoryStatus status = HistoryStatus.loading;
+
+  HistoryProvider(this.ref) {
     _init();
   }
-
-  ChartDataSource activeChartDataSource = ChartDataSource.total;
 
   late int maxRower;
   late int maxBenchHops;
@@ -50,12 +59,31 @@ class HistoryProvider extends ChangeNotifier {
   late int maxDeadBallOverTheShoulder;
   late int maxShuttleSprintLateralHop;
 
-  void getData() async {
-    final scoreCards =
-        await _isar.scoreCards.where().sortByDateDesc().findAll();
-    final cards = <ScoreCard>[];
+  void _init() async {
+    _db = ref.read(dbProvider);
 
-    for (final card in scoreCards) {
+    _auth = ref.read(firebaseAuthProvider);
+    _firestore = ref.read(firestoreProvider);
+    final maxScores = ref.read(maxScoresProvider);
+
+    // Max Scores
+    maxRower = maxScores.maxRower;
+    maxBenchHops = maxScores.maxBenchHops;
+    maxKneeTuckPushUps = maxScores.maxKneeTuckPushUps;
+    maxLateralHops = maxScores.maxLateralHops;
+    maxBoxJumpBurpee = maxScores.maxBoxJumpBurpee;
+    maxChinUps = maxScores.maxChinUps;
+    maxSquatPress = maxScores.maxSquatPress;
+    maxRussianTwist = maxScores.maxRussianTwist;
+    maxDeadBallOverTheShoulder = maxScores.maxDeadBallOverTheShoulder;
+    maxShuttleSprintLateralHop = maxScores.maxShuttleSprintLateralHop;
+
+    status = HistoryStatus.loaded;
+  }
+
+  void getData() async {
+    final scoreCards = await _db.scoreCards.where().sortByDateDesc().findAll();
+    scores = scoreCards.map((card) {
       if (card.totalScore == 0.0) {
         final scores = [
           CoreUtils.calcScore(card.rower, maxRower),
@@ -78,14 +106,12 @@ class HistoryProvider extends ChangeNotifier {
         card.totalScore = double.parse(
           scores.reduce((a, b) => a + b).toStringAsFixed(1),
         );
+
+        return card;
       }
-      cards.add(card);
-    }
-
-    scores = cards;
+      return card;
+    }).toList();
     chartData = scores.reversed.map((e) => e.totalScore.toDouble()).toList();
-
-    notifyListeners();
   }
 
   void updateChartData(ChartDataSource source) {
@@ -132,35 +158,19 @@ class HistoryProvider extends ChangeNotifier {
 
       return amount.toDouble();
     }).toList();
-
-    notifyListeners();
   }
 
   void removeScore(ScoreCard score) async {
-    await _isar.writeTxn((isar) => isar.scoreCards.delete(score.id!));
+    await _db.writeTxn((isar) => isar.scoreCards.delete(score.id!));
     await Future.delayed(const Duration(milliseconds: 500));
 
     // Write scores to cloud when there is an active logged in user.
     final currentUser = _auth.currentUser?.uid;
     if (currentUser != null) {
-      final cards = await _isar.scoreCards.where().exportJson();
+      final cards = await _db.scoreCards.where().exportJson();
       await _firestore.collection("scores").doc(_auth.currentUser!.uid).set({
         "history": cards,
       });
     }
-  }
-
-  void _init() async {
-    // Max Scores
-    maxRower = maxScores.maxRower;
-    maxBenchHops = maxScores.maxBenchHops;
-    maxKneeTuckPushUps = maxScores.maxKneeTuckPushUps;
-    maxLateralHops = maxScores.maxLateralHops;
-    maxBoxJumpBurpee = maxScores.maxBoxJumpBurpee;
-    maxChinUps = maxScores.maxChinUps;
-    maxSquatPress = maxScores.maxSquatPress;
-    maxRussianTwist = maxScores.maxRussianTwist;
-    maxDeadBallOverTheShoulder = maxScores.maxDeadBallOverTheShoulder;
-    maxShuttleSprintLateralHop = maxScores.maxShuttleSprintLateralHop;
   }
 }

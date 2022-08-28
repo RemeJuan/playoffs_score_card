@@ -1,17 +1,18 @@
 part of "auth_view.dart";
 
-class PasswordInput extends HookWidget {
+class PasswordInput extends ConsumerWidget {
   const PasswordInput({Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
+  Widget build(context, ref) {
     final _passwordVisibility = useState(false);
-    final _provider = context.select<ProfileProvider, String>(
-      (p) => p.password,
-    );
-    final _status = context.select<CoreProvider, AuthStatus>(
-      (p) => p.status,
-    );
+    final _provider = ref
+        .watch(profileProvider)
+        .password;
+    final _status = ref
+        .watch(coreProvider)
+        .status;
+
     return TextFormField(
       initialValue: _provider,
       enabled: _status == AuthStatus.None,
@@ -24,10 +25,11 @@ class PasswordInput extends HookWidget {
             _passwordVisibility.value ? Icons.visibility_off : Icons.visibility,
           ),
           onPressed: () =>
-              _passwordVisibility.value = !_passwordVisibility.value,
+          _passwordVisibility.value = !_passwordVisibility.value,
         ),
       ),
-      onChanged: (value) => context.read<ProfileProvider>().updatePassword(
+      onChanged: (value) =>
+          ref.read(profileProvider).updatePassword(
             value,
           ),
     );

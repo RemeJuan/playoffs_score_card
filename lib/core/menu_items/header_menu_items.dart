@@ -1,7 +1,6 @@
 part of "package:playoffs_score_card/app_landing.dart";
 
-void _showAboutDialog(BuildContext context) {
-  final provider = context.read<RouterProvider>();
+void _showAboutDialog(BuildContext context, WidgetRef ref) {
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -83,7 +82,7 @@ void _showAboutDialog(BuildContext context) {
                 text: "\n\n",
               ),
               TextSpan(
-                text: "App version: ${provider.version}",
+                text: "App version: ${ref.read(versionProvider)}",
                 style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,

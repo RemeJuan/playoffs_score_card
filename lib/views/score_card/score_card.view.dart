@@ -1,85 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:playoffs_score_card/locator.dart';
-import 'package:playoffs_score_card/router/router_provider.dart';
+import 'package:playoffs_score_card/core/providers/general_providers.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/themes/default.template.dart';
 import 'package:playoffs_score_card/views/score_card/provider/score_card_provider.dart';
 import 'package:playoffs_score_card/views/score_card/table/score_table.dart';
-import 'package:provider/provider.dart';
 
-class ScoreCardView extends StatelessWidget {
+class ScoreCardView extends ConsumerWidget {
   const ScoreCardView({Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
-    return ChangeNotifierProvider<ScoreCardProvider>.value(
-      value: sl<ScoreCardProvider>(),
-      child: Consumer<ScoreCardProvider>(
-        builder: (context, provider, _) {
-          final status = provider.status;
-          final canSave = status == ScoreCardStatus.complete;
+  Widget build(context, ref) {
+    final provider = ref.watch(scoreCardProvider);
 
-          if (status == ScoreCardStatus.saved) {
-            _navigate();
-          }
+    final status = provider.status;
+    final canSave = status == ScoreCardStatus.complete;
 
-          final date = DateFormat("d MMM yyyy").format(provider.date);
+    if (status == ScoreCardStatus.loading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
 
-          return DefaultTemplate(
-            title: "Score Card",
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+    if (status == ScoreCardStatus.saved) {
+      _navigate(ref);
+    }
+
+    final date = DateFormat("d MMM yyyy").format(provider.date);
+
+    return DefaultTemplate(
+      title: "Score Card",
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(
+              AppTheme.paddingDefault * 2,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(
-                    AppTheme.paddingDefault * 2,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Score: ${provider.totalScore}",
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () => _showDatePicker(context),
-                        child: Text(
-                          date,
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ],
+                Text(
+                  "Score: ${provider.totalScore}",
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Expanded(child: ScoreTable()),
-                const SizedBox(height: AppTheme.paddingDefault),
-                ElevatedButton(
-                  onPressed: canSave ? provider.save : null,
-                  child: const Text("Save"),
+                GestureDetector(
+                  onTap: () => _showDatePicker(context, ref),
+                  child: Text(
+                    date,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
-                const SizedBox(height: AppTheme.paddingDefault),
               ],
             ),
-          );
-        },
+          ),
+          const Expanded(child: ScoreTable()),
+          const SizedBox(height: AppTheme.paddingDefault),
+          ElevatedButton(
+            onPressed: canSave ? provider.save : null,
+            child: const Text("Save"),
+          ),
+          const SizedBox(height: AppTheme.paddingDefault),
+        ],
       ),
     );
   }
 
-  void _navigate() async {
+  void _navigate(WidgetRef ref) async {
     await Future.delayed(const Duration(milliseconds: 10));
-    sl<RouterProvider>().setCurrentIndex(1);
+    ref.read(routerProvider.notifier).state = 1;
   }
 
-  void _showDatePicker(BuildContext context) async {
+  void _showDatePicker(BuildContext context, WidgetRef ref) async {
     final date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -98,6 +98,6 @@ class ScoreCardView extends StatelessWidget {
     );
 
     await Future.delayed(const Duration(milliseconds: 10));
-    sl<ScoreCardProvider>().addPreviousScore(date!);
+    ref.read(scoreCardProvider).addPreviousScore(date!);
   }
 }

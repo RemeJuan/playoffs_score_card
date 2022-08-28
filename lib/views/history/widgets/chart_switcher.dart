@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
-import 'package:provider/provider.dart';
 
-class HistoryChartSwitcher extends StatelessWidget {
+class HistoryChartSwitcher extends ConsumerWidget {
   const HistoryChartSwitcher({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final provider = context.watch<HistoryProvider>();
+  Widget build(context, ref) {
+    final provider = ref.watch(historyProvider);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppTheme.paddingDefault),
@@ -31,8 +31,7 @@ class HistoryChartSwitcher extends StatelessWidget {
                 child: Text(e.name),
               );
             }).toList(),
-            onChanged: (c) =>
-                context.read<HistoryProvider>().updateChartData(c!),
+            onChanged: (c) => provider.updateChartData(c!),
           )
         ],
       ),

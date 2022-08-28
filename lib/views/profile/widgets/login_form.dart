@@ -1,18 +1,15 @@
 part of "auth_view.dart";
 
-class LoginForm extends HookWidget {
+class LoginForm extends ConsumerWidget {
   const LoginForm({Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
-    final _profileProvider = context.read<ProfileProvider>();
-    final _coreProvider = context.read<CoreProvider>();
-    final _errorMessage = context.select<CoreProvider, String>(
-      (p) => p.errorMessage,
-    );
-    final _status = context.select<CoreProvider, AuthStatus>(
-      (p) => p.status,
-    );
+  Widget build(context, ref) {
+    final _profileProvider = ref.read<ProfileProvider>(profileProvider);
+    final _coreProvider = ref.watch<CoreProvider>(coreProvider);
+    final _errorMessage = _coreProvider.errorMessage;
+    final _status = _coreProvider.status;
+
     if (_status == AuthStatus.LoggedIn) {
       Navigator.of(context).pop();
       _profileProvider.cleanUp();
@@ -46,10 +43,11 @@ class LoginForm extends HookWidget {
           Container(
             padding: const EdgeInsets.all(AppTheme.paddingDefault),
             child: ElevatedButton(
-              onPressed: () => _coreProvider.loginUser(
-                _profileProvider.email,
-                _profileProvider.password,
-              ),
+              onPressed: () =>
+                  _coreProvider.loginUser(
+                    _profileProvider.email,
+                    _profileProvider.password,
+                  ),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppTheme.paddingDefault * 2,

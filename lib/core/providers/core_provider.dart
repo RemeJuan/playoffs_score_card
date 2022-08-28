@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
+
+import 'general_providers.dart';
 
 enum AuthExceptions {
   WeakPassword("weak-password"),
@@ -23,23 +25,34 @@ enum AuthStatus {
   Success,
 }
 
-class CoreProvider extends ChangeNotifier {
-  final FirebaseAuth _auth;
-  final FirebaseFirestore _fireStore;
-  final Isar _db;
+final coreProvider = Provider(CoreProvider.new, dependencies: [
+  dbProvider,
+  firebaseAuthProvider,
+  firestoreProvider,
+]);
+
+class CoreProvider {
+  final Ref ref;
+
+  late FirebaseAuth _auth;
+  late FirebaseFirestore _fireStore;
+  late Isar _db;
 
   AuthStatus status = AuthStatus.None;
   String errorMessage = "";
 
-  CoreProvider(this._auth, this._fireStore, this._db) {
+  CoreProvider(this.ref) {
     _init();
   }
 
   void _init() async {
+    _auth = ref.read(firebaseAuthProvider);
+    _fireStore = ref.read(firestoreProvider);
+    _db = ref.read(dbProvider);
+
     if (_auth.currentUser != null) {
       status = AuthStatus.LoggedIn;
       _sync();
-      notifyListeners();
     }
   }
 
@@ -98,28 +111,23 @@ class CoreProvider extends ChangeNotifier {
     String confirmPassword,
   ) async {
     status = AuthStatus.None;
-    notifyListeners();
 
     if (errorMessage.isNotEmpty) {
       errorMessage = "";
-      notifyListeners();
     }
 
     if (!checkEmail(email)) {
       errorMessage = "Please enter a valid email address";
-      notifyListeners();
       return;
     }
 
     if (!_checkPasswordMatch(password, confirmPassword)) {
       errorMessage = "Passwords do not match";
-      notifyListeners();
       return;
     }
 
     try {
       status = AuthStatus.Registering;
-      notifyListeners();
 
       await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -127,7 +135,6 @@ class CoreProvider extends ChangeNotifier {
       );
 
       status = AuthStatus.Success;
-      notifyListeners();
       loginUser(email, password);
     } on FirebaseAuthException catch (e) {
       status = AuthStatus.None;
@@ -136,30 +143,25 @@ class CoreProvider extends ChangeNotifier {
       } else if (e.code == AuthExceptions.UserAlreadyExists.code) {
         errorMessage = 'The account already exists for that email.';
       }
-      notifyListeners();
     }
   }
 
   void loginUser(String email, String password) async {
     if (status != AuthStatus.Success) {
       status == AuthStatus.None;
-      notifyListeners();
     }
 
     if (errorMessage.isNotEmpty) {
       errorMessage = "";
-      notifyListeners();
     }
 
     if (!checkEmail(email)) {
       errorMessage = "Please enter a valid email address";
-      notifyListeners();
       return;
     }
 
     try {
       status = AuthStatus.LoggingIn;
-      notifyListeners();
 
       await _auth.signInWithEmailAndPassword(
         email: email,
@@ -167,8 +169,6 @@ class CoreProvider extends ChangeNotifier {
       );
 
       status = AuthStatus.LoggedIn;
-
-      notifyListeners();
     } on FirebaseAuthException catch (e) {
       status = AuthStatus.None;
       if (e.code == AuthExceptions.UserNotFound.code) {
@@ -176,7 +176,6 @@ class CoreProvider extends ChangeNotifier {
       } else if (e.code == AuthExceptions.WrongPassword.code) {
         errorMessage = 'Wrong password provided for that user.';
       }
-      notifyListeners();
     }
   }
 
@@ -194,7 +193,6 @@ class CoreProvider extends ChangeNotifier {
   void logout() {
     _auth.signOut();
     status = AuthStatus.None;
-    notifyListeners();
   }
 
   // check if passwords match

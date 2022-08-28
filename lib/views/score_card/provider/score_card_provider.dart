@@ -1,22 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
-import 'package:playoffs_score_card/core/models/max_scores.model.dart';
+import 'package:playoffs_score_card/core/providers/general_providers.dart';
 import 'package:playoffs_score_card/core/utils/utils.dart';
 
 enum ScoreCardStatus {
+  loading,
   incomplete,
   complete,
   saved,
 }
 
-class ScoreCardProvider extends ChangeNotifier {
-  final MaxScoresModel maxScores;
-  final Isar db;
-  final FirebaseFirestore _firebaseFirestore;
-  final FirebaseAuth _auth;
+final scoreCardProvider = Provider(ScoreCardProvider.new);
+
+class ScoreCardProvider {
+  final Ref ref;
+
+  late Isar db;
+  late FirebaseFirestore _firebaseFirestore;
+  late FirebaseAuth _auth;
 
   late int maxRower;
   late int maxBenchHops;
@@ -54,18 +58,18 @@ class ScoreCardProvider extends ChangeNotifier {
   double deadBallOverTheShoulderScore = 0;
   double shuttleSprintLateralHopScore = 0;
 
-  ScoreCardStatus status = ScoreCardStatus.incomplete;
+  ScoreCardStatus status = ScoreCardStatus.loading;
 
-  ScoreCardProvider(
-    this.db,
-    this.maxScores,
-    this._firebaseFirestore,
-    this._auth,
-  ) {
+  ScoreCardProvider(this.ref) {
     _init();
   }
 
-  void _init() {
+  void _init() async {
+    db = ref.read(dbProvider);
+    _auth = ref.read(firebaseAuthProvider);
+    _firebaseFirestore = ref.read(firestoreProvider);
+    final maxScores = ref.read(maxScoresProvider);
+
     date = DateTime.now();
     rower = -1;
     benchHops = -1;
@@ -98,7 +102,6 @@ class ScoreCardProvider extends ChangeNotifier {
     rowerScore = CoreUtils.calcScore(value, maxRower);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void setBenchHops(int value) {
@@ -106,7 +109,6 @@ class ScoreCardProvider extends ChangeNotifier {
     benchHopsScore = CoreUtils.calcScore(value, maxBenchHops);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void setKneeTuckPushUps(int value) {
@@ -114,7 +116,6 @@ class ScoreCardProvider extends ChangeNotifier {
     kneeTuckPushUpsScore = CoreUtils.calcScore(value, maxKneeTuckPushUps);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void setLateralHops(int value) {
@@ -122,7 +123,6 @@ class ScoreCardProvider extends ChangeNotifier {
     lateralHopsScore = CoreUtils.calcScore(value, maxLateralHops);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void setBoxJumpBurpee(int value) {
@@ -130,7 +130,6 @@ class ScoreCardProvider extends ChangeNotifier {
     boxJumpBurpeeScore = CoreUtils.calcScore(value, maxBoxJumpBurpee);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void setChinUps(int value) {
@@ -138,7 +137,6 @@ class ScoreCardProvider extends ChangeNotifier {
     chinUpsScore = CoreUtils.calcScore(value, maxChinUps);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void setSquatPress(int value) {
@@ -146,7 +144,6 @@ class ScoreCardProvider extends ChangeNotifier {
     squatPressScore = CoreUtils.calcScore(value, maxSquatPress);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void setRussianTwist(int value) {
@@ -154,7 +151,6 @@ class ScoreCardProvider extends ChangeNotifier {
     russianTwistScore = CoreUtils.calcScore(value, maxRussianTwist);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void setDeadBallOverTheShoulder(int value) {
@@ -163,7 +159,6 @@ class ScoreCardProvider extends ChangeNotifier {
         CoreUtils.calcScore(value, maxDeadBallOverTheShoulder);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void setShuttleSprintLateralHop(int value) {
@@ -172,13 +167,11 @@ class ScoreCardProvider extends ChangeNotifier {
         CoreUtils.calcScore(value, maxShuttleSprintLateralHop);
 
     totalScoreCalculator();
-    notifyListeners();
   }
 
   void addPreviousScore(DateTime d) async {
     _init();
     date = d;
-    notifyListeners();
   }
 
   void totalScoreCalculator() {
@@ -202,7 +195,6 @@ class ScoreCardProvider extends ChangeNotifier {
     totalScore = ts;
 
     canSave();
-    notifyListeners();
   }
 
   void canSave() {
@@ -220,7 +212,6 @@ class ScoreCardProvider extends ChangeNotifier {
     } else {
       status = ScoreCardStatus.incomplete;
     }
-    notifyListeners();
   }
 
   void save() async {
@@ -255,7 +246,6 @@ class ScoreCardProvider extends ChangeNotifier {
     }
 
     status = ScoreCardStatus.saved;
-    notifyListeners();
 
     await Future.delayed(const Duration(milliseconds: 500));
 
