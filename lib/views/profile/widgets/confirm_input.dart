@@ -1,6 +1,6 @@
 part of "auth_view.dart";
 
-class ConfirmPasswordInput extends ConsumerWidget {
+class ConfirmPasswordInput extends HookConsumerWidget {
   const ConfirmPasswordInput({Key? key}) : super(key: key);
 
   @override

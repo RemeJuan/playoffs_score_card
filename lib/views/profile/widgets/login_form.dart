@@ -5,14 +5,15 @@ class LoginForm extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final _profileProvider = ref.read<ProfileProvider>(profileProvider);
-    final _coreProvider = ref.watch<CoreProvider>(coreProvider);
-    final _errorMessage = _coreProvider.errorMessage;
-    final _status = _coreProvider.status;
+    final _profileProvider = ref.watch<ProfileProvider>(profileProvider);
+    final _coreProvider = ref.read<CoreProvider>(coreProvider);
+
+    final _errorMessage = ref.watch(coreProvider.select((p) => p.errorMessage));
+    final _status = ref.watch(coreProvider.select((p) => p.status));
 
     if (_status == AuthStatus.LoggedIn) {
-      Navigator.of(context).pop();
       _profileProvider.cleanUp();
+      Navigator.of(context).pop();
     }
 
     return Column(
@@ -43,11 +44,10 @@ class LoginForm extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(AppTheme.paddingDefault),
             child: ElevatedButton(
-              onPressed: () =>
-                  _coreProvider.loginUser(
-                    _profileProvider.email,
-                    _profileProvider.password,
-                  ),
+              onPressed: () => _coreProvider.loginUser(
+                _profileProvider.email,
+                _profileProvider.password,
+              ),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppTheme.paddingDefault * 2,
