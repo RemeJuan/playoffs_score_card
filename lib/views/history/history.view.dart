@@ -13,6 +13,12 @@ class HistoryView extends ConsumerWidget {
   Widget build(context, ref) {
     final provider = ref.watch(historyProvider)..getData();
 
+    if (provider.status != HistoryStatus.loaded) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return VisibilityDetector(
       key: UniqueKey(),
       onVisibilityChanged: (visibility) {

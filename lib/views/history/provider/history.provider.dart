@@ -61,7 +61,6 @@ class HistoryProvider {
 
   void _init() async {
     _db = ref.read(dbProvider);
-
     _auth = ref.read(firebaseAuthProvider);
     _firestore = ref.read(firestoreProvider);
     final maxScores = ref.read(maxScoresProvider);
@@ -77,13 +76,12 @@ class HistoryProvider {
     maxRussianTwist = maxScores.maxRussianTwist;
     maxDeadBallOverTheShoulder = maxScores.maxDeadBallOverTheShoulder;
     maxShuttleSprintLateralHop = maxScores.maxShuttleSprintLateralHop;
-
-    status = HistoryStatus.loaded;
   }
 
-  void getData() async {
-    final scoreCards = await _db.scoreCards.where().sortByDateDesc().findAll();
-    scores = scoreCards.map((card) {
+  void getData() {
+    final sc = _db.scoreCards.where().sortByDateDesc().findAllSync();
+
+    scores = sc.map((card) {
       if (card.totalScore == 0.0) {
         final scores = [
           CoreUtils.calcScore(card.rower, maxRower),
@@ -111,7 +109,9 @@ class HistoryProvider {
       }
       return card;
     }).toList();
+
     chartData = scores.reversed.map((e) => e.totalScore.toDouble()).toList();
+    status = HistoryStatus.loaded;
   }
 
   void updateChartData(ChartDataSource source) {
