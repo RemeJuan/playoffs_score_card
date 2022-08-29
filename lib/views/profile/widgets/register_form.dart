@@ -6,9 +6,10 @@ class RegisterForm extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final _profileProvider = ref.read(profileProvider);
-    final _coreProvider = ref.watch(coreProvider);
-    final _errorMessage = _coreProvider.errorMessage;
-    final _status = _coreProvider.status;
+    final _coreProvider = ref.read(coreProvider);
+
+    final _errorMessage = ref.watch(coreProvider.select((p) => p.errorMessage));
+    final _status = ref.watch(coreProvider.select((p) => p.status));
 
     if (_status == AuthStatus.LoggedIn) {
       Navigator.of(context).pop();

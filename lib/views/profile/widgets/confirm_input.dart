@@ -7,8 +7,8 @@ class ConfirmPasswordInput extends HookConsumerWidget {
   Widget build(context, ref) {
     final _confirmVisibility = useState(false);
 
-    final confirmPass = ref.watch(profileProvider).confirmPassword;
-    final _status = ref.watch(coreProvider).status;
+    final confirmPass = ref.watch(profileProvider.select((p) => p.confirmPassword));
+    final _status = ref.watch(coreProvider.select((p) => p.status));
 
     return TextFormField(
       initialValue: confirmPass,

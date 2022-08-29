@@ -6,8 +6,9 @@ class PasswordInput extends HookConsumerWidget {
   @override
   Widget build(context, ref) {
     final _passwordVisibility = useState(false);
-    final _provider = ref.watch(profileProvider).password;
-    final _status = ref.watch(coreProvider).status;
+
+    final _provider = ref.watch(profileProvider.select((p) => p.password));
+    final _status = ref.watch(coreProvider.select((p) => p.status));
 
     return TextFormField(
       initialValue: _provider,

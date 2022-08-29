@@ -5,8 +5,8 @@ class EmailInput extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final _email = ref.watch(profileProvider).email;
-    final _status = ref.watch(coreProvider).status;
+    final _email = ref.watch(profileProvider.select((p) => p.email));
+    final _status = ref.watch(coreProvider.select((p) => p.status));
 
     return TextFormField(
       initialValue: _email,

@@ -11,7 +11,7 @@ class ProfileView extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final _coreProvider = ref.read(coreProvider);
-    final _profileProvider = ref.watch(profileProvider);
+    final _profileProvider = ref.read(profileProvider);
 
     final _status = ref.watch(coreProvider.select((value) => value.status));
 
@@ -44,7 +44,7 @@ class ProfileView extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppTheme.paddingDefault * 2),
-          _coreProvider.status == AuthStatus.LoggedIn
+          _status == AuthStatus.LoggedIn
               ? ElevatedButton(
                   onPressed: () => _coreProvider.logout(),
                   child: const Text("Logout"),
@@ -124,17 +124,7 @@ class ProfileView extends ConsumerWidget {
       barrierColor: Colors.black12.withOpacity(0.6),
       barrierDismissible: false,
       pageBuilder: (_, __, ___) {
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider<ProfileProvider>.value(
-              value: context.read<ProfileProvider>(),
-            ),
-            ChangeNotifierProvider<CoreProvider>.value(
-              value: context.read<CoreProvider>(),
-            ),
-          ],
-          child: const AuthView(),
-        );
+        return const AuthView();
       },
     );
   }
