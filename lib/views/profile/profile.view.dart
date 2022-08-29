@@ -14,7 +14,6 @@ class ProfileView extends ConsumerWidget {
     final _profileProvider = ref.watch(profileProvider);
 
     final _status = ref.watch(coreProvider.select((value) => value.status));
-    print(_status);
 
     return Center(
       child: Column(

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
@@ -25,9 +26,9 @@ enum AuthStatus {
   Success,
 }
 
-final coreProvider = Provider(CoreProvider.new);
+final coreProvider = ChangeNotifierProvider(CoreProvider.new);
 
-class CoreProvider {
+class CoreProvider extends ChangeNotifier {
   final Ref ref;
 
   late FirebaseAuth _auth;
@@ -139,6 +140,7 @@ class CoreProvider {
       } else if (e.code == AuthExceptions.UserAlreadyExists.code) {
         errorMessage = 'The account already exists for that email.';
       }
+      notifyListeners();
     }
   }
 
@@ -165,6 +167,7 @@ class CoreProvider {
       );
 
       status = AuthStatus.LoggedIn;
+      notifyListeners();
     } on FirebaseAuthException catch (e) {
       status = AuthStatus.None;
       if (e.code == AuthExceptions.UserNotFound.code) {
@@ -172,6 +175,7 @@ class CoreProvider {
       } else if (e.code == AuthExceptions.WrongPassword.code) {
         errorMessage = 'Wrong password provided for that user.';
       }
+      notifyListeners();
     }
   }
 
@@ -183,12 +187,14 @@ class CoreProvider {
       if (e.code == AuthExceptions.UserNotFound.code) {
         errorMessage = 'No user found for that email.';
       }
+      notifyListeners();
     }
   }
 
   void logout() {
     _auth.signOut();
     status = AuthStatus.None;
+    notifyListeners();
   }
 
   // check if passwords match

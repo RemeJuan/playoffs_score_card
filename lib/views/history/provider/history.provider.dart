@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
@@ -29,9 +30,9 @@ enum HistoryStatus {
   loaded,
 }
 
-final historyProvider = Provider(HistoryProvider.new);
+final historyProvider = ChangeNotifierProvider(HistoryProvider.new);
 
-class HistoryProvider {
+class HistoryProvider extends ChangeNotifier {
   final Ref ref;
 
   late Isar _db;
@@ -78,8 +79,8 @@ class HistoryProvider {
     maxShuttleSprintLateralHop = maxScores.maxShuttleSprintLateralHop;
   }
 
-  void getData() {
-    final sc = _db.scoreCards.where().sortByDateDesc().findAllSync();
+  void getData() async {
+    final sc = await _db.scoreCards.where().sortByDateDesc().findAll();
 
     scores = sc.map((card) {
       if (card.totalScore == 0.0) {
@@ -112,6 +113,7 @@ class HistoryProvider {
 
     chartData = scores.reversed.map((e) => e.totalScore.toDouble()).toList();
     status = HistoryStatus.loaded;
+    notifyListeners();
   }
 
   void updateChartData(ChartDataSource source) {
