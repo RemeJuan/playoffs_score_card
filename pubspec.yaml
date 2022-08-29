@@ -3,7 +3,7 @@ repository: https://github.com/RemeJuan/playoffs_score_card
 homepage: https://playoffsscorecard.app
 description: A simple web app for users to track their progress across the F45 Playoffs.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.4.1
+version: 1.4.2
 
 environment:
   sdk: ">=2.17.3 <3.0.0"
