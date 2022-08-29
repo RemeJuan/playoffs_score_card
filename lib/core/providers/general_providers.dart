@@ -13,10 +13,16 @@ final dbProvider = Provider<Isar>((ref) {
   throw throw UnimplementedError("Isar not implemented");
 });
 
-final firebaseAuthProvider = Provider((ref) => FirebaseAuth.instance);
-final firestoreProvider = Provider((ref) => FirebaseFirestore.instance);
-final maxScoresProvider = StateProvider((ref) => MaxScoresModel());
-final packageInfoProvider = Provider(
+final firebaseAuthProvider = Provider<FirebaseAuth>(
+  (ref) => FirebaseAuth.instance,
+);
+final firestoreProvider = Provider<FirebaseFirestore>(
+  (ref) => FirebaseFirestore.instance,
+);
+final maxScoresProvider = StateProvider<MaxScoresModel>(
+  (ref) => MaxScoresModel(),
+);
+final packageInfoProvider = Provider<Future<PackageInfo>>(
   (ref) async => await PackageInfo.fromPlatform(),
 );
 
@@ -27,5 +33,7 @@ final versionProvider = FutureProvider<String>((ref) async {
   return packageInfo.version;
 });
 
-final filePickerProvider = Provider((ref) => FilePicker.platform);
-final fileSaveProvider = Provider((ref) => FlutterFileSaver());
+final filePickerProvider = Provider<FilePicker>((ref) => FilePicker.platform);
+final fileSaveProvider = Provider<FlutterFileSaver>(
+  (ref) => FlutterFileSaver(),
+);
