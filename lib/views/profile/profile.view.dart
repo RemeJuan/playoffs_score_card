@@ -10,8 +10,11 @@ class ProfileView extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final _coreProvider = ref.watch(coreProvider);
+    final _coreProvider = ref.read(coreProvider);
     final _profileProvider = ref.watch(profileProvider);
+
+    final _status = ref.watch(coreProvider.select((value) => value.status));
+    print(_status);
 
     return Center(
       child: Column(
@@ -44,13 +47,13 @@ class ProfileView extends ConsumerWidget {
           const SizedBox(height: AppTheme.paddingDefault * 2),
           _coreProvider.status == AuthStatus.LoggedIn
               ? ElevatedButton(
-            onPressed: () => _coreProvider.logout(),
-            child: const Text("Logout"),
-          )
+                  onPressed: () => _coreProvider.logout(),
+                  child: const Text("Logout"),
+                )
               : ElevatedButton(
-            onPressed: () => _showLogin(context),
-            child: const Text("Signup / Register"),
-          ),
+                  onPressed: () => _showLogin(context),
+                  child: const Text("Signup / Register"),
+                ),
           const Expanded(child: SizedBox.shrink()),
           Container(
             margin: const EdgeInsets.only(
@@ -74,21 +77,21 @@ class ProfileView extends ConsumerWidget {
                         ),
                         TextSpan(
                           text:
-                          "You can use the following buttons to either export your data for a local backup or to import data from a previous backup.",
+                              "You can use the following buttons to either export your data for a local backup or to import data from a previous backup.",
                         ),
                         TextSpan(
                           text: '\n\n',
                         ),
                         TextSpan(
                           text:
-                          "We will be adding registration shortly, which will allow you to save your data on a server.",
+                              "We will be adding registration shortly, which will allow you to save your data on a server.",
                         ),
                         TextSpan(
                           text: '\n\n',
                         ),
                         TextSpan(
                           text:
-                          "This keeps you in full control over your data.",
+                              "This keeps you in full control over your data.",
                         ),
                       ],
                       style: TextStyle(color: Colors.black),
@@ -98,9 +101,9 @@ class ProfileView extends ConsumerWidget {
                 ),
                 const SizedBox(height: AppTheme.paddingDefault),
                 ElevatedButton(
-                  onPressed:
-                  _profileProvider.hasRecords ? () =>
-                      _profileProvider.exportData() : null,
+                  onPressed: _profileProvider.hasRecords
+                      ? () => _profileProvider.exportData()
+                      : null,
                   child: const Text('Backup Data'),
                 ),
                 const SizedBox(height: AppTheme.paddingDefault * 2),
