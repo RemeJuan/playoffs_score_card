@@ -22,6 +22,7 @@ class AppLanding extends ConsumerWidget {
   Widget build(context, ref) {
     final page = ref.watch(routerProvider);
     final _coreProvider = ref.watch(coreProvider);
+    final _version = ref.watch(versionProvider);
     final _isLoggedIn = _coreProvider.status == AuthStatus.LoggedIn;
 
     if (pageController.hasClients && pageController.page != page) {
@@ -48,7 +49,7 @@ class AppLanding extends ConsumerWidget {
         backgroundColor: AppTheme.blue,
         actions: [
           IconButton(
-            onPressed: () => _showAboutDialog(context, ref),
+            onPressed: () => _showAboutDialog(context, _version.value ?? ''),
             icon: const Icon(Icons.info_outline),
             color: Colors.white,
           )
