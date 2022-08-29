@@ -1,18 +1,15 @@
 part of "auth_view.dart";
 
-class RegisterForm extends StatelessWidget {
+class RegisterForm extends ConsumerWidget {
   const RegisterForm({Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
-    final _profileProvider = context.read<ProfileProvider>();
-    final _coreProvider = context.read<CoreProvider>();
-    final _errorMessage = context.select<CoreProvider, String>(
-      (p) => p.errorMessage,
-    );
-    final _status = context.select<CoreProvider, AuthStatus>(
-      (p) => p.status,
-    );
+  Widget build(context, ref) {
+    final _profileProvider = ref.read(profileProvider);
+    final _coreProvider = ref.read(coreProvider);
+
+    final _errorMessage = ref.watch(coreProvider.select((p) => p.errorMessage));
+    final _status = ref.watch(coreProvider.select((p) => p.status));
 
     if (_status == AuthStatus.LoggedIn) {
       Navigator.of(context).pop();

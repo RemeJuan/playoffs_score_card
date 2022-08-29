@@ -1,21 +1,19 @@
 part of "auth_view.dart";
 
-class LoginForm extends HookWidget {
+class LoginForm extends ConsumerWidget {
   const LoginForm({Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
-    final _profileProvider = context.read<ProfileProvider>();
-    final _coreProvider = context.read<CoreProvider>();
-    final _errorMessage = context.select<CoreProvider, String>(
-      (p) => p.errorMessage,
-    );
-    final _status = context.select<CoreProvider, AuthStatus>(
-      (p) => p.status,
-    );
+  Widget build(context, ref) {
+    final _profileProvider = ref.watch<ProfileProvider>(profileProvider);
+    final _coreProvider = ref.read<CoreProvider>(coreProvider);
+
+    final _errorMessage = ref.watch(coreProvider.select((p) => p.errorMessage));
+    final _status = ref.watch(coreProvider.select((p) => p.status));
+
     if (_status == AuthStatus.LoggedIn) {
-      Navigator.of(context).pop();
       _profileProvider.cleanUp();
+      Navigator.of(context).pop();
     }
 
     return Column(

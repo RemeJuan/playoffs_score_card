@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:playoffs_score_card/locator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
 import 'package:playoffs_score_card/views/history/widgets/chart_switcher.dart';
 import 'package:playoffs_score_card/views/history/widgets/history_chart.dart';
 import 'package:playoffs_score_card/views/history/widgets/history_entry.dart';
-import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class HistoryView extends StatelessWidget {
+class HistoryView extends ConsumerWidget {
   const HistoryView({Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
-    final provider = sl<HistoryProvider>()..getData();
+  Widget build(context, ref) {
+    final provider = ref.watch(historyProvider)..getData();
+
+    if (provider.status != HistoryStatus.loaded) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
 
     return VisibilityDetector(
       key: UniqueKey(),
@@ -21,29 +26,22 @@ class HistoryView extends StatelessWidget {
           provider.getData();
         }
       },
-      child: ChangeNotifierProvider<HistoryProvider>.value(
-        value: provider,
-        child: Consumer<HistoryProvider>(
-          builder: (context, provider, _) {
-            return Column(
-              children: [
-                const HistoryChartSwitcher(),
-                const HistoryChart(),
-                Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: provider.scores.length,
-                    itemBuilder: (context, index) {
-                      final score = provider.scores[index];
+      child: Column(
+        children: [
+          const HistoryChartSwitcher(),
+          const HistoryChart(),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: provider.scores.length,
+              itemBuilder: (context, index) {
+                final score = provider.scores[index];
 
-                      return HistoryEntry(score: score);
-                    },
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+                return HistoryEntry(score: score);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

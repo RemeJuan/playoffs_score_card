@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
 import 'package:playoffs_score_card/views/history/widgets/score_details_header.dart';
 import 'package:playoffs_score_card/views/history/widgets/score_details_row.dart';
-import 'package:provider/provider.dart';
 
-class HistoryDetailsView extends StatelessWidget {
+class HistoryDetailsView extends ConsumerWidget {
   final ScoreCard score;
 
   const HistoryDetailsView({required this.score, Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
-    final provider = context.read<HistoryProvider>();
+  Widget build(context, ref) {
+    final provider = ref.watch(historyProvider);
 
     return Container(
       padding: const EdgeInsets.all(AppTheme.paddingDefault),

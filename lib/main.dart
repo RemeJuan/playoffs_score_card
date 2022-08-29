@@ -1,12 +1,40 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:playoffs_score_card/app_landing.dart';
+import 'package:playoffs_score_card/core/providers/general_providers.dart';
 import 'package:playoffs_score_card/theme.dart';
 
 import 'bootstrap.dart';
+import 'collections/score_card.collection.dart';
 
-void main() {
-  bootstrap(() => const PlayoffsTrackerApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  late Isar _isar;
+
+  if (kIsWeb) {
+    _isar = await Isar.open(
+      schemas: [ScoreCardSchema],
+    );
+  } else {
+    _isar = await Isar.open(
+      schemas: [ScoreCardSchema],
+      directory: (await getApplicationSupportDirectory()).path,
+    );
+  }
+
+  bootstrap(
+    () => ProviderScope(
+      overrides: [
+        dbProvider.overrideWithValue(_isar),
+      ],
+      child: const PlayoffsTrackerApp(),
+    ),
+  );
 }
 
 class PlayoffsTrackerApp extends StatelessWidget {
