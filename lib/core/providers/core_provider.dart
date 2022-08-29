@@ -25,11 +25,7 @@ enum AuthStatus {
   Success,
 }
 
-final coreProvider = Provider(CoreProvider.new, dependencies: [
-  dbProvider,
-  firebaseAuthProvider,
-  firestoreProvider,
-]);
+final coreProvider = Provider(CoreProvider.new);
 
 class CoreProvider {
   final Ref ref;
