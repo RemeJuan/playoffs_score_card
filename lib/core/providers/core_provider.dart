@@ -179,13 +179,25 @@ class CoreProvider extends ChangeNotifier {
     }
   }
 
-  void forgotPassword(String email) {
+  void forgotPassword(String email) async {
     errorMessage = "";
+
+    if (email.isEmpty) {
+      errorMessage = 'Please enter your email address.';
+      notifyListeners();
+      await Future.delayed(const Duration(seconds: 5), () {
+        errorMessage = "";
+        notifyListeners();
+      });
+      return;
+    }
+
     try {
       _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthExceptions.UserNotFound.code) {
         errorMessage = 'No user found for that email.';
+        notifyListeners();
       }
       notifyListeners();
     }

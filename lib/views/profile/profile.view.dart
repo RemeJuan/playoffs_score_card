@@ -124,7 +124,17 @@ class ProfileView extends ConsumerWidget {
       barrierColor: Colors.black12.withOpacity(0.6),
       barrierDismissible: false,
       pageBuilder: (_, __, ___) {
-        return const AuthView();
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider<ProfileProvider>.value(
+              value: context.read<ProfileProvider>(),
+            ),
+            ChangeNotifierProvider<CoreProvider>.value(
+              value: context.read<CoreProvider>(),
+            ),
+          ],
+          child: const AuthView(),
+        );
       },
     );
   }

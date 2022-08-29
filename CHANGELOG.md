@@ -1,3 +1,11 @@
+## [1.4.1] - 2022-08-27
+### Added
+- Fixed Login/SIngup screen crashing
+
+## [1.4.0] - 2022-08-27
+### Added
+- Added support for online sync for logged in users
+
 ## [1.3.0] - 2022-06-26
 ### Added
 - added in user authentication
@@ -14,6 +22,8 @@
 ### Added
 - Users can now restore backups
 
+[1.4.1]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.0...1.4.1
+[1.4.0]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.1.0...1.1.1
