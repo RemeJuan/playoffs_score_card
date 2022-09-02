@@ -55,24 +55,23 @@ void main() async {
 }
 
 void updateVersion(type) async {
-  print(type);
-  // final version = await Process.run(
-  //   "flutter",
-  //   ["pub", "run", "cider", "bump", type],
-  //   workingDirectory: Directory.current.path,
-  // );
-  //
-  // print("Updated to v${version.stdout}");
-  //
-  // await Process.run(
-  //   "git",
-  //   ["tag", version.stdout.trim()],
-  //   workingDirectory: Directory.current.path,
-  // );
-  //
-  // await Process.run(
-  //   "flutter",
-  //   ["pub", "run", "cider", "release", type],
-  //   workingDirectory: Directory.current.path,
-  // );
+  final version = await Process.run(
+    "flutter",
+    ["pub", "run", "cider", "bump", type],
+    workingDirectory: Directory.current.path,
+  );
+
+  print("Updated to v${version.stdout}");
+
+  await Process.run(
+    "git",
+    ["tag", version.stdout.trim()],
+    workingDirectory: Directory.current.path,
+  );
+
+  await Process.run(
+    "flutter",
+    ["pub", "run", "cider", "release", type],
+    workingDirectory: Directory.current.path,
+  );
 }
