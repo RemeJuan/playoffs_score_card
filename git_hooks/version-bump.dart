@@ -9,9 +9,14 @@ void main() async {
     r'(break|feat|fix|none|chore|docs|style|refactor|perf|test|ci)\(.+\):\s.+',
   );
 
+  final branch = await Process.run('git', ['branch', '--show-current']);
   final commitLog = await Process.run(
     "git",
-    ["log", "-10", "--pretty=format:'%s',"],
+    [
+      "log",
+      "main..${branch.stdout.trim()}",
+      "--pretty=format:'%s'",
+    ],
     workingDirectory: Directory.current.path,
   );
 
@@ -50,23 +55,24 @@ void main() async {
 }
 
 void updateVersion(type) async {
-  final version = await Process.run(
-    "flutter",
-    ["pub", "run", "cider", "bump", type],
-    workingDirectory: Directory.current.path,
-  );
-
-  print("Updated to v${version.stdout}");
-
-  await Process.run(
-    "git",
-    ["tag", version.stdout.trim()],
-    workingDirectory: Directory.current.path,
-  );
-
-  await Process.run(
-    "flutter",
-    ["pub", "run", "cider", "release", type],
-    workingDirectory: Directory.current.path,
-  );
+  print(type);
+  // final version = await Process.run(
+  //   "flutter",
+  //   ["pub", "run", "cider", "bump", type],
+  //   workingDirectory: Directory.current.path,
+  // );
+  //
+  // print("Updated to v${version.stdout}");
+  //
+  // await Process.run(
+  //   "git",
+  //   ["tag", version.stdout.trim()],
+  //   workingDirectory: Directory.current.path,
+  // );
+  //
+  // await Process.run(
+  //   "flutter",
+  //   ["pub", "run", "cider", "release", type],
+  //   workingDirectory: Directory.current.path,
+  // );
 }
