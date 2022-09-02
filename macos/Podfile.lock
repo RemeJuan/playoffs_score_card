@@ -165,7 +165,7 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: 50a8e39cae8abf72d5145d07ea34c3244f70862b
   FirebaseFirestore: 3044b77f9d32c07d4536eace25b4c759fd820ba0
   flutter_file_manager_macos: 11df72b919a6e010c8e03ec6adf7439f0319032b
-  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+  FlutterMacOS: ae6af50a8ea7d6103d888583d46bd8328a7e9811
   GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   GTMSessionFetcher: ffbb25ec00ebcb5201adab0a56d808f6f1902d9f

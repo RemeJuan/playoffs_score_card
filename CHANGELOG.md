@@ -1,3 +1,7 @@
+## [1.4.3] - 2022-09-02
+### Changed
+- upgraded flutter version
+
 ## [1.4.2] - 2022-08-29
 ### Added
 - Refactored core architecture
@@ -26,6 +30,7 @@
 ### Added
 - Users can now restore backups
 
+[1.4.3]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.2...1.4.3
 [1.4.2]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.1...1.4.2
 [1.4.1]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.0...1.4.1
 [1.4.0]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.3.0...1.4.0
