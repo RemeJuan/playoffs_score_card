@@ -16,19 +16,18 @@ void main() async {
       "log",
       "main..${branch.stdout.trim()}",
       "--pretty=format:'%s'",
+      "--no-merge",
     ],
     workingDirectory: Directory.current.path,
   );
 
   final commitMessages = commitLog.stdout
       .split(',\n')
-      .where((String e) => !e.toLowerCase().contains('merge'))
-      .toList()
       .where((String e) => regExp.hasMatch(e))
       .toList()
       .map((String e) => e.replaceAll("'", ""))
       .toList();
-
+  print(commitMessages);
   for (final msg in commitMessages) {
     if (msg.startsWith('break')) breaks++;
     if (msg.startsWith('feat')) features++;
@@ -55,23 +54,23 @@ void main() async {
 }
 
 void updateVersion(type) async {
-  final version = await Process.run(
-    "flutter",
-    ["pub", "run", "cider", "bump", type],
-    workingDirectory: Directory.current.path,
-  );
-
-  print("Updated to v${version.stdout}");
-
-  await Process.run(
-    "git",
-    ["tag", version.stdout.trim()],
-    workingDirectory: Directory.current.path,
-  );
-
-  await Process.run(
-    "flutter",
-    ["pub", "run", "cider", "release", type],
-    workingDirectory: Directory.current.path,
-  );
+  // final version = await Process.run(
+  //   "flutter",
+  //   ["pub", "run", "cider", "bump", type],
+  //   workingDirectory: Directory.current.path,
+  // );
+  //
+  // print("Updated to v${version.stdout}");
+  //
+  // await Process.run(
+  //   "git",
+  //   ["tag", version.stdout.trim()],
+  //   workingDirectory: Directory.current.path,
+  // );
+  //
+  // await Process.run(
+  //   "flutter",
+  //   ["pub", "run", "cider", "release", type],
+  //   workingDirectory: Directory.current.path,
+  // );
 }
