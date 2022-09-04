@@ -1,9 +1,9 @@
 name: Version Bump
 permissions: write-all
 on:
-#    pull_request:
-#      branches: [ "main" ]
-#      types: [ "opened" ]
+    pull_request:
+      branches: [ "main" ]
+      types: [ "opened" ]
     workflow_dispatch:
 
 jobs:
