@@ -33,8 +33,8 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        primary: red,
-        onPrimary: Colors.white,
+        foregroundColor: Colors.white,
+        backgroundColor: red,
       ),
     ),
     textSelectionTheme: TextSelectionThemeData(

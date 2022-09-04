@@ -1,6 +1,7 @@
 part of "package:playoffs_score_card/app_landing.dart";
 
 void _showAboutDialog(BuildContext context, String version) {
+  const repo = "https://github.com/RemeJuan/playoffs_score_card";
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -63,21 +64,7 @@ void _showAboutDialog(BuildContext context, String version) {
                   color: Colors.black,
                 ),
               ),
-              TextSpan(
-                text: "HERE",
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    launchUrl(
-                      Uri.parse(
-                          "https://github.com/RemeJuan/playoffs_score_card"),
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
-                style: TextStyle(
-                  color: AppTheme.blue,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
+              ..._externalLink("HERE", repo, false),
               const TextSpan(
                 text: "\n\n",
               ),
@@ -88,6 +75,22 @@ void _showAboutDialog(BuildContext context, String version) {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const TextSpan(
+                text: "\n\n",
+              ),
+              ..._externalLink(
+                "Changelog",
+                "$repo/blob/main/CHANGELOG.md",
+              ),
+              ..._externalLink(
+                "Terms and Conditions",
+                "$repo/blob/main/terms_and_conditions.md",
+              ),
+              ..._externalLink(
+                "Privacy Policy",
+                "$repo/blob/main/app_privacy_policy.md",
+              ),
+              ..._externalLink("Report an issue", "$repo/issues", false),
             ],
           ),
         ),

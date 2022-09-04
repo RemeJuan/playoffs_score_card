@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'core/providers/general_providers.dart';
 
+part 'package:playoffs_score_card/core/menu_items/external_link.dart';
 part 'package:playoffs_score_card/core/menu_items/header_menu_items.dart';
 
 class AppLanding extends ConsumerWidget {

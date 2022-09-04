@@ -16,18 +16,19 @@ void main() async {
       "log",
       "main..${branch.stdout.trim()}",
       "--pretty=format:'%s'",
+      "--no-merges",
     ],
     workingDirectory: Directory.current.path,
   );
-
   final commitMessages = commitLog.stdout
-      .split(',\n')
-      .where((String e) => !e.toLowerCase().contains('merge'))
+      .split('\n')
       .toList()
       .where((String e) => regExp.hasMatch(e))
       .toList()
       .map((String e) => e.replaceAll("'", ""))
       .toList();
+
+  print(commitMessages);
 
   for (final msg in commitMessages) {
     if (msg.startsWith('break')) breaks++;
