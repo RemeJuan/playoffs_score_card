@@ -16,18 +16,19 @@ void main() async {
       "log",
       "main..${branch.stdout.trim()}",
       "--pretty=format:'%s'",
+      "--no-merges",
     ],
     workingDirectory: Directory.current.path,
   );
-
   final commitMessages = commitLog.stdout
-      .split(',\n')
+      .split('\n')
+      .toList()
       .where((String e) => regExp.hasMatch(e))
       .toList()
       .map((String e) => e.replaceAll("'", ""))
       .toList();
 
-  print(commitMessages);
+  print(commitLog);
 
   for (final msg in commitMessages) {
     if (msg.startsWith('break')) breaks++;
@@ -68,10 +69,10 @@ void updateVersion(type) async {
     ["tag", version.stdout.trim()],
     workingDirectory: Directory.current.path,
   );
-  //
-  // await Process.run(
-  //   "flutter",
-  //   ["pub", "run", "cider", "release", type],
-  //   workingDirectory: Directory.current.path,
-  // );
+
+  await Process.run(
+    "flutter",
+    ["pub", "run", "cider", "release", type],
+    workingDirectory: Directory.current.path,
+  );
 }
