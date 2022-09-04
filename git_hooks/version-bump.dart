@@ -68,10 +68,10 @@ void updateVersion(type) async {
     ["tag", version.stdout.trim()],
     workingDirectory: Directory.current.path,
   );
-
-  await Process.run(
-    "flutter",
-    ["pub", "run", "cider", "release", type],
-    workingDirectory: Directory.current.path,
-  );
+  //
+  // await Process.run(
+  //   "flutter",
+  //   ["pub", "run", "cider", "release", type],
+  //   workingDirectory: Directory.current.path,
+  // );
 }
