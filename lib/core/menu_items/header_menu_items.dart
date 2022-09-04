@@ -86,6 +86,10 @@ void _showAboutDialog(BuildContext context, String version) {
                 "Terms and Conditions",
                 "$repo/blob/main/terms_and_conditions.md",
               ),
+              ..._externalLink(
+                "Privacy Policy",
+                "$repo/blob/main/app_privacy_policy.md",
+              ),
               ..._externalLink("Report an issue", "$repo/issues", false),
             ],
           ),
