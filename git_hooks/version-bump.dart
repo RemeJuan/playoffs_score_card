@@ -28,7 +28,7 @@ void main() async {
       .map((String e) => e.replaceAll("'", ""))
       .toList();
 
-  print(commitLog);
+  print(commitMessages);
 
   for (final msg in commitMessages) {
     if (msg.startsWith('break')) breaks++;
