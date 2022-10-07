@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
@@ -13,9 +14,9 @@ enum ScoreCardStatus {
   saved,
 }
 
-final scoreCardProvider = Provider(ScoreCardProvider.new);
+final scoreCardProvider = ChangeNotifierProvider(ScoreCardProvider.new);
 
-class ScoreCardProvider {
+class ScoreCardProvider extends ChangeNotifier {
   final Ref ref;
 
   late Isar db;
@@ -95,6 +96,8 @@ class ScoreCardProvider {
     maxRussianTwist = maxScores.maxRussianTwist;
     maxDeadBallOverTheShoulder = maxScores.maxDeadBallOverTheShoulder;
     maxShuttleSprintLateralHop = maxScores.maxShuttleSprintLateralHop;
+
+    notifyListeners();
   }
 
   void setRower(int value) {
@@ -172,6 +175,8 @@ class ScoreCardProvider {
   void addPreviousScore(DateTime d) async {
     _init();
     date = d;
+
+    notifyListeners();
   }
 
   void totalScoreCalculator() {
@@ -192,7 +197,9 @@ class ScoreCardProvider {
     // together to get the total score
     final ts = scores.where((s) => s != -1).reduce((a, b) => a + b);
 
-    totalScore = ts;
+    totalScore = double.parse(ts.toStringAsFixed(2));
+
+    notifyListeners();
 
     canSave();
   }
@@ -212,6 +219,8 @@ class ScoreCardProvider {
     } else {
       status = ScoreCardStatus.incomplete;
     }
+
+    notifyListeners();
   }
 
   void save() async {

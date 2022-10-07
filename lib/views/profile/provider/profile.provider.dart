@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_file_saver/flutter_file_saver.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
 import 'package:playoffs_score_card/core/providers/general_providers.dart';
 
-final profileProvider = Provider(ProfileProvider.new);
+final profileProvider = ChangeNotifierProvider(ProfileProvider.new);
 
-class ProfileProvider {
+class ProfileProvider extends ChangeNotifier {
   final Ref ref;
 
   late Isar _isar;
@@ -32,6 +33,8 @@ class ProfileProvider {
     _filePicker = ref.read(filePickerProvider);
 
     hasRecords = _isar.scoreCards.where().countSync() > 0;
+
+    notifyListeners();
   }
 
   void exportData() async {
@@ -63,11 +66,15 @@ class ProfileProvider {
   // update users email address
   void updateEmail(String email) async {
     this.email = email;
+
+    notifyListeners();
   }
 
   // update users password
   void updatePassword(String password) async {
     this.password = password;
+
+    notifyListeners();
   }
 
   // update users confirm password
@@ -79,5 +86,7 @@ class ProfileProvider {
     email = "";
     password = "";
     confirmPassword = "";
+
+    notifyListeners();
   }
 }

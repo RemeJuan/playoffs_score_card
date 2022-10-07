@@ -25,7 +25,7 @@ class ScoreTable extends ConsumerWidget {
               child: Column(
                 children: [
                   ScoreRow(
-                    key: const Key("1"),
+                    key: const ValueKey("rower"),
                     event: "1. Rower",
                     maxReps: provider.maxRower,
                     reps: provider.rower,
@@ -33,6 +33,7 @@ class ScoreTable extends ConsumerWidget {
                     onChanged: (value) => provider.setRower(int.parse(value)),
                   ),
                   ScoreRow(
+                    key: const ValueKey("bench_hops"),
                     event: "2. Bench Hops",
                     maxReps: provider.maxBenchHops,
                     reps: provider.benchHops,
@@ -41,6 +42,7 @@ class ScoreTable extends ConsumerWidget {
                         provider.setBenchHops(int.parse(value)),
                   ),
                   ScoreRow(
+                    key: const ValueKey("knee_tuck_push_ups"),
                     event: "3. Knee Tuck Push Ups",
                     maxReps: provider.maxKneeTuckPushUps,
                     reps: provider.kneeTuckPushUps,
@@ -49,6 +51,7 @@ class ScoreTable extends ConsumerWidget {
                         provider.setKneeTuckPushUps(int.parse(value)),
                   ),
                   ScoreRow(
+                    key: const ValueKey("lateral_hops"),
                     event: "4. Lateral Hops",
                     maxReps: provider.maxLateralHops,
                     reps: provider.lateralHops,
@@ -57,6 +60,7 @@ class ScoreTable extends ConsumerWidget {
                         provider.setLateralHops(int.parse(value)),
                   ),
                   ScoreRow(
+                    key: const ValueKey("box_jump_burpee"),
                     event: "5. Box Jump Burpee",
                     maxReps: provider.maxBoxJumpBurpee,
                     reps: provider.boxJumpBurpee,
@@ -65,6 +69,7 @@ class ScoreTable extends ConsumerWidget {
                         provider.setBoxJumpBurpee(int.parse(value)),
                   ),
                   ScoreRow(
+                    key: const ValueKey("chim_ups"),
                     event: "6. Chin Ups",
                     maxReps: provider.maxChinUps,
                     reps: provider.chinUps,
@@ -72,6 +77,7 @@ class ScoreTable extends ConsumerWidget {
                     onChanged: (value) => provider.setChinUps(int.parse(value)),
                   ),
                   ScoreRow(
+                    key: const ValueKey("squat_press"),
                     event: "7. Squat Press",
                     maxReps: provider.maxSquatPress,
                     reps: provider.squatPress,
@@ -80,6 +86,7 @@ class ScoreTable extends ConsumerWidget {
                         provider.setSquatPress(int.parse(value)),
                   ),
                   ScoreRow(
+                    key: const ValueKey("russian_twist"),
                     event: "8. Russian Twist",
                     maxReps: provider.maxRussianTwist,
                     reps: provider.russianTwist,
@@ -88,6 +95,7 @@ class ScoreTable extends ConsumerWidget {
                         provider.setRussianTwist(int.parse(value)),
                   ),
                   ScoreRow(
+                    key: const ValueKey("dead_ball_over_the_shoulder"),
                     event: "9. Dead Ball Over The Shoulder",
                     maxReps: provider.maxDeadBallOverTheShoulder,
                     reps: provider.deadBallOverTheShoulder,
@@ -96,6 +104,7 @@ class ScoreTable extends ConsumerWidget {
                         provider.setDeadBallOverTheShoulder(int.parse(value)),
                   ),
                   ScoreRow(
+                    key: const ValueKey("sprint_lateral_hops"),
                     event: "10. Shuttle Sprint and Lateral Hop",
                     maxReps: provider.maxShuttleSprintLateralHop,
                     reps: provider.shuttleSprintLateralHop,
