@@ -4,9 +4,9 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "favicon.png": "088fcd9c7ffc4bd23bf6493e917a2826",
-"main.dart.js": "5bef3b99878127344c3034d33bd38fad",
-"index.html": "2cee6f03c5695023b9f1e6b30114f210",
-"/": "2cee6f03c5695023b9f1e6b30114f210",
+"main.dart.js": "20d57a1d71310ed287dca8cfe451e46b",
+"index.html": "204994befce71b51d7291d7e4124b51f",
+"/": "204994befce71b51d7291d7e4124b51f",
 "flutter.js": "f85e6fb278b0fd20c349186fb46ae36d",
 "manifest.json": "59b1d047bcf5564a16d097947ca7ff8f",
 "canvaskit/canvaskit.js": "2bc454a691c631b07a9307ac4ca47797",
@@ -21,7 +21,7 @@ const RESOURCES = {
 "assets/assets/fonts/Trade%2520Gothic%2520LT%2520Bold.ttf": "cb7d0b0968943ceca839712e38df14c1",
 "assets/assets/fonts/Trade%2520Gothic%2520LT.ttf": "0631e2714248f8295ff4d71b602a486d",
 "assets/fonts/MaterialIcons-Regular.otf": "95db9098c58fd6db106f1116bae85a0b",
-"assets/NOTICES": "d4c4a82b03968925bac33aa330f0f8ae",
+"assets/NOTICES": "c055f30b710945a0dc1394f9ebdaee0e",
 "version.json": "2e73b367b9d627f8ce8adac3da53371d",
 "icons/Icon-512.png": "43f31faaeda7705c3fe10672f38c7a87",
 "icons/Icon-192.png": "01a4940be6c2f4727b9ac0206bb1193d",
