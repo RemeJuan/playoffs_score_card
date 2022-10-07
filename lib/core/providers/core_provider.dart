@@ -47,10 +47,15 @@ class CoreProvider extends ChangeNotifier {
     _fireStore = ref.read(firestoreProvider);
     _db = ref.read(dbProvider);
 
-    if (_auth.currentUser != null) {
-      status = AuthStatus.LoggedIn;
-      _sync();
-    }
+    _auth.authStateChanges().listen((User? user) {
+      if (user == null) {
+        status = AuthStatus.None;
+      } else {
+        status = AuthStatus.LoggedIn;
+        _sync();
+      }
+      notifyListeners();
+    });
   }
 
   void _sync() async {
@@ -80,24 +85,25 @@ class CoreProvider extends ChangeNotifier {
           return !dates.contains(e["date"]);
         }).toList();
 
-        final updated = [...historyMissing].map((e) {
-          return ScoreCard()
-            ..date = DateTime(e["date"])
-            ..rower = e["rower"]
-            ..benchHops = e["benchHops"]
-            ..kneeTuckPushUps = e["kneeTuckPushUps"]
-            ..lateralHops = e["lateralHops"]
-            ..boxJumpBurpee = e["boxJumpBurpee"]
-            ..chinUps = e["chinUps"]
-            ..squatPress = e["squatPress"]
-            ..russianTwist = e["russianTwist"]
-            ..deadBallOverTheShoulder = e["deadBallOverTheShoulder"]
-            ..shuttleSprintLateralHop = e["shuttleSprintLateralHop"];
-        }).toList();
+        for (final item in historyMissing) {
+          final card = ScoreCard()
+            ..id = item["id"]
+            ..date = DateTime.fromMicrosecondsSinceEpoch(item["date"])
+            ..rower = item["rower"]
+            ..benchHops = item["benchHops"]
+            ..kneeTuckPushUps = item["kneeTuckPushUps"]
+            ..lateralHops = item["lateralHops"]
+            ..boxJumpBurpee = item["boxJumpBurpee"]
+            ..chinUps = item["chinUps"]
+            ..squatPress = item["squatPress"]
+            ..russianTwist = item["russianTwist"]
+            ..deadBallOverTheShoulder = item["deadBallOverTheShoulder"]
+            ..shuttleSprintLateralHop = item["shuttleSprintLateralHop"];
 
-        await _db.writeTxn((isar) async {
-          isar.scoreCards.putAll(updated);
-        });
+          await _db.writeTxn((isar) async {
+            await isar.scoreCards.put(card);
+          });
+        }
       }
     }
   }

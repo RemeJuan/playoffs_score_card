@@ -1,3 +1,7 @@
+## [1.4.5] - 2022-10-07
+### Fixed
+- fixed auth peristence post refresh on web
+
 ## [1.4.4] - 2022-10-07
 ### Added
 - added changelog, terms privacy policy to about dialog
@@ -37,6 +41,7 @@
 ### Added
 - Users can now restore backups
 
+[1.4.5]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.4...1.4.5
 [1.4.4]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.3...1.4.4
 [1.4.3]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.2...1.4.3
 [1.4.2]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.1...1.4.2
