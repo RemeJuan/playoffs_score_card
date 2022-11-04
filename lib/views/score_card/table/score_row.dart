@@ -1,6 +1,6 @@
 part of "score_table.dart";
 
-class ScoreRow extends StatelessWidget {
+class ScoreRow extends HookConsumerWidget {
   final String event;
   final int reps;
   final int maxReps;
@@ -17,7 +17,19 @@ class ScoreRow extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(context) {
+  Widget build(context, ref) {
+    final status = ref.watch(scoreCardProvider.select((v) => v.status));
+    final controller = useTextEditingController(
+      text: reps == -1 ? "" : reps.toString(),
+    );
+
+    useEffect(() {
+      if (status == ScoreCardStatus.saved) {
+        controller.clear();
+      }
+      return null;
+    }, [status]);
+
     return Container(
       margin: const EdgeInsets.only(top: AppTheme.paddingDefault),
       padding: const EdgeInsets.symmetric(
@@ -35,7 +47,7 @@ class ScoreRow extends StatelessWidget {
               SizedBox(
                 width: width * 0.3,
                 child: TextFormField(
-                  initialValue: reps == -1 ? "" : reps.toString(),
+                  controller: controller,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     isDense: true,
@@ -59,7 +71,7 @@ class ScoreRow extends StatelessWidget {
               Container(
                 width: width * 0.3,
                 alignment: Alignment.centerRight,
-                child: Text("$score / 100"),
+                child: Text("${score == -1 ? '' : score} / 100"),
               ),
             ],
           );

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:playoffs_score_card/theme.dart';
-import 'package:playoffs_score_card/views/score_card/provider/score_card_provider.dart';
+import 'package:playoffs_score_card/views/score_card/provider/score_card_notifier.dart';
+import 'package:playoffs_score_card/views/score_card/provider/score_card_state.dart';
 
 part "score_header.dart";
 part "score_row.dart";
@@ -13,6 +16,10 @@ class ScoreTable extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final provider = ref.watch(scoreCardProvider);
+    final notifier = ref.read(scoreCardProvider.notifier);
+    final maxScores = provider.maxScores;
+    final reps = provider.reps;
+    final scores = provider.score;
 
     return Container(
       padding: const EdgeInsets.all(AppTheme.paddingDefault),
@@ -27,90 +34,90 @@ class ScoreTable extends ConsumerWidget {
                   ScoreRow(
                     key: const ValueKey("rower"),
                     event: "1. Rower",
-                    maxReps: provider.maxRower,
-                    reps: provider.rower,
-                    score: provider.rowerScore,
-                    onChanged: (value) => provider.setRower(int.parse(value)),
+                    maxReps: maxScores.maxRower,
+                    reps: reps.rower,
+                    score: scores.rower,
+                    onChanged: (value) => notifier.setRower(int.parse(value)),
                   ),
                   ScoreRow(
                     key: const ValueKey("bench_hops"),
                     event: "2. Bench Hops",
-                    maxReps: provider.maxBenchHops,
-                    reps: provider.benchHops,
-                    score: provider.benchHopsScore,
+                    maxReps: maxScores.maxBenchHops,
+                    reps: reps.benchHops,
+                    score: scores.benchHops,
                     onChanged: (value) =>
-                        provider.setBenchHops(int.parse(value)),
+                        notifier.setBenchHops(int.parse(value)),
                   ),
                   ScoreRow(
                     key: const ValueKey("knee_tuck_push_ups"),
                     event: "3. Knee Tuck Push Ups",
-                    maxReps: provider.maxKneeTuckPushUps,
-                    reps: provider.kneeTuckPushUps,
-                    score: provider.kneeTuckPushUpsScore,
+                    maxReps: maxScores.maxKneeTuckPushUps,
+                    reps: reps.kneeTuckPushUps,
+                    score: scores.kneeTuckPushUps,
                     onChanged: (value) =>
-                        provider.setKneeTuckPushUps(int.parse(value)),
+                        notifier.setKneeTuckPushUps(int.parse(value)),
                   ),
                   ScoreRow(
                     key: const ValueKey("lateral_hops"),
                     event: "4. Lateral Hops",
-                    maxReps: provider.maxLateralHops,
-                    reps: provider.lateralHops,
-                    score: provider.lateralHopsScore,
+                    maxReps: maxScores.maxLateralHops,
+                    reps: reps.lateralHops,
+                    score: scores.lateralHops,
                     onChanged: (value) =>
-                        provider.setLateralHops(int.parse(value)),
+                        notifier.setLateralHops(int.parse(value)),
                   ),
                   ScoreRow(
                     key: const ValueKey("box_jump_burpee"),
                     event: "5. Box Jump Burpee",
-                    maxReps: provider.maxBoxJumpBurpee,
-                    reps: provider.boxJumpBurpee,
-                    score: provider.boxJumpBurpeeScore,
+                    maxReps: maxScores.maxBoxJumpBurpee,
+                    reps: reps.boxJumpBurpee,
+                    score: scores.boxJumpBurpee,
                     onChanged: (value) =>
-                        provider.setBoxJumpBurpee(int.parse(value)),
+                        notifier.setBoxJumpBurpee(int.parse(value)),
                   ),
                   ScoreRow(
-                    key: const ValueKey("chim_ups"),
+                    key: const ValueKey("chin_ups"),
                     event: "6. Chin Ups",
-                    maxReps: provider.maxChinUps,
-                    reps: provider.chinUps,
-                    score: provider.chinUpsScore,
-                    onChanged: (value) => provider.setChinUps(int.parse(value)),
+                    maxReps: maxScores.maxChinUps,
+                    reps: reps.chinUps,
+                    score: scores.chinUps,
+                    onChanged: (value) => notifier.setChinUps(int.parse(value)),
                   ),
                   ScoreRow(
                     key: const ValueKey("squat_press"),
                     event: "7. Squat Press",
-                    maxReps: provider.maxSquatPress,
-                    reps: provider.squatPress,
-                    score: provider.squatPressScore,
+                    maxReps: maxScores.maxSquatPress,
+                    reps: reps.squatPress,
+                    score: scores.squatPress,
                     onChanged: (value) =>
-                        provider.setSquatPress(int.parse(value)),
+                        notifier.setSquatPress(int.parse(value)),
                   ),
                   ScoreRow(
                     key: const ValueKey("russian_twist"),
                     event: "8. Russian Twist",
-                    maxReps: provider.maxRussianTwist,
-                    reps: provider.russianTwist,
-                    score: provider.russianTwistScore,
+                    maxReps: maxScores.maxRussianTwist,
+                    reps: reps.russianTwist,
+                    score: scores.russianTwist,
                     onChanged: (value) =>
-                        provider.setRussianTwist(int.parse(value)),
+                        notifier.setRussianTwist(int.parse(value)),
                   ),
                   ScoreRow(
                     key: const ValueKey("dead_ball_over_the_shoulder"),
                     event: "9. Dead Ball Over The Shoulder",
-                    maxReps: provider.maxDeadBallOverTheShoulder,
-                    reps: provider.deadBallOverTheShoulder,
-                    score: provider.deadBallOverTheShoulderScore,
+                    maxReps: maxScores.maxDeadBallOverTheShoulder,
+                    reps: reps.deadBallOverTheShoulder,
+                    score: scores.deadBallOverTheShoulder,
                     onChanged: (value) =>
-                        provider.setDeadBallOverTheShoulder(int.parse(value)),
+                        notifier.setDeadBallOverTheShoulder(int.parse(value)),
                   ),
                   ScoreRow(
                     key: const ValueKey("sprint_lateral_hops"),
                     event: "10. Shuttle Sprint and Lateral Hop",
-                    maxReps: provider.maxShuttleSprintLateralHop,
-                    reps: provider.shuttleSprintLateralHop,
-                    score: provider.shuttleSprintLateralHopScore,
+                    maxReps: maxScores.maxShuttleSprintLateralHop,
+                    reps: reps.shuttleSprintLateralHop,
+                    score: scores.shuttleSprintLateralHop,
                     onChanged: (value) =>
-                        provider.setShuttleSprintLateralHop(int.parse(value)),
+                        notifier.setShuttleSprintLateralHop(int.parse(value)),
                   ),
                 ],
               ),

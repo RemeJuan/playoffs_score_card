@@ -20,7 +20,7 @@ final firestoreProvider = Provider<FirebaseFirestore>(
   (ref) => FirebaseFirestore.instance,
 );
 final maxScoresProvider = StateProvider<MaxScoresModel>(
-  (ref) => MaxScoresModel(),
+  (ref) => const MaxScoresModel(),
 );
 final packageInfoProvider = Provider<Future<PackageInfo>>(
   (ref) async => await PackageInfo.fromPlatform(),

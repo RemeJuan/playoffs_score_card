@@ -4,7 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:playoffs_score_card/core/providers/general_providers.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/themes/default.template.dart';
-import 'package:playoffs_score_card/views/score_card/provider/score_card_provider.dart';
+import 'package:playoffs_score_card/views/score_card/provider/score_card_notifier.dart';
+import 'package:playoffs_score_card/views/score_card/provider/score_card_state.dart';
 import 'package:playoffs_score_card/views/score_card/table/score_table.dart';
 
 class ScoreCardView extends ConsumerWidget {
@@ -13,15 +14,10 @@ class ScoreCardView extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final provider = ref.watch(scoreCardProvider);
+    final notifier = ref.read(scoreCardProvider.notifier);
 
     final status = provider.status;
     final canSave = status == ScoreCardStatus.complete;
-
-    if (status == ScoreCardStatus.loading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
 
     if (status == ScoreCardStatus.saved) {
       _navigate(ref);
@@ -65,7 +61,7 @@ class ScoreCardView extends ConsumerWidget {
           const Expanded(child: ScoreTable()),
           const SizedBox(height: AppTheme.paddingDefault),
           ElevatedButton(
-            onPressed: canSave ? provider.save : null,
+            onPressed: canSave ? notifier.save : null,
             child: const Text("Save"),
           ),
           const SizedBox(height: AppTheme.paddingDefault),
@@ -98,6 +94,6 @@ class ScoreCardView extends ConsumerWidget {
     );
 
     await Future.delayed(const Duration(milliseconds: 10));
-    ref.read(scoreCardProvider).addPreviousScore(date!);
+    ref.read(scoreCardProvider.notifier).addPreviousScore(date!);
   }
 }

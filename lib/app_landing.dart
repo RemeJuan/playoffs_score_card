@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:playoffs_score_card/core/providers/core_provider.dart';
 import 'package:playoffs_score_card/router/app_router.dart';
 import 'package:playoffs_score_card/theme.dart';
@@ -11,7 +12,7 @@ import 'core/providers/general_providers.dart';
 part 'package:playoffs_score_card/core/menu_items/external_link.dart';
 part 'package:playoffs_score_card/core/menu_items/header_menu_items.dart';
 
-class AppLanding extends ConsumerWidget {
+class AppLanding extends HookConsumerWidget {
   AppLanding({Key? key}) : super(key: key);
 
   final pageController = PageController(
@@ -26,13 +27,18 @@ class AppLanding extends ConsumerWidget {
     final _version = ref.watch(versionProvider);
     final _isLoggedIn = _coreProvider.status == AuthStatus.LoggedIn;
 
-    if (pageController.hasClients && pageController.page != page) {
-      pageController.animateToPage(
-        page,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
+    useEffect(() {
+      if (pageController.hasClients) {
+        if (pageController.page != page) {
+          pageController.animateToPage(
+            page,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        }
+      }
+      return null;
+    }, [page]);
 
     return Scaffold(
       appBar: AppBar(

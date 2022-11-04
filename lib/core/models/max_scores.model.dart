@@ -1,4 +1,6 @@
 class MaxScoresModel {
+  const MaxScoresModel();
+
   final int maxRower = 290;
   final int maxBenchHops = 95;
   final int maxKneeTuckPushUps = 57;
