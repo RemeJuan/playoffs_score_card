@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:playoffs_score_card/app_landing.dart';
 import 'package:playoffs_score_card/core/providers/general_providers.dart';
 import 'package:playoffs_score_card/theme.dart';
+import 'package:rate_my_app/rate_my_app.dart';
 
 import 'bootstrap.dart';
 import 'collections/score_card.collection.dart';
@@ -47,11 +48,29 @@ class PlayoffsTrackerApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Playoffs Score Tracker",
-      theme: AppTheme.primary,
-      home: AppLanding(),
+    return RateMyAppBuilder(
+      rateMyApp: RateMyApp(
+        preferencesPrefix: 'rateMyApp_',
+        minDays: 3,
+        minLaunches: 7,
+        remindDays: 2,
+        remindLaunches: 5,
+        googlePlayIdentifier: 'com.playoffs_score_card',
+        appStoreIdentifier: 'com.playoffsScoreCard',
+      ),
+      onInitialized: (context, rateMyApp) {
+        if (rateMyApp.shouldOpenDialog) {
+          rateMyApp.showRateDialog(context);
+        }
+      },
+      builder: (context) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "Playoffs Score Tracker",
+          theme: AppTheme.primary,
+          home: AppLanding(),
+        );
+      },
     );
   }
 }
