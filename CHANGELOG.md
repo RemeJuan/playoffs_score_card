@@ -1,4 +1,4 @@
-## [Unreleased]
+## [1.4.8] - 2022-11-05
 ### Fixed
 - close keyboard when tapping outside an input field
 
@@ -53,7 +53,7 @@
 ### Added
 - Users can now restore backups
 
-[Unreleased]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.7...HEAD
+[1.4.8]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.7...1.4.8
 [1.4.7]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.6...1.4.7
 [1.4.6]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.5...1.4.6
 [1.4.5]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.4...1.4.5

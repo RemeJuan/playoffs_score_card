@@ -64,11 +64,14 @@ class PlayoffsTrackerApp extends StatelessWidget {
         }
       },
       builder: (context) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Playoffs Score Tracker",
-          theme: AppTheme.primary,
-          home: AppLanding(),
+        return GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: "Playoffs Score Tracker",
+            theme: AppTheme.primary,
+            home: AppLanding(),
+          ),
         );
       },
     );
