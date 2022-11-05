@@ -9,7 +9,9 @@ class HistoryChartSwitcher extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final provider = ref.watch(historyProvider);
+    final activeChartDataSource = ref.watch(
+      historyProvider.select((v) => v.activeChartDataSource),
+    );
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppTheme.paddingDefault),
@@ -25,7 +27,7 @@ class HistoryChartSwitcher extends ConsumerWidget {
           ),
           const SizedBox(width: 10),
           DropdownButton<ChartDataSource>(
-            value: provider.activeChartDataSource,
+            value: activeChartDataSource,
             items: ChartDataSource.values.map((e) {
               return DropdownMenuItem(
                 value: e,

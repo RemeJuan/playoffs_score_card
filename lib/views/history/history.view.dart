@@ -11,7 +11,7 @@ class HistoryView extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final notifier = ref.watch(historyProvider.notifier)..getData();
+    final notifier = ref.read(historyProvider.notifier);
     final provider = ref.watch(historyProvider);
 
     return VisibilityDetector(

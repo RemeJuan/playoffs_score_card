@@ -9,7 +9,7 @@ class HistoryChart extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final provider = ref.watch(historyProvider);
+    final chartData = ref.watch(historyProvider.select((v) => v.chartData));
 
     return Container(
       padding: const EdgeInsets.only(left: AppTheme.paddingDefault * 1.5),
@@ -17,8 +17,9 @@ class HistoryChart extends ConsumerWidget {
         vertical: AppTheme.paddingDefault * 1.5,
       ),
       child: Sparkline(
+        key: const Key('history_chart'),
         enableGridLines: true,
-        data: provider.chartData.map((e) => e).toList(),
+        data: chartData.map((e) => e).toList(),
         pointsMode: PointsMode.all,
         pointSize: 5,
         pointColor: AppTheme.darkerRed,
