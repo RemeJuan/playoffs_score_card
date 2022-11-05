@@ -1,3 +1,7 @@
+## [Unreleased]
+### Fixed
+- close keyboard when tapping outside an input field
+
 ## [1.4.7] - 2022-11-05
 ### Fixed
 - fixed touch targets not working on score card and history view
@@ -49,6 +53,7 @@
 ### Added
 - Users can now restore backups
 
+[Unreleased]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.7...HEAD
 [1.4.7]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.6...1.4.7
 [1.4.6]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.5...1.4.6
 [1.4.5]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.4...1.4.5
