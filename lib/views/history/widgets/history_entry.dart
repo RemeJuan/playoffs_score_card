@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:playoffs_score_card/collections/score_card.collection.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/views/history/history_details.view.dart';
-import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
+import 'package:playoffs_score_card/views/history/provider/history_notifier.dart';
 
 class HistoryEntry extends ConsumerWidget {
   final ScoreCard score;
@@ -16,12 +16,12 @@ class HistoryEntry extends ConsumerWidget {
     final date = DateFormat("d MMMM yyyy").format(score.date);
 
     return Dismissible(
-      key: UniqueKey(),
+      key: Key(score.id.toString()),
       background: Container(color: Colors.red),
       confirmDismiss: (_) => _confirmDelete(context),
       direction: DismissDirection.endToStart,
       onDismissed: (direction) {
-        ref.read(historyProvider).removeScore(score);
+        ref.read(historyProvider.notifier).removeScore(score);
       },
       child: InkWell(
         onTap: () => _showMaterialDialog(context),

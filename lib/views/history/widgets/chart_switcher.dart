@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:playoffs_score_card/theme.dart';
-import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
+import 'package:playoffs_score_card/views/history/provider/history_notifier.dart';
+import 'package:playoffs_score_card/views/history/provider/history_state.dart';
 
 class HistoryChartSwitcher extends ConsumerWidget {
   const HistoryChartSwitcher({Key? key}) : super(key: key);
@@ -31,7 +32,8 @@ class HistoryChartSwitcher extends ConsumerWidget {
                 child: Text(e.name),
               );
             }).toList(),
-            onChanged: (c) => provider.updateChartData(c!),
+            onChanged: (c) =>
+                ref.read(historyProvider.notifier).updateChartData(c!),
           )
         ],
       ),

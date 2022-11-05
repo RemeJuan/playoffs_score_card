@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:playoffs_score_card/core/providers/general_providers.dart';
+import 'package:playoffs_score_card/extensions/date_time.extension.dart';
 import 'package:playoffs_score_card/theme.dart';
 import 'package:playoffs_score_card/themes/default.template.dart';
 import 'package:playoffs_score_card/views/score_card/provider/score_card_notifier.dart';
@@ -78,9 +79,9 @@ class ScoreCardView extends ConsumerWidget {
   void _showDatePicker(BuildContext context, WidgetRef ref) async {
     final date = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: ExtendedDateTime.current,
       firstDate: DateTime(2015),
-      lastDate: DateTime(DateTime.now().day),
+      lastDate: ExtendedDateTime.current,
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(

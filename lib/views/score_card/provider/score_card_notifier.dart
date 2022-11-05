@@ -187,7 +187,7 @@ class ScoreCardNotifier extends StateNotifier<ScoreCardState> {
       state.reps.deadBallOverTheShoulder,
       state.reps.shuttleSprintLateralHop,
     ];
-    print(allReps);
+
     state = state.copyWith(
       status: allReps.every((r) => r != -1)
           ? ScoreCardStatus.complete

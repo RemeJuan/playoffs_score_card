@@ -2,7 +2,7 @@ import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:playoffs_score_card/theme.dart';
-import 'package:playoffs_score_card/views/history/provider/history.provider.dart';
+import 'package:playoffs_score_card/views/history/provider/history_notifier.dart';
 
 class HistoryChart extends ConsumerWidget {
   const HistoryChart({Key? key}) : super(key: key);
