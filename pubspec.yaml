@@ -79,5 +79,5 @@ flutter:
           weight: 300
 cider:
   link_template:
-    tag: https://github.com/RemeJuan/playoffs_score_card/project/releases/tag/%tag% # initial release link template
-    diff: https://github.com/RemeJuan/playoffs_score_card/project/compare/%from%...%to% # subsequent releases link template
+    tag: https://github.com/RemeJuan/playoffs_score_card/releases/tag/%tag% # initial release link template
+    diff: https://github.com/RemeJuan/playoffs_score_card/compare/%from%...%to% # subsequent releases link template

@@ -61,18 +61,18 @@
 ### Added
 - Users can now restore backups
 
-[1.4.10]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.9...1.4.10
-[1.4.9]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.8...1.4.9
-[1.4.8]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.7...1.4.8
-[1.4.7]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.6...1.4.7
-[1.4.6]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.5...1.4.6
-[1.4.5]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.4...1.4.5
-[1.4.4]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.3...1.4.4
-[1.4.3]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.2...1.4.3
-[1.4.2]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.1...1.4.2
-[1.4.1]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.0...1.4.1
-[1.4.0]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.3.0...1.4.0
-[1.3.0]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.2.0...1.3.0
-[1.2.0]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.1.1...1.2.0
-[1.1.1]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.1.0...1.1.1
-[1.1.0]: https://github.com/RemeJuan/playoffs_score_card/project/releases/tag/1.1.0
+[1.4.10]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.9...1.4.10
+[1.4.9]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.8...1.4.9
+[1.4.8]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.7...1.4.8
+[1.4.7]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.6...1.4.7
+[1.4.6]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.5...1.4.6
+[1.4.5]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.4...1.4.5
+[1.4.4]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.3...1.4.4
+[1.4.3]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.2...1.4.3
+[1.4.2]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.1...1.4.2
+[1.4.1]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.0...1.4.1
+[1.4.0]: https://github.com/RemeJuan/playoffs_score_card/compare/1.3.0...1.4.0
+[1.3.0]: https://github.com/RemeJuan/playoffs_score_card/compare/1.2.0...1.3.0
+[1.2.0]: https://github.com/RemeJuan/playoffs_score_card/compare/1.1.1...1.2.0
+[1.1.1]: https://github.com/RemeJuan/playoffs_score_card/compare/1.1.0...1.1.1
+[1.1.0]: https://github.com/RemeJuan/playoffs_score_card/releases/tag/1.1.0
