@@ -23,8 +23,8 @@ const RESOURCES = {
 "assets/assets/fonts/Trade%2520Gothic%2520LT%2520Bold.ttf": "cb7d0b0968943ceca839712e38df14c1",
 "assets/assets/fonts/Trade%2520Gothic%2520LT%2520Light.ttf": "05748951114e8f8876ccfcaca8c8e7f2",
 "assets/NOTICES": "300c1ffb9062ce8eefec267f42b5fdbf",
-"index.html": "28a9d1bde93ed5fec5385ae63e061a62",
-"/": "28a9d1bde93ed5fec5385ae63e061a62",
+"index.html": "a72ddee0bf85680bf9f60688720efb50",
+"/": "a72ddee0bf85680bf9f60688720efb50",
 "favicon.png": "088fcd9c7ffc4bd23bf6493e917a2826",
 "version.json": "7a716f2f66890d7179b1e703b99dcfdb"
 };
