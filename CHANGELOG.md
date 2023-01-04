@@ -1,3 +1,7 @@
+## [1.4.10] - 2023-01-04
+### Security
+- general package and core upgrades
+
 ## [1.4.9] - 2022-11-05
 ### Fixed
 - fixed history switcher not updating chart
@@ -57,6 +61,7 @@
 ### Added
 - Users can now restore backups
 
+[1.4.10]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.9...1.4.10
 [1.4.9]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.8...1.4.9
 [1.4.8]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.7...1.4.8
 [1.4.7]: https://github.com/RemeJuan/playoffs_score_card/project/compare/1.4.6...1.4.7
