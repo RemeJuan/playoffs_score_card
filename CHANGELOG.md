@@ -1,3 +1,7 @@
+## [1.4.10+2] - 2023-02-28
+### Changed
+- core and package updates
+
 ## [1.4.10+1] - 2023-01-04
 ### Fixed
 - fixed pod pod package references
@@ -65,6 +69,7 @@
 ### Added
 - Users can now restore backups
 
+[1.4.10+2]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.10+1...1.4.10+2
 [1.4.10+1]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.10...1.4.10+1
 [1.4.10]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.9...1.4.10
 [1.4.9]: https://github.com/RemeJuan/playoffs_score_card/compare/1.4.8...1.4.9
