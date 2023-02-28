@@ -49,5 +49,7 @@
   </array>
   <key>NSPhotoLibraryUsageDescription</key>
   <string>$(PRODUCT_NAME) will only access storage when importing/exporting your data</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>
