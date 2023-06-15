@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,18 +14,10 @@ import 'collections/score_card.collection.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  late Isar _isar;
-
-  if (kIsWeb) {
-    _isar = await Isar.open(
-      schemas: [ScoreCardSchema],
-    );
-  } else {
-    _isar = await Isar.open(
-      schemas: [ScoreCardSchema],
-      directory: (await getApplicationSupportDirectory()).path,
-    );
-  }
+  final _isar = await Isar.open(
+    [ScoreCardSchema],
+    directory: (await getApplicationSupportDirectory()).path,
+  );
 
   bootstrap(
     () => ProviderScope(

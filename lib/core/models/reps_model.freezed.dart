@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'reps_model.dart';
 
@@ -35,7 +35,8 @@ mixin _$RepsModel {
 /// @nodoc
 abstract class $RepsModelCopyWith<$Res> {
   factory $RepsModelCopyWith(RepsModel value, $Res Function(RepsModel) then) =
-      _$RepsModelCopyWithImpl<$Res>;
+      _$RepsModelCopyWithImpl<$Res, RepsModel>;
+  @useResult
   $Res call(
       {int rower,
       int benchHops,
@@ -50,77 +51,81 @@ abstract class $RepsModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RepsModelCopyWithImpl<$Res> implements $RepsModelCopyWith<$Res> {
+class _$RepsModelCopyWithImpl<$Res, $Val extends RepsModel>
+    implements $RepsModelCopyWith<$Res> {
   _$RepsModelCopyWithImpl(this._value, this._then);
 
-  final RepsModel _value;
   // ignore: unused_field
-  final $Res Function(RepsModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? rower = freezed,
-    Object? benchHops = freezed,
-    Object? kneeTuckPushUps = freezed,
-    Object? lateralHops = freezed,
-    Object? boxJumpBurpee = freezed,
-    Object? chinUps = freezed,
-    Object? squatPress = freezed,
-    Object? russianTwist = freezed,
-    Object? deadBallOverTheShoulder = freezed,
-    Object? shuttleSprintLateralHop = freezed,
+    Object? rower = null,
+    Object? benchHops = null,
+    Object? kneeTuckPushUps = null,
+    Object? lateralHops = null,
+    Object? boxJumpBurpee = null,
+    Object? chinUps = null,
+    Object? squatPress = null,
+    Object? russianTwist = null,
+    Object? deadBallOverTheShoulder = null,
+    Object? shuttleSprintLateralHop = null,
   }) {
     return _then(_value.copyWith(
-      rower: rower == freezed
+      rower: null == rower
           ? _value.rower
           : rower // ignore: cast_nullable_to_non_nullable
               as int,
-      benchHops: benchHops == freezed
+      benchHops: null == benchHops
           ? _value.benchHops
           : benchHops // ignore: cast_nullable_to_non_nullable
               as int,
-      kneeTuckPushUps: kneeTuckPushUps == freezed
+      kneeTuckPushUps: null == kneeTuckPushUps
           ? _value.kneeTuckPushUps
           : kneeTuckPushUps // ignore: cast_nullable_to_non_nullable
               as int,
-      lateralHops: lateralHops == freezed
+      lateralHops: null == lateralHops
           ? _value.lateralHops
           : lateralHops // ignore: cast_nullable_to_non_nullable
               as int,
-      boxJumpBurpee: boxJumpBurpee == freezed
+      boxJumpBurpee: null == boxJumpBurpee
           ? _value.boxJumpBurpee
           : boxJumpBurpee // ignore: cast_nullable_to_non_nullable
               as int,
-      chinUps: chinUps == freezed
+      chinUps: null == chinUps
           ? _value.chinUps
           : chinUps // ignore: cast_nullable_to_non_nullable
               as int,
-      squatPress: squatPress == freezed
+      squatPress: null == squatPress
           ? _value.squatPress
           : squatPress // ignore: cast_nullable_to_non_nullable
               as int,
-      russianTwist: russianTwist == freezed
+      russianTwist: null == russianTwist
           ? _value.russianTwist
           : russianTwist // ignore: cast_nullable_to_non_nullable
               as int,
-      deadBallOverTheShoulder: deadBallOverTheShoulder == freezed
+      deadBallOverTheShoulder: null == deadBallOverTheShoulder
           ? _value.deadBallOverTheShoulder
           : deadBallOverTheShoulder // ignore: cast_nullable_to_non_nullable
               as int,
-      shuttleSprintLateralHop: shuttleSprintLateralHop == freezed
+      shuttleSprintLateralHop: null == shuttleSprintLateralHop
           ? _value.shuttleSprintLateralHop
           : shuttleSprintLateralHop // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$RepsModelCopyWith<$Res> implements $RepsModelCopyWith<$Res> {
-  factory _$RepsModelCopyWith(
-          _RepsModel value, $Res Function(_RepsModel) then) =
-      __$RepsModelCopyWithImpl<$Res>;
+abstract class _$$_RepsModelCopyWith<$Res> implements $RepsModelCopyWith<$Res> {
+  factory _$$_RepsModelCopyWith(
+          _$_RepsModel value, $Res Function(_$_RepsModel) then) =
+      __$$_RepsModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int rower,
       int benchHops,
@@ -135,65 +140,65 @@ abstract class _$RepsModelCopyWith<$Res> implements $RepsModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$RepsModelCopyWithImpl<$Res> extends _$RepsModelCopyWithImpl<$Res>
-    implements _$RepsModelCopyWith<$Res> {
-  __$RepsModelCopyWithImpl(_RepsModel _value, $Res Function(_RepsModel) _then)
-      : super(_value, (v) => _then(v as _RepsModel));
+class __$$_RepsModelCopyWithImpl<$Res>
+    extends _$RepsModelCopyWithImpl<$Res, _$_RepsModel>
+    implements _$$_RepsModelCopyWith<$Res> {
+  __$$_RepsModelCopyWithImpl(
+      _$_RepsModel _value, $Res Function(_$_RepsModel) _then)
+      : super(_value, _then);
 
-  @override
-  _RepsModel get _value => super._value as _RepsModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? rower = freezed,
-    Object? benchHops = freezed,
-    Object? kneeTuckPushUps = freezed,
-    Object? lateralHops = freezed,
-    Object? boxJumpBurpee = freezed,
-    Object? chinUps = freezed,
-    Object? squatPress = freezed,
-    Object? russianTwist = freezed,
-    Object? deadBallOverTheShoulder = freezed,
-    Object? shuttleSprintLateralHop = freezed,
+    Object? rower = null,
+    Object? benchHops = null,
+    Object? kneeTuckPushUps = null,
+    Object? lateralHops = null,
+    Object? boxJumpBurpee = null,
+    Object? chinUps = null,
+    Object? squatPress = null,
+    Object? russianTwist = null,
+    Object? deadBallOverTheShoulder = null,
+    Object? shuttleSprintLateralHop = null,
   }) {
-    return _then(_RepsModel(
-      rower: rower == freezed
+    return _then(_$_RepsModel(
+      rower: null == rower
           ? _value.rower
           : rower // ignore: cast_nullable_to_non_nullable
               as int,
-      benchHops: benchHops == freezed
+      benchHops: null == benchHops
           ? _value.benchHops
           : benchHops // ignore: cast_nullable_to_non_nullable
               as int,
-      kneeTuckPushUps: kneeTuckPushUps == freezed
+      kneeTuckPushUps: null == kneeTuckPushUps
           ? _value.kneeTuckPushUps
           : kneeTuckPushUps // ignore: cast_nullable_to_non_nullable
               as int,
-      lateralHops: lateralHops == freezed
+      lateralHops: null == lateralHops
           ? _value.lateralHops
           : lateralHops // ignore: cast_nullable_to_non_nullable
               as int,
-      boxJumpBurpee: boxJumpBurpee == freezed
+      boxJumpBurpee: null == boxJumpBurpee
           ? _value.boxJumpBurpee
           : boxJumpBurpee // ignore: cast_nullable_to_non_nullable
               as int,
-      chinUps: chinUps == freezed
+      chinUps: null == chinUps
           ? _value.chinUps
           : chinUps // ignore: cast_nullable_to_non_nullable
               as int,
-      squatPress: squatPress == freezed
+      squatPress: null == squatPress
           ? _value.squatPress
           : squatPress // ignore: cast_nullable_to_non_nullable
               as int,
-      russianTwist: russianTwist == freezed
+      russianTwist: null == russianTwist
           ? _value.russianTwist
           : russianTwist // ignore: cast_nullable_to_non_nullable
               as int,
-      deadBallOverTheShoulder: deadBallOverTheShoulder == freezed
+      deadBallOverTheShoulder: null == deadBallOverTheShoulder
           ? _value.deadBallOverTheShoulder
           : deadBallOverTheShoulder // ignore: cast_nullable_to_non_nullable
               as int,
-      shuttleSprintLateralHop: shuttleSprintLateralHop == freezed
+      shuttleSprintLateralHop: null == shuttleSprintLateralHop
           ? _value.shuttleSprintLateralHop
           : shuttleSprintLateralHop // ignore: cast_nullable_to_non_nullable
               as int,
@@ -247,44 +252,48 @@ class _$_RepsModel extends _RepsModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _RepsModel &&
-            const DeepCollectionEquality().equals(other.rower, rower) &&
-            const DeepCollectionEquality().equals(other.benchHops, benchHops) &&
-            const DeepCollectionEquality()
-                .equals(other.kneeTuckPushUps, kneeTuckPushUps) &&
-            const DeepCollectionEquality()
-                .equals(other.lateralHops, lateralHops) &&
-            const DeepCollectionEquality()
-                .equals(other.boxJumpBurpee, boxJumpBurpee) &&
-            const DeepCollectionEquality().equals(other.chinUps, chinUps) &&
-            const DeepCollectionEquality()
-                .equals(other.squatPress, squatPress) &&
-            const DeepCollectionEquality()
-                .equals(other.russianTwist, russianTwist) &&
-            const DeepCollectionEquality().equals(
-                other.deadBallOverTheShoulder, deadBallOverTheShoulder) &&
-            const DeepCollectionEquality().equals(
-                other.shuttleSprintLateralHop, shuttleSprintLateralHop));
+            other is _$_RepsModel &&
+            (identical(other.rower, rower) || other.rower == rower) &&
+            (identical(other.benchHops, benchHops) ||
+                other.benchHops == benchHops) &&
+            (identical(other.kneeTuckPushUps, kneeTuckPushUps) ||
+                other.kneeTuckPushUps == kneeTuckPushUps) &&
+            (identical(other.lateralHops, lateralHops) ||
+                other.lateralHops == lateralHops) &&
+            (identical(other.boxJumpBurpee, boxJumpBurpee) ||
+                other.boxJumpBurpee == boxJumpBurpee) &&
+            (identical(other.chinUps, chinUps) || other.chinUps == chinUps) &&
+            (identical(other.squatPress, squatPress) ||
+                other.squatPress == squatPress) &&
+            (identical(other.russianTwist, russianTwist) ||
+                other.russianTwist == russianTwist) &&
+            (identical(
+                    other.deadBallOverTheShoulder, deadBallOverTheShoulder) ||
+                other.deadBallOverTheShoulder == deadBallOverTheShoulder) &&
+            (identical(
+                    other.shuttleSprintLateralHop, shuttleSprintLateralHop) ||
+                other.shuttleSprintLateralHop == shuttleSprintLateralHop));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(rower),
-      const DeepCollectionEquality().hash(benchHops),
-      const DeepCollectionEquality().hash(kneeTuckPushUps),
-      const DeepCollectionEquality().hash(lateralHops),
-      const DeepCollectionEquality().hash(boxJumpBurpee),
-      const DeepCollectionEquality().hash(chinUps),
-      const DeepCollectionEquality().hash(squatPress),
-      const DeepCollectionEquality().hash(russianTwist),
-      const DeepCollectionEquality().hash(deadBallOverTheShoulder),
-      const DeepCollectionEquality().hash(shuttleSprintLateralHop));
+      rower,
+      benchHops,
+      kneeTuckPushUps,
+      lateralHops,
+      boxJumpBurpee,
+      chinUps,
+      squatPress,
+      russianTwist,
+      deadBallOverTheShoulder,
+      shuttleSprintLateralHop);
 
   @JsonKey(ignore: true)
   @override
-  _$RepsModelCopyWith<_RepsModel> get copyWith =>
-      __$RepsModelCopyWithImpl<_RepsModel>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_RepsModelCopyWith<_$_RepsModel> get copyWith =>
+      __$$_RepsModelCopyWithImpl<_$_RepsModel>(this, _$identity);
 }
 
 abstract class _RepsModel extends RepsModel {
@@ -302,27 +311,27 @@ abstract class _RepsModel extends RepsModel {
   const _RepsModel._() : super._();
 
   @override
-  int get rower => throw _privateConstructorUsedError;
+  int get rower;
   @override
-  int get benchHops => throw _privateConstructorUsedError;
+  int get benchHops;
   @override
-  int get kneeTuckPushUps => throw _privateConstructorUsedError;
+  int get kneeTuckPushUps;
   @override
-  int get lateralHops => throw _privateConstructorUsedError;
+  int get lateralHops;
   @override
-  int get boxJumpBurpee => throw _privateConstructorUsedError;
+  int get boxJumpBurpee;
   @override
-  int get chinUps => throw _privateConstructorUsedError;
+  int get chinUps;
   @override
-  int get squatPress => throw _privateConstructorUsedError;
+  int get squatPress;
   @override
-  int get russianTwist => throw _privateConstructorUsedError;
+  int get russianTwist;
   @override
-  int get deadBallOverTheShoulder => throw _privateConstructorUsedError;
+  int get deadBallOverTheShoulder;
   @override
-  int get shuttleSprintLateralHop => throw _privateConstructorUsedError;
+  int get shuttleSprintLateralHop;
   @override
   @JsonKey(ignore: true)
-  _$RepsModelCopyWith<_RepsModel> get copyWith =>
+  _$$_RepsModelCopyWith<_$_RepsModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

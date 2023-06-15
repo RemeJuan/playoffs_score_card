@@ -100,8 +100,8 @@ class CoreProvider extends ChangeNotifier {
             ..deadBallOverTheShoulder = item["deadBallOverTheShoulder"]
             ..shuttleSprintLateralHop = item["shuttleSprintLateralHop"];
 
-          await _db.writeTxn((isar) async {
-            await isar.scoreCards.put(card);
+          await _db.writeTxn(() async {
+            await _db.scoreCards.put(card);
           });
         }
       }

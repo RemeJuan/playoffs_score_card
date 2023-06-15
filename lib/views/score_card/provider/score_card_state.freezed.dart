@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'score_card_state.dart';
 
@@ -32,7 +32,8 @@ mixin _$ScoreCardState {
 abstract class $ScoreCardStateCopyWith<$Res> {
   factory $ScoreCardStateCopyWith(
           ScoreCardState value, $Res Function(ScoreCardState) then) =
-      _$ScoreCardStateCopyWithImpl<$Res>;
+      _$ScoreCardStateCopyWithImpl<$Res, ScoreCardState>;
+  @useResult
   $Res call(
       {DateTime date,
       MaxScoresModel maxScores,
@@ -46,73 +47,78 @@ abstract class $ScoreCardStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ScoreCardStateCopyWithImpl<$Res>
+class _$ScoreCardStateCopyWithImpl<$Res, $Val extends ScoreCardState>
     implements $ScoreCardStateCopyWith<$Res> {
   _$ScoreCardStateCopyWithImpl(this._value, this._then);
 
-  final ScoreCardState _value;
   // ignore: unused_field
-  final $Res Function(ScoreCardState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? date = freezed,
-    Object? maxScores = freezed,
-    Object? reps = freezed,
-    Object? score = freezed,
-    Object? totalScore = freezed,
-    Object? status = freezed,
+    Object? date = null,
+    Object? maxScores = null,
+    Object? reps = null,
+    Object? score = null,
+    Object? totalScore = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
-      date: date == freezed
+      date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      maxScores: maxScores == freezed
+      maxScores: null == maxScores
           ? _value.maxScores
           : maxScores // ignore: cast_nullable_to_non_nullable
               as MaxScoresModel,
-      reps: reps == freezed
+      reps: null == reps
           ? _value.reps
           : reps // ignore: cast_nullable_to_non_nullable
               as RepsModel,
-      score: score == freezed
+      score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as ScoresModel,
-      totalScore: totalScore == freezed
+      totalScore: null == totalScore
           ? _value.totalScore
           : totalScore // ignore: cast_nullable_to_non_nullable
               as double,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ScoreCardStatus,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $RepsModelCopyWith<$Res> get reps {
     return $RepsModelCopyWith<$Res>(_value.reps, (value) {
-      return _then(_value.copyWith(reps: value));
+      return _then(_value.copyWith(reps: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ScoresModelCopyWith<$Res> get score {
     return $ScoresModelCopyWith<$Res>(_value.score, (value) {
-      return _then(_value.copyWith(score: value));
+      return _then(_value.copyWith(score: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$ScoreCardStateCopyWith<$Res>
+abstract class _$$_ScoreCardStateCopyWith<$Res>
     implements $ScoreCardStateCopyWith<$Res> {
-  factory _$ScoreCardStateCopyWith(
-          _ScoreCardState value, $Res Function(_ScoreCardState) then) =
-      __$ScoreCardStateCopyWithImpl<$Res>;
+  factory _$$_ScoreCardStateCopyWith(
+          _$_ScoreCardState value, $Res Function(_$_ScoreCardState) then) =
+      __$$_ScoreCardStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {DateTime date,
       MaxScoresModel maxScores,
@@ -128,47 +134,45 @@ abstract class _$ScoreCardStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ScoreCardStateCopyWithImpl<$Res>
-    extends _$ScoreCardStateCopyWithImpl<$Res>
-    implements _$ScoreCardStateCopyWith<$Res> {
-  __$ScoreCardStateCopyWithImpl(
-      _ScoreCardState _value, $Res Function(_ScoreCardState) _then)
-      : super(_value, (v) => _then(v as _ScoreCardState));
+class __$$_ScoreCardStateCopyWithImpl<$Res>
+    extends _$ScoreCardStateCopyWithImpl<$Res, _$_ScoreCardState>
+    implements _$$_ScoreCardStateCopyWith<$Res> {
+  __$$_ScoreCardStateCopyWithImpl(
+      _$_ScoreCardState _value, $Res Function(_$_ScoreCardState) _then)
+      : super(_value, _then);
 
-  @override
-  _ScoreCardState get _value => super._value as _ScoreCardState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? date = freezed,
-    Object? maxScores = freezed,
-    Object? reps = freezed,
-    Object? score = freezed,
-    Object? totalScore = freezed,
-    Object? status = freezed,
+    Object? date = null,
+    Object? maxScores = null,
+    Object? reps = null,
+    Object? score = null,
+    Object? totalScore = null,
+    Object? status = null,
   }) {
-    return _then(_ScoreCardState(
-      date: date == freezed
+    return _then(_$_ScoreCardState(
+      date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      maxScores: maxScores == freezed
+      maxScores: null == maxScores
           ? _value.maxScores
           : maxScores // ignore: cast_nullable_to_non_nullable
               as MaxScoresModel,
-      reps: reps == freezed
+      reps: null == reps
           ? _value.reps
           : reps // ignore: cast_nullable_to_non_nullable
               as RepsModel,
-      score: score == freezed
+      score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as ScoresModel,
-      totalScore: totalScore == freezed
+      totalScore: null == totalScore
           ? _value.totalScore
           : totalScore // ignore: cast_nullable_to_non_nullable
               as double,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ScoreCardStatus,
@@ -209,30 +213,26 @@ class _$_ScoreCardState implements _ScoreCardState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ScoreCardState &&
-            const DeepCollectionEquality().equals(other.date, date) &&
-            const DeepCollectionEquality().equals(other.maxScores, maxScores) &&
-            const DeepCollectionEquality().equals(other.reps, reps) &&
-            const DeepCollectionEquality().equals(other.score, score) &&
-            const DeepCollectionEquality()
-                .equals(other.totalScore, totalScore) &&
-            const DeepCollectionEquality().equals(other.status, status));
+            other is _$_ScoreCardState &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.maxScores, maxScores) ||
+                other.maxScores == maxScores) &&
+            (identical(other.reps, reps) || other.reps == reps) &&
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.totalScore, totalScore) ||
+                other.totalScore == totalScore) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(date),
-      const DeepCollectionEquality().hash(maxScores),
-      const DeepCollectionEquality().hash(reps),
-      const DeepCollectionEquality().hash(score),
-      const DeepCollectionEquality().hash(totalScore),
-      const DeepCollectionEquality().hash(status));
+      runtimeType, date, maxScores, reps, score, totalScore, status);
 
   @JsonKey(ignore: true)
   @override
-  _$ScoreCardStateCopyWith<_ScoreCardState> get copyWith =>
-      __$ScoreCardStateCopyWithImpl<_ScoreCardState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_ScoreCardStateCopyWith<_$_ScoreCardState> get copyWith =>
+      __$$_ScoreCardStateCopyWithImpl<_$_ScoreCardState>(this, _$identity);
 }
 
 abstract class _ScoreCardState implements ScoreCardState {
@@ -245,19 +245,19 @@ abstract class _ScoreCardState implements ScoreCardState {
       required final ScoreCardStatus status}) = _$_ScoreCardState;
 
   @override
-  DateTime get date => throw _privateConstructorUsedError;
+  DateTime get date;
   @override
-  MaxScoresModel get maxScores => throw _privateConstructorUsedError;
+  MaxScoresModel get maxScores;
   @override
-  RepsModel get reps => throw _privateConstructorUsedError;
+  RepsModel get reps;
   @override
-  ScoresModel get score => throw _privateConstructorUsedError;
+  ScoresModel get score;
   @override
-  double get totalScore => throw _privateConstructorUsedError;
+  double get totalScore;
   @override
-  ScoreCardStatus get status => throw _privateConstructorUsedError;
+  ScoreCardStatus get status;
   @override
   @JsonKey(ignore: true)
-  _$ScoreCardStateCopyWith<_ScoreCardState> get copyWith =>
+  _$$_ScoreCardStateCopyWith<_$_ScoreCardState> get copyWith =>
       throw _privateConstructorUsedError;
 }

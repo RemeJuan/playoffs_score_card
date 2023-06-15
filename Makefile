@@ -1,9 +1,6 @@
 flutter_generate:
 	fvm flutter packages pub run build_runner build --verbose --delete-conflicting-outputs
 
-flutter_schemas:
-	fvm flutter pub run realm generate
-
 flutter_test:
 	fvm flutter test test
 
@@ -15,3 +12,6 @@ bump_fix:
 
 bump_feat:
 	./version-bump.sh minor
+
+fix_ios:
+	cd ios && rm podfile.lock && arch -x86_64 pod install --repo-update && cd ..

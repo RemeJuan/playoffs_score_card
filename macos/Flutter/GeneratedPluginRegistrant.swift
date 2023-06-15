@@ -12,8 +12,8 @@ import firebase_core
 import flutter_file_manager_macos
 import isar_flutter_libs
 import package_info_plus
-import path_provider_macos
-import shared_preferences_macos
+import path_provider_foundation
+import shared_preferences_foundation
 import url_launcher_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

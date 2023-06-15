@@ -58,7 +58,7 @@ class ProfileProvider extends ChangeNotifier {
         result.files.single.bytes!.buffer.asUint8List(),
       );
       final json = jsonDecode(data);
-      await _isar.writeTxn((isar) => isar.scoreCards.importJson(json));
+      await _isar.writeTxn(() => _isar.scoreCards.importJson(json));
       hasRecords = true;
     }
   }

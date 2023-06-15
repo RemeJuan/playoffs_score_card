@@ -110,7 +110,7 @@ class HistoryNotifier extends StateNotifier<HistoryState> {
     final auth = _ref.read(firebaseAuthProvider);
     final firestore = _ref.read(firestoreProvider);
 
-    await db.writeTxn((isar) => isar.scoreCards.delete(score.id!));
+    await db.writeTxn(() => db.scoreCards.delete(score.id!));
     // await Future.delayed(const Duration(milliseconds: 500));
 
     // Write scores to cloud when there is an active logged in user.

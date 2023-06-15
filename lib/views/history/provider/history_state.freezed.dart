@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'history_state.dart';
 
@@ -31,7 +31,8 @@ mixin _$HistoryState {
 abstract class $HistoryStateCopyWith<$Res> {
   factory $HistoryStateCopyWith(
           HistoryState value, $Res Function(HistoryState) then) =
-      _$HistoryStateCopyWithImpl<$Res>;
+      _$HistoryStateCopyWithImpl<$Res, HistoryState>;
+  @useResult
   $Res call(
       {List<double> chartData,
       List<ScoreCard> scores,
@@ -40,48 +41,52 @@ abstract class $HistoryStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HistoryStateCopyWithImpl<$Res> implements $HistoryStateCopyWith<$Res> {
+class _$HistoryStateCopyWithImpl<$Res, $Val extends HistoryState>
+    implements $HistoryStateCopyWith<$Res> {
   _$HistoryStateCopyWithImpl(this._value, this._then);
 
-  final HistoryState _value;
   // ignore: unused_field
-  final $Res Function(HistoryState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? chartData = freezed,
-    Object? scores = freezed,
-    Object? activeChartDataSource = freezed,
-    Object? maxScores = freezed,
+    Object? chartData = null,
+    Object? scores = null,
+    Object? activeChartDataSource = null,
+    Object? maxScores = null,
   }) {
     return _then(_value.copyWith(
-      chartData: chartData == freezed
+      chartData: null == chartData
           ? _value.chartData
           : chartData // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      scores: scores == freezed
+      scores: null == scores
           ? _value.scores
           : scores // ignore: cast_nullable_to_non_nullable
               as List<ScoreCard>,
-      activeChartDataSource: activeChartDataSource == freezed
+      activeChartDataSource: null == activeChartDataSource
           ? _value.activeChartDataSource
           : activeChartDataSource // ignore: cast_nullable_to_non_nullable
               as ChartDataSource,
-      maxScores: maxScores == freezed
+      maxScores: null == maxScores
           ? _value.maxScores
           : maxScores // ignore: cast_nullable_to_non_nullable
               as MaxScoresModel,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$HistoryStateCopyWith<$Res>
+abstract class _$$_HistoryStateCopyWith<$Res>
     implements $HistoryStateCopyWith<$Res> {
-  factory _$HistoryStateCopyWith(
-          _HistoryState value, $Res Function(_HistoryState) then) =
-      __$HistoryStateCopyWithImpl<$Res>;
+  factory _$$_HistoryStateCopyWith(
+          _$_HistoryState value, $Res Function(_$_HistoryState) then) =
+      __$$_HistoryStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<double> chartData,
       List<ScoreCard> scores,
@@ -90,36 +95,35 @@ abstract class _$HistoryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$HistoryStateCopyWithImpl<$Res> extends _$HistoryStateCopyWithImpl<$Res>
-    implements _$HistoryStateCopyWith<$Res> {
-  __$HistoryStateCopyWithImpl(
-      _HistoryState _value, $Res Function(_HistoryState) _then)
-      : super(_value, (v) => _then(v as _HistoryState));
+class __$$_HistoryStateCopyWithImpl<$Res>
+    extends _$HistoryStateCopyWithImpl<$Res, _$_HistoryState>
+    implements _$$_HistoryStateCopyWith<$Res> {
+  __$$_HistoryStateCopyWithImpl(
+      _$_HistoryState _value, $Res Function(_$_HistoryState) _then)
+      : super(_value, _then);
 
-  @override
-  _HistoryState get _value => super._value as _HistoryState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? chartData = freezed,
-    Object? scores = freezed,
-    Object? activeChartDataSource = freezed,
-    Object? maxScores = freezed,
+    Object? chartData = null,
+    Object? scores = null,
+    Object? activeChartDataSource = null,
+    Object? maxScores = null,
   }) {
-    return _then(_HistoryState(
-      chartData: chartData == freezed
-          ? _value.chartData
+    return _then(_$_HistoryState(
+      chartData: null == chartData
+          ? _value._chartData
           : chartData // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      scores: scores == freezed
-          ? _value.scores
+      scores: null == scores
+          ? _value._scores
           : scores // ignore: cast_nullable_to_non_nullable
               as List<ScoreCard>,
-      activeChartDataSource: activeChartDataSource == freezed
+      activeChartDataSource: null == activeChartDataSource
           ? _value.activeChartDataSource
           : activeChartDataSource // ignore: cast_nullable_to_non_nullable
               as ChartDataSource,
-      maxScores: maxScores == freezed
+      maxScores: null == maxScores
           ? _value.maxScores
           : maxScores // ignore: cast_nullable_to_non_nullable
               as MaxScoresModel,
@@ -141,6 +145,7 @@ class _$_HistoryState implements _HistoryState {
   final List<double> _chartData;
   @override
   List<double> get chartData {
+    if (_chartData is EqualUnmodifiableListView) return _chartData;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_chartData);
   }
@@ -148,6 +153,7 @@ class _$_HistoryState implements _HistoryState {
   final List<ScoreCard> _scores;
   @override
   List<ScoreCard> get scores {
+    if (_scores is EqualUnmodifiableListView) return _scores;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_scores);
   }
@@ -166,26 +172,29 @@ class _$_HistoryState implements _HistoryState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _HistoryState &&
-            const DeepCollectionEquality().equals(other.chartData, chartData) &&
-            const DeepCollectionEquality().equals(other.scores, scores) &&
+            other is _$_HistoryState &&
             const DeepCollectionEquality()
-                .equals(other.activeChartDataSource, activeChartDataSource) &&
-            const DeepCollectionEquality().equals(other.maxScores, maxScores));
+                .equals(other._chartData, _chartData) &&
+            const DeepCollectionEquality().equals(other._scores, _scores) &&
+            (identical(other.activeChartDataSource, activeChartDataSource) ||
+                other.activeChartDataSource == activeChartDataSource) &&
+            (identical(other.maxScores, maxScores) ||
+                other.maxScores == maxScores));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(chartData),
-      const DeepCollectionEquality().hash(scores),
-      const DeepCollectionEquality().hash(activeChartDataSource),
-      const DeepCollectionEquality().hash(maxScores));
+      const DeepCollectionEquality().hash(_chartData),
+      const DeepCollectionEquality().hash(_scores),
+      activeChartDataSource,
+      maxScores);
 
   @JsonKey(ignore: true)
   @override
-  _$HistoryStateCopyWith<_HistoryState> get copyWith =>
-      __$HistoryStateCopyWithImpl<_HistoryState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_HistoryStateCopyWith<_$_HistoryState> get copyWith =>
+      __$$_HistoryStateCopyWithImpl<_$_HistoryState>(this, _$identity);
 }
 
 abstract class _HistoryState implements HistoryState {
@@ -196,16 +205,15 @@ abstract class _HistoryState implements HistoryState {
       required final MaxScoresModel maxScores}) = _$_HistoryState;
 
   @override
-  List<double> get chartData => throw _privateConstructorUsedError;
+  List<double> get chartData;
   @override
-  List<ScoreCard> get scores => throw _privateConstructorUsedError;
+  List<ScoreCard> get scores;
   @override
-  ChartDataSource get activeChartDataSource =>
-      throw _privateConstructorUsedError;
+  ChartDataSource get activeChartDataSource;
   @override
-  MaxScoresModel get maxScores => throw _privateConstructorUsedError;
+  MaxScoresModel get maxScores;
   @override
   @JsonKey(ignore: true)
-  _$HistoryStateCopyWith<_HistoryState> get copyWith =>
+  _$$_HistoryStateCopyWith<_$_HistoryState> get copyWith =>
       throw _privateConstructorUsedError;
 }

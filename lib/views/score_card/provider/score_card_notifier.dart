@@ -214,8 +214,8 @@ class ScoreCardNotifier extends StateNotifier<ScoreCardState> {
       ..shuttleSprintLateralHop = state.reps.shuttleSprintLateralHop
       ..totalScore = state.totalScore;
 
-    await db.writeTxn((isar) async {
-      isar.scoreCards.put(card);
+    await db.writeTxn(() async {
+      db.scoreCards.put(card);
     });
 
     // Write scores to cloud when there is an active logged in user.
