@@ -215,6 +215,12 @@ class CoreProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteUser() {
+    _auth.currentUser!.delete();
+    status = AuthStatus.None;
+    notifyListeners();
+  }
+
   // check if passwords match
   bool _checkPasswordMatch(String password, String confirmPassword) {
     return password == confirmPassword;

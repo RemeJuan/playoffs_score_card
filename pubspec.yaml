@@ -3,7 +3,7 @@ repository: https://github.com/RemeJuan/playoffs_score_card
 homepage: https://playoffs-score-tracker.pages.dev/
 description: A simple app for users to track their progress across the F45 Playoffs.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.4.11
+version: 1.4.12
 
 environment:
   sdk: ">=2.18.0 <3.0.0"
@@ -22,7 +22,7 @@ dependencies:
   isar_flutter_libs: 3.1.0+1
   path_provider: 2.0.15
   firebase_core: 2.14.0
-  firebase_app_check: 0.1.4+2
+  firebase_app_check: 0.1.4+3
   chart_sparkline: 1.0.13
   flutter_file_saver: 0.6.2
   url_launcher: 6.1.11
@@ -39,7 +39,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: 2.4.5
   isar_generator: 3.1.0+1
-  cider: 0.1.6
+  cider: 0.2.3
   flutter_lints: 2.0.1
 
 flutter:
